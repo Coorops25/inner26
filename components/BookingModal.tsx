@@ -5,10 +5,11 @@ import { CloseIcon } from '../constants';
 import { Illustration } from '../src/assets/Illustrations';
 
 const availableTimeSlots = [
-    'Lunes, 10:00 AM',
-    'Miércoles, 6:00 PM',
-    'Viernes, 9:00 AM',
-    'Sábado, 11:00 AM',
+  'Lunes, 7:00 AM',
+  'Miércoles, 6:30 AM',
+  'Viernes, 6:30 AM',
+  'Sábado, 8:00 AM',
+  'Domingo, 8:00 AM',
 ];
 
 const BookingModal: React.FC = () => {
@@ -19,53 +20,93 @@ const BookingModal: React.FC = () => {
 
   const handleAddToCart = () => {
     if (selectedSlot) {
-        addToCart({
-            id: `${bookingDetails.type}-${bookingDetails.title}-${selectedSlot}`,
-            name: bookingDetails.title,
-            price: bookingDetails.price,
-            imageUrl: bookingDetails.imageUrl,
-            illustrationName: bookingDetails.illustrationName,
-            quantity: 1,
-            type: bookingDetails.type,
-            details: selectedSlot
-        });
-        closeBookingModal();
+      addToCart({
+        id: `${bookingDetails.type}-${bookingDetails.title}-${selectedSlot}`,
+        name: bookingDetails.title,
+        price: bookingDetails.price,
+        imageUrl: bookingDetails.imageUrl,
+        illustrationName: bookingDetails.illustrationName,
+        quantity: 1,
+        type: bookingDetails.type,
+        details: selectedSlot,
+      });
+      closeBookingModal();
     } else {
-        alert("Por favor, selecciona un horario.");
+      alert('Por favor, selecciona un horario.');
     }
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-center p-4">
-      <div className="bg-base rounded-lg shadow-2xl w-full max-w-md relative animate-fade-in-up border border-black/10">
-        <button onClick={closeBookingModal} className="absolute top-4 right-4 text-detail hover:text-base-text transition-colors duration-400" aria-label="Cerrar">
-          <CloseIcon className="w-6 h-6" />
+    <div className="fixed inset-0 bg-black/60 z-50 flex justify-center items-center p-4">
+      <div
+        className="rounded-sm shadow-2xl w-full max-w-md relative animate-fade-in-up border"
+        style={{ background: '#EAE0CC', borderColor: 'rgba(160,160,131,0.25)' }}
+      >
+        <button
+          onClick={closeBookingModal}
+          className="absolute top-4 right-4 transition-colors"
+          style={{ color: '#A0A083' }}
+          aria-label="Cerrar"
+        >
+          <CloseIcon className="w-5 h-5" />
         </button>
+
         <div className="p-8">
-          <h2 className="text-3xl font-heading text-accent font-bold mb-4">Reservar: {bookingDetails.title}</h2>
-          
-          <div className="w-full h-48 bg-stone-50 rounded-lg mb-6 overflow-hidden flex items-center justify-center">
-            {bookingDetails.illustrationName ? (
-              <Illustration name={bookingDetails.illustrationName} className="w-1/3 h-1/3 text-stone-300" />
-            ) : (
-              <img src={bookingDetails.imageUrl} alt={bookingDetails.title} className="w-full h-full object-cover" referrerPolicy="no-referrer"/>
-            )}
+          <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#4D6A6D' }}>
+            Reservar
+          </p>
+          <h2 className="text-3xl font-heading font-bold mb-6" style={{ color: '#252520' }}>
+            {bookingDetails.title}
+          </h2>
+
+          <div
+            className="w-full h-40 rounded-sm mb-6 overflow-hidden flex items-center justify-center"
+            style={{ background: '#F3EDE2' }}
+          >
+            <Illustration
+              name={bookingDetails.illustrationName ?? 'abstract-spirit'}
+              className="w-1/3 h-1/3"
+              style={{ color: '#C9ADA1' } as React.CSSProperties}
+            />
           </div>
-          
-          <h3 className="text-lg font-semibold text-base-text mb-3">Selecciona un horario:</h3>
+
+          <h3 className="text-sm font-bold uppercase tracking-wider mb-3" style={{ color: '#798478' }}>
+            Selecciona un horario
+          </h3>
           <div className="space-y-2">
-            {availableTimeSlots.map(slot => (
-                 <label key={slot} className={`flex items-center p-3 border rounded-md cursor-pointer transition-colors ${selectedSlot === slot ? 'bg-accent/10 border-accent' : 'border-black/10 hover:bg-black/5'}`}>
-                    <input type="radio" name="time-slot" value={slot} checked={selectedSlot === slot} onChange={() => setSelectedSlot(slot)} className="form-radio text-accent focus:ring-accent h-4 w-4"/>
-                    <span className="ml-3 text-base-text">{slot}</span>
-                </label>
+            {availableTimeSlots.map((slot) => (
+              <label
+                key={slot}
+                className={`flex items-center p-3 border rounded-sm cursor-pointer transition-colors`}
+                style={{
+                  background: selectedSlot === slot ? 'rgba(77,106,109,0.08)' : 'transparent',
+                  borderColor: selectedSlot === slot ? '#4D6A6D' : 'rgba(160,160,131,0.35)',
+                }}
+              >
+                <input
+                  type="radio"
+                  name="time-slot"
+                  value={slot}
+                  checked={selectedSlot === slot}
+                  onChange={() => setSelectedSlot(slot)}
+                  className="h-4 w-4"
+                  style={{ accentColor: '#4D6A6D' }}
+                />
+                <span className="ml-3 text-sm" style={{ color: '#252520' }}>{slot}</span>
+              </label>
             ))}
           </div>
 
           <div className="mt-8 flex justify-between items-center">
-            <p className="text-2xl font-bold text-base-text">${bookingDetails.price.toFixed(2)}</p>
-            <button onClick={handleAddToCart} className="bg-accent hover:bg-opacity-80 text-white font-semibold py-3 px-8 rounded-full transition-all duration-400 transform hover:scale-105">
-                Confirmar y Añadir
+            <p className="text-xl font-bold font-mono" style={{ color: '#252520' }}>
+              ${bookingDetails.price.toLocaleString('es-CO')} COP
+            </p>
+            <button
+              onClick={handleAddToCart}
+              className="font-semibold py-3 px-7 rounded-full transition-all duration-300 hover:opacity-90 active:scale-95 text-sm uppercase tracking-wide"
+              style={{ background: '#4D6A6D', color: '#EAE0CC' }}
+            >
+              Confirmar
             </button>
           </div>
         </div>

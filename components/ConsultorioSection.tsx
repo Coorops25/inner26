@@ -1,39 +1,85 @@
 
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
+import { Illustration } from '../src/assets/Illustrations';
 
 const ConsultorioSection: React.FC = () => {
   const { navigate } = useContext(CartContext);
 
   return (
-    <section id="consultorio" className="relative h-[80vh] flex items-center justify-center overflow-hidden">
-       {/* Background */}
-       <div className="absolute inset-0">
-           <img 
-            src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?q=80&w=1800&auto=format&fit=crop" 
-            alt="Consultorio Background" 
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-           />
-           <div className="absolute inset-0 bg-stone-900/40"></div>
-       </div>
+    <section
+      id="consultorio"
+      className="relative overflow-hidden"
+      style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+    >
+      {/* Gradient background — no external images */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(135deg, #1c2829 0%, #2a3f42 45%, #1f3235 100%)',
+        }}
+      />
 
-      <div className="relative z-10 container mx-auto px-6 text-center text-white">
-        <span className="block text-xs font-bold tracking-[0.3em] uppercase mb-4 opacity-80">Sesiones 1:1</span>
+      {/* Decorative illustration — subtle */}
+      <div className="absolute inset-0 flex items-center justify-end pointer-events-none opacity-10 pr-8 md:pr-20">
+        <Illustration
+          name="abstract-spirit"
+          className="w-96 h-96"
+          style={{ color: '#4D6A6D' } as React.CSSProperties}
+        />
+      </div>
+      <div className="absolute inset-0 flex items-center justify-start pointer-events-none opacity-5 pl-8 md:pl-20">
+        <Illustration
+          name="lotus"
+          className="w-64 h-64"
+          style={{ color: '#C9ADA1' } as React.CSSProperties}
+        />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-6 text-center text-white py-24">
+        <span className="block text-xs font-bold tracking-[0.35em] uppercase mb-5 opacity-70" style={{ color: '#A0A083' }}>
+          Sesiones 1:1
+        </span>
         <h2 className="text-5xl md:text-7xl font-heading font-medium text-white mb-8 leading-tight">
-            Acompañamiento <br/> <span className="italic font-light">Individual</span>
+          Acompañamiento <br />
+          <span className="italic font-light" style={{ color: '#C9ADA1' }}>Individual</span>
         </h2>
-        
-        <div className="max-w-2xl mx-auto text-xl md:text-2xl text-stone-100 font-light leading-relaxed space-y-6 mb-12">
-            <p>A veces, el camino necesita un testigo. Un espacio seguro para explorar lo que emerge en el silencio.</p>
+
+        <div
+          className="w-12 h-px mx-auto mb-8"
+          style={{ background: '#4D6A6D' }}
+        />
+
+        <p className="max-w-xl mx-auto text-xl font-light leading-relaxed mb-4" style={{ color: '#C9ADA1' }}>
+          A veces, el camino necesita un testigo. Un espacio seguro para explorar lo que emerge en el silencio.
+        </p>
+        <p className="text-base font-light mb-12" style={{ color: '#798478' }}>
+          Yoga terapéutico · Meditación guiada · Breathwork · Arte terapia
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <button
+            onClick={() => navigate('consultorio')}
+            className="px-10 py-4 font-heading text-xl transition-all duration-300 rounded-none"
+            style={{ border: '1px solid rgba(77,106,109,0.6)', color: '#EAE0CC' }}
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#4D6A6D'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'transparent'; }}
+          >
+            Ver Consultorio
+          </button>
+          <a
+            href="https://wa.me/573212248261?text=Hola%2C%20me%20interesa%20una%20sesi%C3%B3n%20individual"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-10 py-4 font-heading text-xl transition-all duration-300 rounded-none"
+            style={{ background: '#4D6A6D', color: '#EAE0CC', border: '1px solid #4D6A6D' }}
+            onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = '#3d5557'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = '#4D6A6D'; }}
+          >
+            Agendar por WhatsApp
+          </a>
         </div>
-        
-        <button 
-            onClick={() => navigate('consultorio')} 
-            className="px-10 py-4 border border-white/30 hover:bg-white hover:text-stone-900 transition-all duration-300 backdrop-blur-sm font-heading text-xl rounded-none"
-        >
-            Agendar Sesión
-        </button>
       </div>
     </section>
   );

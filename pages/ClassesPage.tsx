@@ -6,74 +6,120 @@ import { Illustration } from '../src/assets/Illustrations';
 const classes = [
   {
     title: 'Yoga',
-    description: 'Una práctica para unificar cuerpo, mente y respiración. Nuestras sesiones de yoga fluyen con la energía del grupo, explorando posturas (asanas), respiración consciente (pranayama) y quietud. Abierto a todos los niveles, desde principiantes hasta practicantes avanzados.',
-    imageUrl: 'https://images.unsplash.com/photo-1599447421405-0e32096d30fd?q=80&w=800&auto=format&fit=crop',
+    subtitle: 'Hatha · Vinyasa · Yin · AcroYoga · Kundalini',
+    description: 'Una práctica para unificar cuerpo, mente y respiración. Flujos dinámicos, posturas clásicas y trabajo energético con mantras. Para todos los niveles, en español e inglés.',
     illustrationName: 'yoga',
-    price: 25,
+    price: 36000,
+    priceLabel: '$36.000 COP / sesión',
   },
   {
-    title: 'Meditación',
-    description: 'Un espacio de silencio para observar y descansar. A través de prácticas de atención plena y meditación guiada, cultivamos la calma interior y la claridad. No se requiere experiencia, solo la disposición de sentarse y estar presente.',
-    imageUrl: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800&auto=format&fit=crop',
-    illustrationName: 'meditation',
-    price: 20,
+    title: 'Meditación & Breathwork',
+    subtitle: 'Silencio · Pranayama · Atención Plena',
+    description: 'Un espacio de silencio para observar y descansar. Técnicas de respiración para liberar tensiones, expandir la energía y cultivar la claridad interior. Sin experiencia previa.',
+    illustrationName: 'breathwork',
+    price: 36000,
+    priceLabel: '$36.000 COP / sesión',
   },
   {
-    title: 'Danza Holística',
-    description: 'Movimiento libre para liberar el cuerpo y la mente. Sin pasos a seguir ni coreografías, esta práctica es una invitación a que tu cuerpo se exprese auténticamente, guiado por la música y tu impulso interior. Un espacio para soltar, sentir y disfrutar.',
-    imageUrl: 'https://images.unsplash.com/photo-1508700929628-666bc8bd84ea?q=80&w=800&auto=format&fit=crop',
+    title: 'Danza & Movimiento',
+    subtitle: 'Inner Dance · Danza Boreal · Inner Movement',
+    description: 'Movimiento libre para liberar el cuerpo y la mente. Sin coreografías — una invitación a que tu cuerpo se exprese auténticamente guiado por la música y tu impulso interior.',
     illustrationName: 'dance',
-    price: 30,
+    price: 36000,
+    priceLabel: '$36.000 COP / sesión',
+  },
+  {
+    title: 'Sound Healing',
+    subtitle: 'Gong · Cuencos Tibetanos · Arte Terapia',
+    description: 'Sesiones de sanación sonora con gong, cuencos tibetanos y campanas. El sonido como vehículo de transformación para armonizar cuerpo, mente y espíritu.',
+    illustrationName: 'sound-healing',
+    price: 36000,
+    priceLabel: '$36.000 COP / sesión',
   },
 ];
 
 const ClassesPage: React.FC = () => {
   const { openBookingModal } = useContext(CartContext);
 
-  const handleBookClick = (cls: typeof classes[0]) => {
-    openBookingModal({
-      type: 'class',
-      title: cls.title,
-      price: cls.price,
-      imageUrl: cls.imageUrl,
-      illustrationName: cls.illustrationName
-    });
-  };
-
   return (
     <div className="animate-fade-in-up">
       <section className="py-20 md:py-32 bg-base">
         <div className="container mx-auto px-6 max-w-7xl">
+
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-heading text-accent font-semibold">Nuestras Prácticas Semanales</h1>
-            <p className="mt-6 text-xl text-base-text/80 leading-relaxed">
-              Cada clase es una invitación a habitar tu cuerpo y calmar tu mente. No se requiere experiencia, solo presencia.
+            <span className="text-xs font-bold tracking-[0.3em] uppercase mb-4 block" style={{ color: '#4D6A6D' }}>
+              Práctica Diaria
+            </span>
+            <h1 className="text-5xl md:text-6xl font-heading font-semibold" style={{ color: '#4D6A6D' }}>
+              Nuestras Prácticas
+            </h1>
+            <p className="mt-6 text-xl font-light leading-relaxed" style={{ color: '#798478' }}>
+              Cada clase es una invitación a habitar tu cuerpo y calmar tu mente.
+              No se requiere experiencia, solo presencia.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {classes.map((item) => (
-              <div key={item.title} className="bg-base rounded-lg shadow-sm overflow-hidden group border border-black/5 flex flex-col">
-                <div className="overflow-hidden aspect-[4/3] bg-stone-50 relative flex items-center justify-center">
-                  {item.illustrationName ? (
-                    <Illustration name={item.illustrationName} className="w-1/2 h-1/2 text-stone-300 group-hover:text-accent transition-colors duration-700" />
-                  ) : (
-                    <img src={item.imageUrl} alt={`Ilustración de ${item.title}`} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy" referrerPolicy="no-referrer" />
-                  )}
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
+              <div
+                key={item.title}
+                className="rounded-sm shadow-sm overflow-hidden group border flex flex-col transition-all duration-300"
+                style={{ background: '#FAF7F2', borderColor: '#EAE0CC' }}
+              >
+                <div
+                  className="overflow-hidden aspect-[16/9] relative flex items-center justify-center transition-colors duration-500"
+                  style={{ background: '#EAE0CC' }}
+                >
+                  <Illustration
+                    name={item.illustrationName}
+                    className="w-1/3 h-1/3 transition-all duration-700 group-hover:scale-110"
+                    style={{ color: '#C9ADA1' } as React.CSSProperties}
+                  />
                 </div>
-                <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-3xl font-heading font-bold text-base-text">{item.title}</h3>
-                  <p className="mt-4 text-base-text/80 flex-grow leading-relaxed font-light">{item.description}</p>
-                  <div className="mt-8">
-                    <button 
-                      onClick={() => handleBookClick(item)}
-                      className="w-full border border-accent text-accent hover:bg-accent hover:text-white font-heading uppercase tracking-widest text-sm py-3 px-6 transition-all duration-300">
-                      Ver Horarios
-                    </button>
-                  </div>
+                <div className="p-8 flex flex-col flex-grow">
+                  <span className="text-xs font-bold uppercase tracking-widest mb-2 block" style={{ color: '#4D6A6D' }}>
+                    {item.subtitle}
+                  </span>
+                  <h3 className="text-3xl font-heading font-bold mb-3" style={{ color: '#252520' }}>
+                    {item.title}
+                  </h3>
+                  <p className="font-light flex-grow leading-relaxed mb-2" style={{ color: '#798478' }}>
+                    {item.description}
+                  </p>
+                  <p className="text-xs font-mono mb-6" style={{ color: '#A0A083' }}>{item.priceLabel}</p>
+                  <button
+                    onClick={() => openBookingModal({ type: 'class', title: item.title, price: item.price, imageUrl: '', illustrationName: item.illustrationName })}
+                    className="border font-heading uppercase tracking-widest text-sm py-3 px-6 transition-all duration-300 hover:opacity-90"
+                    style={{ borderColor: '#4D6A6D', color: '#4D6A6D' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#4D6A6D'; (e.currentTarget as HTMLButtonElement).style.color = '#EAE0CC'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'transparent'; (e.currentTarget as HTMLButtonElement).style.color = '#4D6A6D'; }}
+                  >
+                    Ver Horarios
+                  </button>
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Promo block */}
+          <div
+            className="mt-16 p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 rounded-sm"
+            style={{ background: '#F3EDE2', border: '1px solid #D9D1C0' }}
+          >
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: '#4D6A6D' }}>Promo Mensual</p>
+              <h3 className="text-2xl font-heading" style={{ color: '#252520' }}>3 sesiones por $100.000 COP</h3>
+              <p className="text-sm mt-1" style={{ color: '#798478' }}>~$25 USD · Lun–Vie 6:30 AM · Sáb–Dom 8:00 AM</p>
+            </div>
+            <a
+              href="https://wa.me/573212248261?text=Hola%2C%20me%20interesa%20la%20promo%20de%203%20sesiones"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3 font-heading text-lg whitespace-nowrap transition-all hover:opacity-90"
+              style={{ background: '#4D6A6D', color: '#EAE0CC' }}
+            >
+              Reservar por WhatsApp
+            </a>
           </div>
         </div>
       </section>

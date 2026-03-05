@@ -7,71 +7,86 @@ import { Illustration } from '../src/assets/Illustrations';
 const blogPosts: BlogPost[] = [
   {
     id: 1,
-    title: '5 Pasos para Iniciar tu Práctica',
+    title: '5 Pasos para Iniciar tu Práctica de Meditación',
     category: 'Meditación',
-    excerpt: 'Descubre cómo incorporar la meditación en tu rutina.',
-    imageUrl: 'https://images.unsplash.com/photo-1601758178112-731c3b24e6b2?q=80&w=700',
-    illustrationName: 'meditation'
+    excerpt: 'La meditación no requiere experiencia previa — solo la disposición de sentarte contigo mismo un momento al día.',
+    imageUrl: '',
+    illustrationName: 'meditation',
   },
   {
     id: 2,
-    title: 'Yoga: Posturas Esenciales',
+    title: 'Yoga: Posturas Esenciales para tu Base',
     category: 'Yoga',
-    excerpt: 'Una guía de las posturas fundamentales para tu base.',
-    imageUrl: 'https://images.unsplash.com/photo-1617634667999-968538b3257f?q=80&w=700',
-    illustrationName: 'yoga'
+    excerpt: 'Una guía de las posturas fundamentales de Hatha y Vinyasa para construir una práctica sólida y consciente.',
+    imageUrl: '',
+    illustrationName: 'yoga',
   },
   {
     id: 3,
-    title: 'Alineando la Energía Vital',
-    category: 'Crecimiento Espiritual',
-    excerpt: 'Por qué el equilibrio energético es crucial para tu salud.',
-    imageUrl: 'https://images.unsplash.com/photo-1599383636454-322677805299?q=80&w=700',
-    illustrationName: 'abstract-spirit'
+    title: 'Breathwork: El Arte de Respirar con Consciencia',
+    category: 'Bienestar',
+    excerpt: 'La respiración es la herramienta más poderosa que tienes. Descubre cómo el breathwork puede transformar tu energía.',
+    imageUrl: '',
+    illustrationName: 'breathwork',
   },
 ];
 
 const BlogSection: React.FC = () => {
-    const { navigate } = useContext(CartContext);
+  const { navigate } = useContext(CartContext);
 
   return (
-    <section id="blog" className="py-32 bg-white border-t border-stone-100">
+    <section id="blog" className="py-32 border-t" style={{ background: '#FAF7F2', borderColor: '#EAE0CC' }}>
       <div className="container mx-auto px-6 max-w-5xl">
         <div className="flex justify-between items-baseline mb-16">
-            <h2 className="text-4xl font-heading text-stone-900">Journal</h2>
-            <button onClick={() => navigate('blog')} className="text-sm font-bold uppercase tracking-widest text-stone-400 hover:text-accent transition-colors">
-                Ver Todo
-            </button>
+          <h2 className="text-4xl font-heading" style={{ color: '#252520' }}>Journal</h2>
+          <button
+            onClick={() => navigate('blog')}
+            className="text-sm font-bold uppercase tracking-widest transition-colors"
+            style={{ color: '#A0A083' }}
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = '#4D6A6D'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = '#A0A083'; }}
+          >
+            Ver Todo
+          </button>
         </div>
 
         <div className="space-y-12">
           {blogPosts.map((post) => (
-            <div key={post.id} className="group flex flex-col md:flex-row gap-8 items-center cursor-pointer border-b border-stone-100 pb-12 last:border-0">
-               {/* Image - reduced visual weight */}
-              <div className="w-full md:w-1/3 aspect-[3/2] overflow-hidden bg-stone-50 flex items-center justify-center">
-                {post.illustrationName ? (
-                    <Illustration name={post.illustrationName} className="w-1/2 h-1/2 text-stone-300 group-hover:text-accent transition-colors duration-700" />
-                ) : (
-                    <img 
-                        src={post.imageUrl} 
-                        alt={post.title} 
-                        className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 ease-out" 
-                        loading="lazy" 
-                        referrerPolicy="no-referrer"
-                    />
-                )}
+            <div
+              key={post.id}
+              className="group flex flex-col md:flex-row gap-8 items-center cursor-pointer pb-12 border-b last:border-0"
+              style={{ borderColor: '#EAE0CC' }}
+              onClick={() => navigate('blog')}
+            >
+              {/* Illustration */}
+              <div
+                className="w-full md:w-1/3 aspect-[3/2] overflow-hidden flex items-center justify-center transition-colors duration-500"
+                style={{ background: '#EAE0CC' }}
+              >
+                <Illustration
+                  name={post.illustrationName ?? 'meditation'}
+                  className="w-2/5 h-2/5 transition-all duration-700 group-hover:scale-110"
+                  style={{ color: '#C9ADA1' } as React.CSSProperties}
+                />
               </div>
-              
+
               {/* Content */}
               <div className="w-full md:w-2/3">
-                <span className="text-xs font-bold tracking-widest text-accent uppercase mb-2 block">{post.category}</span>
-                <h3 className="text-3xl font-heading text-stone-900 group-hover:text-stone-600 transition-colors mb-3">
-                    {post.title}
+                <span className="text-xs font-bold tracking-widest uppercase mb-2 block" style={{ color: '#4D6A6D' }}>
+                  {post.category}
+                </span>
+                <h3 className="text-3xl font-heading mb-3 transition-colors" style={{ color: '#252520' }}>
+                  {post.title}
                 </h3>
-                <p className="text-stone-500 font-light leading-relaxed mb-4 max-w-lg">
-                    {post.excerpt}
+                <p className="font-light leading-relaxed mb-4 max-w-lg" style={{ color: '#798478' }}>
+                  {post.excerpt}
                 </p>
-                <span className="text-sm border-b border-stone-300 pb-0.5 group-hover:border-accent group-hover:text-accent transition-colors">Leer Artículo</span>
+                <span
+                  className="text-sm pb-0.5 transition-all"
+                  style={{ borderBottom: '1px solid #C9ADA1', color: '#A0A083' }}
+                >
+                  Leer Artículo
+                </span>
               </div>
             </div>
           ))}

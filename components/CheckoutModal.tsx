@@ -5,85 +5,133 @@ import { CloseIcon } from '../constants';
 import { Illustration } from '../src/assets/Illustrations';
 
 const CheckoutModal: React.FC = () => {
-    const { isCheckoutModalOpen, toggleCheckoutModal, cart, removeFromCart, clearCart } = useContext(CartContext);
-    const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const { isCheckoutModalOpen, toggleCheckoutModal, cart, removeFromCart, clearCart } = useContext(CartContext);
+  const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-    if (!isCheckoutModalOpen) return null;
+  if (!isCheckoutModalOpen) return null;
 
-    const handlePayment = (e: React.FormEvent) => {
-        e.preventDefault();
-        alert('Gracias. Tu lugar ha sido reservado.');
-        clearCart();
-        toggleCheckoutModal();
-    };
+  const handlePayment = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert('Gracias. Tu lugar ha sido reservado.');
+    clearCart();
+    toggleCheckoutModal();
+  };
 
-    return (
-        <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex justify-center items-start p-4 overflow-y-auto">
-            <div className="bg-base rounded-lg shadow-2xl w-full max-w-lg relative my-8 animate-fade-in-up border border-black/10">
-                <div className="sticky top-0 bg-base p-6 border-b border-black/10 flex justify-between items-center rounded-t-lg z-10">
-                    <h2 className="text-3xl font-heading text-accent font-bold">Tu carrito</h2>
-                    <button onClick={toggleCheckoutModal} className="text-detail hover:text-base-text transition-colors duration-400" aria-label="Cerrar carrito">
-                        <CloseIcon className="w-6 h-6" />
-                    </button>
-                </div>
-                
-                <div className="p-6">
-                    {cart.length === 0 ? (
-                        <p className="text-center text-base-text/70 py-12">Tu carrito está vacío.</p>
-                    ) : (
-                        <>
-                            <div className="space-y-4 mb-6 max-h-60 overflow-y-auto pr-2">
-                                {cart.map(item => (
-                                    <div key={item.id} className="flex items-center justify-between">
-                                        <div className="flex items-center space-x-4">
-                                            <div className="w-16 h-16 rounded-md bg-stone-50 flex items-center justify-center overflow-hidden">
-                                                {item.illustrationName ? (
-                                                    <Illustration name={item.illustrationName} className="w-1/2 h-1/2 text-stone-300" />
-                                                ) : (
-                                                    <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" referrerPolicy="no-referrer"/>
-                                                )}
-                                            </div>
-                                            <div>
-                                                <h4 className="font-semibold text-base-text">{item.name}</h4>
-                                                <p className="text-sm text-detail">{item.details}</p>
-                                                <p className="text-sm text-base-text font-medium">${item.price.toFixed(2)} x {item.quantity}</p>
-                                            </div>
-                                        </div>
-                                        <button 
-                                            onClick={() => removeFromCart(item.id)} 
-                                            className="text-stone hover:text-base-text text-sm font-semibold transition-colors"
-                                            aria-label={`Quitar ${item.name} del carrito`}
-                                        >
-                                            Quitar
-                                        </button>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="border-t border-black/10 pt-4 flex justify-between items-center font-bold text-xl">
-                                <span className="text-base-text">Total</span>
-                                <span className="text-base-text">${totalPrice.toFixed(2)}</span>
-                            </div>
-
-                            <div className="mt-8">
-                                <h3 className="text-2xl font-heading text-base-text font-bold mb-4">Información de Pago</h3>
-                                <form onSubmit={handlePayment} className="space-y-4">
-                                    <input type="text" placeholder="Nombre en la tarjeta" className="w-full p-3 border border-black/20 rounded-md focus:ring-accent focus:border-accent bg-base" required />
-                                    <input type="email" placeholder="Correo electrónico" className="w-full p-3 border border-black/20 rounded-md focus:ring-accent focus:border-accent bg-base" required />
-                                    <div className="bg-black/5 p-3 rounded-md">
-                                       <p className="text-sm text-center text-detail">Simulación de pasarela de pago</p>
-                                    </div>
-                                    <button type="submit" className="w-full bg-accent hover:bg-opacity-80 text-white font-semibold py-3 rounded-md transition-colors text-lg">
-                                        Pagar ${totalPrice.toFixed(2)}
-                                    </button>
-                                </form>
-                            </div>
-                        </>
-                    )}
-                </div>
-            </div>
+  return (
+    <div className="fixed inset-0 bg-black/70 z-50 flex justify-center items-start p-4 overflow-y-auto">
+      <div
+        className="rounded-sm shadow-2xl w-full max-w-lg relative my-8 animate-fade-in-up border"
+        style={{ background: '#EAE0CC', borderColor: 'rgba(160,160,131,0.25)' }}
+      >
+        {/* Header */}
+        <div
+          className="sticky top-0 p-6 border-b flex justify-between items-center z-10 rounded-t-sm"
+          style={{ background: '#EAE0CC', borderColor: 'rgba(160,160,131,0.25)' }}
+        >
+          <h2 className="text-3xl font-heading font-bold" style={{ color: '#252520' }}>
+            Tu carrito
+          </h2>
+          <button
+            onClick={toggleCheckoutModal}
+            className="transition-colors"
+            style={{ color: '#A0A083' }}
+            aria-label="Cerrar carrito"
+          >
+            <CloseIcon className="w-5 h-5" />
+          </button>
         </div>
-    );
+
+        <div className="p-6">
+          {cart.length === 0 ? (
+            <p className="text-center py-12 text-lg" style={{ color: '#A0A083' }}>
+              Tu carrito está vacío.
+            </p>
+          ) : (
+            <>
+              <div className="space-y-4 mb-6 max-h-64 overflow-y-auto pr-2">
+                {cart.map(item => (
+                  <div key={item.id} className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div
+                        className="w-14 h-14 rounded-sm flex items-center justify-center overflow-hidden flex-shrink-0"
+                        style={{ background: '#F3EDE2' }}
+                      >
+                        <Illustration
+                          name={item.illustrationName ?? 'abstract-spirit'}
+                          className="w-1/2 h-1/2"
+                          style={{ color: '#C9ADA1' } as React.CSSProperties}
+                        />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-sm" style={{ color: '#252520' }}>{item.name}</h4>
+                        {item.details && (
+                          <p className="text-xs" style={{ color: '#A0A083' }}>{item.details}</p>
+                        )}
+                        <p className="text-xs font-mono mt-0.5" style={{ color: '#798478' }}>
+                          ${item.price.toLocaleString('es-CO')} × {item.quantity}
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="text-xs font-semibold uppercase tracking-wider transition-colors"
+                      style={{ color: '#A0A083' }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = '#252520'; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = '#A0A083'; }}
+                      aria-label={`Quitar ${item.name}`}
+                    >
+                      Quitar
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              <div
+                className="border-t pt-4 flex justify-between items-center font-bold text-lg mb-8"
+                style={{ borderColor: 'rgba(160,160,131,0.3)', color: '#252520' }}
+              >
+                <span>Total</span>
+                <span className="font-mono">${totalPrice.toLocaleString('es-CO')} COP</span>
+              </div>
+
+              <h3 className="text-2xl font-heading font-bold mb-4" style={{ color: '#252520' }}>
+                Información de Pago
+              </h3>
+              <form onSubmit={handlePayment} className="space-y-4">
+                <input
+                  type="text"
+                  placeholder="Nombre completo"
+                  className="w-full p-3 rounded-sm outline-none text-sm"
+                  style={{ border: '1px solid rgba(160,160,131,0.4)', background: '#F3EDE2', color: '#252520' }}
+                  required
+                />
+                <input
+                  type="email"
+                  placeholder="Correo electrónico"
+                  className="w-full p-3 rounded-sm outline-none text-sm"
+                  style={{ border: '1px solid rgba(160,160,131,0.4)', background: '#F3EDE2', color: '#252520' }}
+                  required
+                />
+                <div
+                  className="p-3 rounded-sm text-center"
+                  style={{ background: 'rgba(77,106,109,0.08)' }}
+                >
+                  <p className="text-xs" style={{ color: '#798478' }}>Simulación de pasarela de pago</p>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full font-semibold py-3 rounded-sm transition-all text-sm uppercase tracking-widest hover:opacity-90"
+                  style={{ background: '#4D6A6D', color: '#EAE0CC' }}
+                >
+                  Confirmar pago · ${totalPrice.toLocaleString('es-CO')} COP
+                </button>
+              </form>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default CheckoutModal;
