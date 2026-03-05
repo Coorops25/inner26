@@ -5,7 +5,7 @@ import { View } from '@react-three/drei';
 import R3FImagePlane from './R3FImagePlane';
 
 const images = [
-  'https://images.unsplash.com/photo-1592398188185-110a1744b199?q=80&w=800&auto=format&fit=crop', // Minimal room
+  'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=800&auto=format&fit=crop', // Minimal room
   'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=800&auto=format&fit=crop', // Light window
   'https://images.unsplash.com/photo-1545243424-0ce743321e11?q=80&w=800&auto=format&fit=crop', // Plants/Nature
 ];

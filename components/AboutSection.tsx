@@ -1,6 +1,7 @@
 
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
+import { Illustration } from '../src/assets/Illustrations';
 
 const AboutSection: React.FC = () => {
     const { navigate } = useContext(CartContext);
@@ -38,14 +39,12 @@ const AboutSection: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Right: Image - Clean vertical aspect ratio */}
+                    {/* Right: Illustration - Clean vertical aspect ratio */}
                     <div className="lg:w-1/2 order-1 lg:order-2 relative">
-                        <div className="relative aspect-[3/4] overflow-hidden bg-stone-100">
-                             <img
-                                src="https://images.unsplash.com/photo-1614730341194-75c60740a2d3?q=80&w=800&fit=crop"
-                                alt="Abstract connection"
-                                className="object-cover w-full h-full hover:scale-105 transition-transform duration-[1.5s] ease-out"
-                                loading="lazy"
+                        <div className="relative aspect-[3/4] overflow-hidden bg-stone-50 flex items-center justify-center p-12">
+                             <Illustration 
+                                name="abstract-spirit" 
+                                className="w-full h-full text-accent/40 transform hover:scale-110 transition-transform duration-[1.5s] ease-out"
                             />
                             {/* Decorative element */}
                             <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-[#F5F0E6] z-10 hidden md:block"></div>

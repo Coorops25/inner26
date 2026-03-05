@@ -2,6 +2,7 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import { CloseIcon } from '../constants';
+import { Illustration } from '../src/assets/Illustrations';
 
 const CheckoutModal: React.FC = () => {
     const { isCheckoutModalOpen, toggleCheckoutModal, cart, removeFromCart, clearCart } = useContext(CartContext);
@@ -35,7 +36,13 @@ const CheckoutModal: React.FC = () => {
                                 {cart.map(item => (
                                     <div key={item.id} className="flex items-center justify-between">
                                         <div className="flex items-center space-x-4">
-                                            <img src={item.imageUrl} alt={item.name} className="w-16 h-16 rounded-md object-cover"/>
+                                            <div className="w-16 h-16 rounded-md bg-stone-50 flex items-center justify-center overflow-hidden">
+                                                {item.illustrationName ? (
+                                                    <Illustration name={item.illustrationName} className="w-1/2 h-1/2 text-stone-300" />
+                                                ) : (
+                                                    <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" referrerPolicy="no-referrer"/>
+                                                )}
+                                            </div>
                                             <div>
                                                 <h4 className="font-semibold text-base-text">{item.name}</h4>
                                                 <p className="text-sm text-detail">{item.details}</p>

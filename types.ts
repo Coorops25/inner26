@@ -4,6 +4,7 @@ export interface Product {
   name: string;
   price: string;
   imageUrl: string;
+  illustrationName?: string;
 }
 
 export interface BlogPost {
@@ -12,6 +13,7 @@ export interface BlogPost {
   category: 'Meditación' | 'Yoga' | 'Crecimiento Espiritual' | 'Bienestar';
   excerpt: string;
   imageUrl: string;
+  illustrationName?: string;
 }
 
 export interface Testimonial {
@@ -28,6 +30,7 @@ export interface CartItem {
     name:string;
     price: number;
     imageUrl: string;
+    illustrationName?: string;
     quantity: number;
     type: CartItemType;
     details?: string;
@@ -38,4 +41,5 @@ export interface BookingDetails {
     title: string;
     price: number;
     imageUrl: string;
+    illustrationName?: string;
 }

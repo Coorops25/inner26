@@ -1,24 +1,28 @@
 
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
+import { Illustration } from '../src/assets/Illustrations';
 
 const classes = [
   {
     title: 'Yoga',
     description: 'Una práctica para unificar cuerpo, mente y respiración. Nuestras sesiones de yoga fluyen con la energía del grupo, explorando posturas (asanas), respiración consciente (pranayama) y quietud. Abierto a todos los niveles, desde principiantes hasta practicantes avanzados.',
     imageUrl: 'https://images.unsplash.com/photo-1599447421405-0e32096d30fd?q=80&w=800&auto=format&fit=crop',
+    illustrationName: 'yoga',
     price: 25,
   },
   {
     title: 'Meditación',
     description: 'Un espacio de silencio para observar y descansar. A través de prácticas de atención plena y meditación guiada, cultivamos la calma interior y la claridad. No se requiere experiencia, solo la disposición de sentarse y estar presente.',
     imageUrl: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800&auto=format&fit=crop',
+    illustrationName: 'meditation',
     price: 20,
   },
   {
     title: 'Danza Holística',
     description: 'Movimiento libre para liberar el cuerpo y la mente. Sin pasos a seguir ni coreografías, esta práctica es una invitación a que tu cuerpo se exprese auténticamente, guiado por la música y tu impulso interior. Un espacio para soltar, sentir y disfrutar.',
     imageUrl: 'https://images.unsplash.com/photo-1508700929628-666bc8bd84ea?q=80&w=800&auto=format&fit=crop',
+    illustrationName: 'dance',
     price: 30,
   },
 ];
@@ -31,7 +35,8 @@ const ClassesPage: React.FC = () => {
       type: 'class',
       title: cls.title,
       price: cls.price,
-      imageUrl: cls.imageUrl
+      imageUrl: cls.imageUrl,
+      illustrationName: cls.illustrationName
     });
   };
 
@@ -48,8 +53,12 @@ const ClassesPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {classes.map((item) => (
               <div key={item.title} className="bg-base rounded-lg shadow-sm overflow-hidden group border border-black/5 flex flex-col">
-                <div className="overflow-hidden aspect-[4/3] bg-stone-100 relative">
-                  <img src={item.imageUrl} alt={`Ilustración de ${item.title}`} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy" />
+                <div className="overflow-hidden aspect-[4/3] bg-stone-50 relative flex items-center justify-center">
+                  {item.illustrationName ? (
+                    <Illustration name={item.illustrationName} className="w-1/2 h-1/2 text-stone-300 group-hover:text-accent transition-colors duration-700" />
+                  ) : (
+                    <img src={item.imageUrl} alt={`Ilustración de ${item.title}`} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy" referrerPolicy="no-referrer" />
+                  )}
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow">

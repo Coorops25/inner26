@@ -2,6 +2,7 @@
 import React, { useContext } from 'react';
 import type { BlogPost } from '../types';
 import { CartContext } from '../context/CartContext';
+import { Illustration } from '../src/assets/Illustrations';
 
 const blogPosts: BlogPost[] = [
   {
@@ -10,6 +11,7 @@ const blogPosts: BlogPost[] = [
     category: 'Meditación',
     excerpt: 'Descubre cómo incorporar la meditación en tu rutina.',
     imageUrl: 'https://images.unsplash.com/photo-1601758178112-731c3b24e6b2?q=80&w=700',
+    illustrationName: 'meditation'
   },
   {
     id: 2,
@@ -17,6 +19,7 @@ const blogPosts: BlogPost[] = [
     category: 'Yoga',
     excerpt: 'Una guía de las posturas fundamentales para tu base.',
     imageUrl: 'https://images.unsplash.com/photo-1617634667999-968538b3257f?q=80&w=700',
+    illustrationName: 'yoga'
   },
   {
     id: 3,
@@ -24,6 +27,7 @@ const blogPosts: BlogPost[] = [
     category: 'Crecimiento Espiritual',
     excerpt: 'Por qué el equilibrio energético es crucial para tu salud.',
     imageUrl: 'https://images.unsplash.com/photo-1599383636454-322677805299?q=80&w=700',
+    illustrationName: 'abstract-spirit'
   },
 ];
 
@@ -44,13 +48,18 @@ const BlogSection: React.FC = () => {
           {blogPosts.map((post) => (
             <div key={post.id} className="group flex flex-col md:flex-row gap-8 items-center cursor-pointer border-b border-stone-100 pb-12 last:border-0">
                {/* Image - reduced visual weight */}
-              <div className="w-full md:w-1/3 aspect-[3/2] overflow-hidden bg-stone-50">
-                <img 
-                    src={post.imageUrl} 
-                    alt={post.title} 
-                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 ease-out" 
-                    loading="lazy" 
-                />
+              <div className="w-full md:w-1/3 aspect-[3/2] overflow-hidden bg-stone-50 flex items-center justify-center">
+                {post.illustrationName ? (
+                    <Illustration name={post.illustrationName} className="w-1/2 h-1/2 text-stone-300 group-hover:text-accent transition-colors duration-700" />
+                ) : (
+                    <img 
+                        src={post.imageUrl} 
+                        alt={post.title} 
+                        className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 ease-out" 
+                        loading="lazy" 
+                        referrerPolicy="no-referrer"
+                    />
+                )}
               </div>
               
               {/* Content */}

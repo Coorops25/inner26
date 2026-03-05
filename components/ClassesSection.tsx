@@ -1,6 +1,7 @@
 
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
+import { Illustration } from '../src/assets/Illustrations';
 
 const classes = [
   {
@@ -8,6 +9,7 @@ const classes = [
     subtitle: 'Unión y Respiración',
     description: 'Fluye con tu respiración y encuentra el equilibrio.',
     imageUrl: 'https://images.unsplash.com/photo-1599447421405-0e32096d30fd?q=80&w=800&auto=format&fit=crop',
+    illustrationName: 'yoga',
     price: 25,
   },
   {
@@ -15,6 +17,7 @@ const classes = [
     subtitle: 'Silencio Interior',
     description: 'Cultiva la paz interior y la claridad mental.',
     imageUrl: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800&auto=format&fit=crop',
+    illustrationName: 'meditation',
     price: 20,
   },
   {
@@ -22,6 +25,7 @@ const classes = [
     subtitle: 'Expresión Libre',
     description: 'Libera tensiones y expresa tu ser auténtico.',
     imageUrl: 'https://images.unsplash.com/photo-1508700929628-666bc8bd84ea?q=80&w=800&auto=format&fit=crop',
+    illustrationName: 'dance',
     price: 30,
   },
 ];
@@ -34,7 +38,8 @@ const ClassesSection: React.FC = () => {
       type: 'class',
       title: cls.title,
       price: cls.price,
-      imageUrl: cls.imageUrl
+      imageUrl: cls.imageUrl,
+      illustrationName: cls.illustrationName
     });
   };
 
@@ -59,13 +64,18 @@ const ClassesSection: React.FC = () => {
             <div key={index} className="group cursor-pointer" onClick={() => handleBookClick(item)}>
               
               {/* Image Container */}
-              <div className="relative overflow-hidden w-full aspect-[3/4] mb-6 bg-stone-100">
-                <img 
-                  src={item.imageUrl} 
-                  alt={item.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-90 group-hover:opacity-100" 
-                  loading="lazy" 
-                />
+              <div className="relative overflow-hidden w-full aspect-[3/4] mb-6 bg-stone-50 flex items-center justify-center">
+                {item.illustrationName ? (
+                  <Illustration name={item.illustrationName} className="w-1/2 h-1/2 text-stone-300 group-hover:text-accent transition-colors duration-700" />
+                ) : (
+                  <img 
+                    src={item.imageUrl} 
+                    alt={item.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-90 group-hover:opacity-100" 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer"
+                  />
+                )}
                 {/* Overlay Button */}
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500 flex items-center justify-center">
                    <button className="bg-white/90 backdrop-blur-sm text-base-text px-6 py-3 font-heading text-lg opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">

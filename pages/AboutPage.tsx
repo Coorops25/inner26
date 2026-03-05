@@ -3,7 +3,7 @@ import React from 'react';
 
 const galleryImages = [
   'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=800&auto=format&fit=crop', // Window
-  'https://images.unsplash.com/photo-1592398188185-110a1744b199?q=80&w=800&auto=format&fit=crop', // Minimal Space
+  'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=800&auto=format&fit=crop', // Minimal Space
   'https://images.unsplash.com/photo-1545243424-0ce743321e11?q=80&w=800&auto=format&fit=crop', // Nature/Plants
 ];
 
@@ -44,6 +44,7 @@ const AboutPage: React.FC = () => {
                             alt="Ilustración abstracta de la guía de Inner Spirit"
                             className="relative w-64 h-64 md:w-80 md:h-80 object-cover rounded-full shadow-2xl grayscale hover:grayscale-0 transition-all duration-700"
                             loading="lazy"
+                            referrerPolicy="no-referrer"
                         />
                         </div>
                     </div>
@@ -72,7 +73,7 @@ const AboutPage: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
                 {galleryImages.map((src, index) => (
                     <div key={index} className="overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-500 aspect-[3/4]">
-                    <img src={src} alt={`Ilustración abstracta del estudio ${index + 1}`} className="w-full h-full object-cover" loading="lazy" />
+                    <img src={src} alt={`Ilustración abstracta del estudio ${index + 1}`} className="w-full h-full object-cover" loading="lazy" referrerPolicy="no-referrer" />
                     </div>
                 ))}
                 </div>

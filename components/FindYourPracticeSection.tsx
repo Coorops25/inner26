@@ -96,6 +96,7 @@ const PracticeCard: React.FC<{ item: PracticeItem }> = ({ item }) => {
                     src={item.imageUrl} 
                     alt={item.title} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                    referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500"></div>
             </div>

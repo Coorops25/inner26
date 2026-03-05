@@ -13,6 +13,7 @@ const FounderSection: React.FC = () => {
                 src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&h=400&fit=crop"
                 alt="Ilustración abstracta de la guía de Inner Spirit"
                 className="relative w-64 h-64 md:w-80 md:h-80 object-cover rounded-full shadow-2xl grayscale hover:grayscale-0 transition-all duration-700"
+                referrerPolicy="no-referrer"
               />
             </div>
           </div>

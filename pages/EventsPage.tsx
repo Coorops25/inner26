@@ -1,6 +1,7 @@
 
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
+import { Illustration } from '../src/assets/Illustrations';
 
 const events = [
   {
@@ -8,6 +9,7 @@ const events = [
     description: 'Un ritual contemporáneo para que el cuerpo hable sin palabras y el alma encuentre su ritmo. Solo tú, la música y la oscuridad amable.',
     date: 'Sábado, 7 de Octubre, 6:00 PM',
     imageUrl: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop',
+    illustrationName: 'dance',
     price: 50,
   },
   {
@@ -15,6 +17,7 @@ const events = [
     description: 'Un encuentro para compartir, meditar y soltar bajo la energía de la luna llena. Un espacio de conexión profunda con nosotras mismas y la comunidad.',
     date: 'Viernes, 20 de Octubre, 7:00 PM',
     imageUrl: 'https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?q=80&w=800&auto=format&fit=crop',
+    illustrationName: 'ritual',
     price: 35,
   },
   {
@@ -22,6 +25,7 @@ const events = [
     description: 'Explora tu mundo interior a través de la palabra escrita. Un taller para desbloquear la creatividad y escuchar tu voz más auténtica, sin juicios ni expectativas.',
     date: 'Domingo, 29 de Octubre, 10:00 AM',
     imageUrl: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=800&auto=format&fit=crop',
+    illustrationName: 'journal',
     price: 45,
   },
 ];
@@ -34,7 +38,8 @@ const EventsPage: React.FC = () => {
           type: 'event',
           title: event.title,
           price: event.price,
-          imageUrl: event.imageUrl
+          imageUrl: event.imageUrl,
+          illustrationName: event.illustrationName
         });
       };
 
@@ -51,8 +56,12 @@ const EventsPage: React.FC = () => {
                 <div className="space-y-16">
                     {events.map(event => (
                         <div key={event.title} className="bg-white rounded-sm shadow-sm md:flex items-stretch max-w-5xl mx-auto overflow-hidden border border-stone-100 group">
-                            <div className="md:w-1/2 overflow-hidden relative min-h-[300px]">
-                                <img src={event.imageUrl} alt={`Ilustración de ${event.title}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+                            <div className="md:w-1/2 overflow-hidden relative min-h-[300px] flex items-center justify-center bg-stone-50">
+                                {event.illustrationName ? (
+                                  <Illustration name={event.illustrationName} className="w-1/2 h-1/2 text-stone-300 group-hover:text-accent transition-colors duration-700" />
+                                ) : (
+                                  <img src={event.imageUrl} alt={`Ilustración de ${event.title}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" referrerPolicy="no-referrer" />
+                                )}
                                 <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors"></div>
                             </div>
                             <div className="md:w-1/2 p-10 md:p-14 flex flex-col justify-center">

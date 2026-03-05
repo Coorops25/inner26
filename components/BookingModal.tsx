@@ -2,6 +2,7 @@
 import React, { useContext, useState } from 'react';
 import { CartContext } from '../context/CartContext';
 import { CloseIcon } from '../constants';
+import { Illustration } from '../src/assets/Illustrations';
 
 const availableTimeSlots = [
     'Lunes, 10:00 AM',
@@ -23,6 +24,7 @@ const BookingModal: React.FC = () => {
             name: bookingDetails.title,
             price: bookingDetails.price,
             imageUrl: bookingDetails.imageUrl,
+            illustrationName: bookingDetails.illustrationName,
             quantity: 1,
             type: bookingDetails.type,
             details: selectedSlot
@@ -41,7 +43,14 @@ const BookingModal: React.FC = () => {
         </button>
         <div className="p-8">
           <h2 className="text-3xl font-heading text-accent font-bold mb-4">Reservar: {bookingDetails.title}</h2>
-          <img src={bookingDetails.imageUrl} alt={bookingDetails.title} className="w-full h-48 object-cover rounded-lg mb-6"/>
+          
+          <div className="w-full h-48 bg-stone-50 rounded-lg mb-6 overflow-hidden flex items-center justify-center">
+            {bookingDetails.illustrationName ? (
+              <Illustration name={bookingDetails.illustrationName} className="w-1/3 h-1/3 text-stone-300" />
+            ) : (
+              <img src={bookingDetails.imageUrl} alt={bookingDetails.title} className="w-full h-full object-cover" referrerPolicy="no-referrer"/>
+            )}
+          </div>
           
           <h3 className="text-lg font-semibold text-base-text mb-3">Selecciona un horario:</h3>
           <div className="space-y-2">

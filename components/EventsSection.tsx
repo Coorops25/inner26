@@ -1,6 +1,7 @@
 
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
+import { Illustration } from '../src/assets/Illustrations';
 
 const eventDetails = {
     title: 'INNER DANCE',
@@ -12,6 +13,7 @@ const eventDetails = {
     Solo tú, la música y la oscuridad amable.`,
     date: 'Sábado, 7 de Octubre — 6:00 PM',
     imageUrl: 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?q=80&w=1200',
+    illustrationName: 'dance',
     price: 50,
 }
 
@@ -24,13 +26,18 @@ const EventsSection: React.FC = () => {
         <div className="flex flex-col md:flex-row items-stretch min-h-[600px]">
           
           {/* Image Side */}
-          <div className="md:w-1/2 relative overflow-hidden group">
-            <img 
-                src={eventDetails.imageUrl} 
-                alt="Inner Dance" 
-                className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0" 
-                loading="lazy" 
-            />
+          <div className="md:w-1/2 relative overflow-hidden group flex items-center justify-center bg-stone-50">
+            {eventDetails.illustrationName ? (
+              <Illustration name={eventDetails.illustrationName} className="w-1/2 h-1/2 text-stone-300 group-hover:text-accent transition-colors duration-700" />
+            ) : (
+              <img 
+                  src={eventDetails.imageUrl} 
+                  alt="Inner Dance" 
+                  className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105 filter grayscale-[20%] group-hover:grayscale-0" 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer"
+              />
+            )}
           </div>
 
           {/* Text Side */}

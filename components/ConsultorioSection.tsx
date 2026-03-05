@@ -13,6 +13,7 @@ const ConsultorioSection: React.FC = () => {
             src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?q=80&w=1800&auto=format&fit=crop" 
             alt="Consultorio Background" 
             className="w-full h-full object-cover"
+            referrerPolicy="no-referrer"
            />
            <div className="absolute inset-0 bg-stone-900/40"></div>
        </div>

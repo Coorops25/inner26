@@ -2,12 +2,13 @@
 import React, { useContext } from 'react';
 import type { Product } from '../types';
 import { CartContext } from '../context/CartContext';
+import { Illustration } from '../src/assets/Illustrations';
 
 const products: Product[] = [
-  { id: 1, name: 'Cristal de Cuarzo', price: '15.00', imageUrl: 'https://images.unsplash.com/photo-1596464716127-f9a0639b936f?q=80&w=500&auto=format&fit=crop' },
-  { id: 2, name: 'Incienso Natural', price: '8.00', imageUrl: 'https://images.unsplash.com/photo-1519669556878-63bdad8a1a49?q=80&w=500&auto=format&fit=crop' },
-  { id: 3, name: 'Aceite Esencial', price: '12.00', imageUrl: 'https://images.unsplash.com/photo-1608571423902-eed4a5e84d85?q=80&w=500&auto=format&fit=crop' },
-  { id: 4, name: 'Diario de Gratitud', price: '22.00', imageUrl: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=500&auto=format&fit=crop' },
+  { id: 1, name: 'Cristal de Cuarzo', price: '15.00', imageUrl: 'https://images.unsplash.com/photo-1596464716127-f9a0639b936f?q=80&w=500&auto=format&fit=crop', illustrationName: 'crystal' },
+  { id: 2, name: 'Incienso Natural', price: '8.00', imageUrl: 'https://images.unsplash.com/photo-1519669556878-63bdad8a1a49?q=80&w=500&auto=format&fit=crop', illustrationName: 'incense' },
+  { id: 3, name: 'Aceite Esencial', price: '12.00', imageUrl: 'https://images.unsplash.com/photo-1608571423902-eed4a5e84d85?q=80&w=500&auto=format&fit=crop', illustrationName: 'oil' },
+  { id: 4, name: 'Diario de Gratitud', price: '22.00', imageUrl: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=500&auto=format&fit=crop', illustrationName: 'journal' },
 ];
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
@@ -17,16 +18,21 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   <div className="group relative">
     {/* Image Aspect 1:1 for clean grid */}
     <div className="aspect-square bg-[#FBF9F6] mb-6 overflow-hidden flex items-center justify-center relative">
-      <img 
-        src={product.imageUrl} 
-        alt={product.name} 
-        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out" 
-        loading="lazy" 
-      />
+      {product.illustrationName ? (
+        <Illustration name={product.illustrationName} className="w-1/2 h-1/2 text-stone-400 group-hover:text-accent transition-colors duration-500" />
+      ) : (
+        <img 
+          src={product.imageUrl} 
+          alt={product.name} 
+          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out" 
+          loading="lazy" 
+          referrerPolicy="no-referrer"
+        />
+      )}
       
       {/* Quick Add Button showing on hover */}
       <button 
-        onClick={() => addToCart({ id: `prod-${product.id}`, name: product.name, price: parseFloat(product.price), imageUrl: product.imageUrl, quantity: 1, type: 'product' })}
+        onClick={() => addToCart({ id: `prod-${product.id}`, name: product.name, price: parseFloat(product.price), imageUrl: product.imageUrl, illustrationName: product.illustrationName, quantity: 1, type: 'product' })}
         className="absolute bottom-4 right-4 bg-base-text text-white w-10 h-10 rounded-full flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-accent z-10"
         aria-label="Añadir al carrito"
       >
