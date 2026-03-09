@@ -41,11 +41,11 @@ const EventsSection: React.FC = () => {
   const event = events[activeIdx];
 
   return (
-    <section id="eventos" className="py-32" style={{ background: '#EAE0CC' }}>
+    <section id="eventos" className="py-20" style={{ background: '#EAE0CC' }}>
       <div className="container mx-auto px-6 max-w-7xl">
 
         {/* Tab selectors */}
-        <div className="flex gap-3 mb-10 justify-center">
+        <div className="flex gap-3 mb-6 justify-center">
           {events.map((e, i) => (
             <button
               key={i}
@@ -62,7 +62,7 @@ const EventsSection: React.FC = () => {
           ))}
         </div>
 
-        <div className="flex flex-col md:flex-row items-stretch min-h-[580px]">
+        <div className="flex flex-col md:flex-row items-stretch min-h-[480px]">
 
           {/* Illustration side */}
           <div

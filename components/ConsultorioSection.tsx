@@ -10,7 +10,7 @@ const ConsultorioSection: React.FC = () => {
     <section
       id="consultorio"
       className="relative overflow-hidden"
-      style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      style={{ minHeight: '50vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
     >
       {/* Gradient background — no external images */}
       <div
@@ -37,7 +37,7 @@ const ConsultorioSection: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 text-center text-white py-24">
+      <div className="relative z-10 container mx-auto px-6 text-center text-white py-16">
         <span className="block text-xs font-bold tracking-[0.35em] uppercase mb-5 opacity-70" style={{ color: '#A0A083' }}>
           Sesiones 1:1
         </span>

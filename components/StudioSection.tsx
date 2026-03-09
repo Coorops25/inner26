@@ -16,11 +16,11 @@ const pillars = [
 
 const StudioSection: React.FC = () => {
   return (
-    <section id="studio" className="py-24 md:py-40 bg-base relative overflow-hidden">
+    <section id="studio" className="py-16 md:py-24 bg-base relative overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl">
 
         {/* Editorial heading */}
-        <div className="flex flex-col items-center text-center mb-20">
+        <div className="flex flex-col items-center text-center mb-12">
           <span className="uppercase tracking-[0.2em] text-sm font-semibold mb-6" style={{ color: '#4D6A6D' }}>El Espacio</span>
           <h2 className="text-4xl md:text-5xl font-heading leading-tight mb-6" style={{ color: '#252520' }}>
             No somos un gimnasio.<br />
@@ -34,7 +34,7 @@ const StudioSection: React.FC = () => {
         </div>
 
         {/* Illustration grid — replaces R3F images */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-12">
           {pillars.map((item) => (
             <div
               key={item.illustration}

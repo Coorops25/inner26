@@ -7,9 +7,9 @@ const AboutSection: React.FC = () => {
   const { navigate } = useContext(CartContext);
 
   return (
-    <section id="about" className="py-32 overflow-hidden" style={{ background: '#FAF7F2' }}>
+    <section id="about" className="py-20 overflow-hidden" style={{ background: '#FAF7F2' }}>
       <div className="container mx-auto px-6 max-w-7xl">
-        <div className="flex flex-col lg:flex-row gap-20 items-center">
+        <div className="flex flex-col lg:flex-row gap-12 items-center">
 
           {/* Left: Text */}
           <div className="lg:w-1/2 lg:pr-12 order-2 lg:order-1">

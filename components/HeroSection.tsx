@@ -60,10 +60,10 @@ const HeroSection: React.FC = () => {
           </h1>
 
           {/* Divider line */}
-          <div className="w-px h-16 md:h-20 my-10 md:my-12" style={{ background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.18), transparent)' }} />
+          <div className="w-px h-10 md:h-14 my-6 md:my-8" style={{ background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.18), transparent)' }} />
 
           {/* Description */}
-          <p className="text-base md:text-lg text-stone-400 font-light max-w-md mx-auto mb-14 leading-relaxed">
+          <p className="text-base md:text-lg text-stone-400 font-light max-w-md mx-auto mb-10 leading-relaxed">
             Un refugio para calmar la mente y despertar el espíritu a los pies de Monserrate.
           </p>
 

@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="py-24 md:py-32" style={{ background: '#1c2829', color: '#A0A083' }}>
+    <footer className="py-16 md:py-24" style={{ background: '#1c2829', color: '#A0A083' }}>
       <div className="container mx-auto px-6 max-w-7xl flex flex-col items-center text-center">
 
         {/* Big brand word */}
@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
         >
           INNER SPIRIT
         </h2>
-        <p className="text-xs tracking-[0.3em] uppercase mb-14" style={{ color: '#4D6A6D' }}>
+        <p className="text-xs tracking-[0.3em] uppercase mb-10" style={{ color: '#4D6A6D' }}>
           Studio — La Candelaria, Bogotá
         </p>
 

@@ -134,10 +134,10 @@ const FindYourPracticeSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category>('movimiento');
 
   return (
-    <section className="py-32" style={{ background: '#FAF7F2' }}>
+    <section className="py-20" style={{ background: '#FAF7F2' }}>
       <div className="container mx-auto px-6 max-w-6xl">
-        <div className="mb-16 text-center">
-          <h2 className="text-4xl md:text-5xl font-heading mb-12" style={{ color: '#252520' }}>
+        <div className="mb-10 text-center">
+          <h2 className="text-4xl md:text-5xl font-heading mb-8" style={{ color: '#252520' }}>
             ¿Qué buscas hoy?
           </h2>
           <div className="flex justify-center gap-8 md:gap-16 border-b" style={{ borderColor: '#D9D1C0' }}>
@@ -147,7 +147,7 @@ const FindYourPracticeSection: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-14 animate-fade-in-up">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 animate-fade-in-up">
           {practiceData[activeCategory].map((item, idx) => (
             <PracticeCard key={`${activeCategory}-${idx}`} item={item} />
           ))}

@@ -35,9 +35,9 @@ const BlogSection: React.FC = () => {
   const { navigate } = useContext(CartContext);
 
   return (
-    <section id="blog" className="py-32 border-t" style={{ background: '#FAF7F2', borderColor: '#EAE0CC' }}>
+    <section id="blog" className="py-20 border-t" style={{ background: '#FAF7F2', borderColor: '#EAE0CC' }}>
       <div className="container mx-auto px-6 max-w-5xl">
-        <div className="flex justify-between items-baseline mb-16">
+        <div className="flex justify-between items-baseline mb-10">
           <h2 className="text-4xl font-heading" style={{ color: '#252520' }}>Journal</h2>
           <button
             onClick={() => navigate('blog')}
@@ -50,11 +50,11 @@ const BlogSection: React.FC = () => {
           </button>
         </div>
 
-        <div className="space-y-12">
+        <div className="space-y-8">
           {blogPosts.map((post) => (
             <div
               key={post.id}
-              className="group flex flex-col md:flex-row gap-8 items-center cursor-pointer pb-12 border-b last:border-0"
+              className="group flex flex-col md:flex-row gap-8 items-center cursor-pointer pb-8 border-b last:border-0"
               style={{ borderColor: '#EAE0CC' }}
               onClick={() => navigate('blog')}
             >
