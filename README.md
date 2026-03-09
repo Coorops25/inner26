@@ -86,15 +86,7 @@ El servidor de desarrollo estará disponible en `http://localhost:3000`.
 | `npm run preview` | Vista previa de la build |
 | `npm run lint` | Verificar tipos TypeScript |
 
-### Variables de Entorno
 
-Crea un archivo `.env.local` en la raíz del proyecto:
-
-```env
-GEMINI_API_KEY=tu_api_key_aqui
-```
-
-*(Nota: La API de Gemini es opcional y solo es necesaria para ciertas funcionalidades de IA)*
 
 ## Diseño y Estilo
 
