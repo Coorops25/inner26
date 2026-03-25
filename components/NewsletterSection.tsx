@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Ribbons from './Ribbons';
 
 const NewsletterSection: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
@@ -8,8 +9,16 @@ const NewsletterSection: React.FC = () => {
   };
 
   return (
-    <section className="py-16 md:py-20 border-t" style={{ background: '#EAE0CC', borderColor: '#D9D1C0' }}>
-      <div className="container mx-auto px-6 text-center max-w-3xl">
+    <section
+      className="relative py-16 md:py-20 border-t overflow-hidden"
+      style={{ background: '#EAE0CC', borderColor: '#D9D1C0' }}
+    >
+      {/* Animated ribbon waves as section background */}
+      <div className="absolute inset-0">
+        <Ribbons />
+      </div>
+
+      <div className="relative container mx-auto px-6 text-center max-w-3xl" style={{ zIndex: 10 }}>
         <span className="text-xs font-bold tracking-[0.25em] uppercase mb-4 block" style={{ color: '#4D6A6D' }}>
           Comunidad
         </span>

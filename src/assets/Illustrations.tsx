@@ -4,6 +4,7 @@ import React from 'react';
 interface IllustrationProps {
   name: string;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 export const Illustration: React.FC<IllustrationProps> = ({ name, className = "" }) => {

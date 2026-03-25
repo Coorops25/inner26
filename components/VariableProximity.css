@@ -1,0 +1,8 @@
+.variable-proximity {
+  display: inline;
+}
+
+.vp-char {
+  display: inline-block;
+  transition: font-weight 0.1s ease;
+}

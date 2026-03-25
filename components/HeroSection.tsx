@@ -1,7 +1,11 @@
 
 import React, { useContext } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrthographicCamera } from '@react-three/drei';
 import { CartContext } from '../context/CartContext';
 import Galaxy from './Galaxy';
+import VariableProximity from './VariableProximity';
+import R3FButton from './R3FButton';
 
 const HeroSection: React.FC = () => {
   const { navigate } = useContext(CartContext);
@@ -51,9 +55,16 @@ const HeroSection: React.FC = () => {
             La Candelaria, Bogotá &mdash; #1 Yoga Studio
           </span>
 
-          {/* Headline */}
+          {/* Headline — "Movimiento" reacts to mouse proximity */}
           <h1 className="text-6xl md:text-8xl lg:text-[8.5rem] font-heading text-white leading-[0.88] tracking-tight">
-            <span className="block opacity-95">Movimiento</span>
+            <span className="block opacity-95">
+              <VariableProximity
+                text="Movimiento"
+                radius={220}
+                minWeight={300}
+                maxWeight={700}
+              />
+            </span>
             <span className="block font-light italic opacity-75 mt-2 md:mt-4" style={{ color: '#C9ADA1' }}>
               Consciente
             </span>
@@ -67,44 +78,67 @@ const HeroSection: React.FC = () => {
             Un refugio para calmar la mente y despertar el espíritu a los pies de Monserrate.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center gap-5 sm:gap-8 w-full justify-center">
-
+          {/* CTA — 3D buttons (desktop) / HTML buttons (mobile) */}
+          {/* Mobile */}
+          <div className="flex sm:hidden flex-col items-center gap-5 w-full">
             <button
               onClick={() => navigate('clases')}
               className="px-9 py-4 font-heading text-lg tracking-wide rounded-sm min-w-[200px] transition-all duration-400"
-              style={{
-                background: '#4D6A6D',
-                color: '#EAE0CC',
-                border: '1px solid #4D6A6D',
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLButtonElement).style.background = '#3d5557';
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLButtonElement).style.background = '#4D6A6D';
-              }}
+              style={{ background: '#4D6A6D', color: '#EAE0CC', border: '1px solid #4D6A6D' }}
             >
               Ver Clases
             </button>
-
             <button
               onClick={() => navigate('eventos')}
               className="px-9 py-4 text-white/70 hover:text-white font-heading text-lg tracking-wide italic min-w-[200px] transition-all duration-400"
               style={{ borderBottom: '1px solid rgba(255,255,255,0.25)' }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLButtonElement).style.borderBottomColor = 'rgba(201,173,161,0.7)';
-                (e.currentTarget as HTMLButtonElement).style.color = '#C9ADA1';
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLButtonElement).style.borderBottomColor = 'rgba(255,255,255,0.25)';
-                (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.7)';
-              }}
             >
               Próximos Eventos &rarr;
             </button>
-
           </div>
+
+          {/* Desktop — R3F 3D buttons inside WebGL Canvas */}
+          <div
+            className="hidden sm:block"
+            style={{ width: '480px', height: '72px', maxWidth: '90vw' }}
+          >
+            <Canvas
+              gl={{ alpha: true, antialias: true }}
+              style={{ width: '100%', height: '100%' }}
+            >
+              {/*
+                Orthographic frustum: x from -5 to 5 (10 units wide),
+                y from -0.75 to 0.75 (1.5 units tall).
+                Canvas 480×72 → aspect 6.67 = 10/1.5 ✓
+                Each RoundedBox is 4×1 units, placed at x=±2.6.
+              */}
+              <OrthographicCamera
+                makeDefault
+                left={-5} right={5}
+                top={0.75} bottom={-0.75}
+                near={0.1} far={100}
+                position={[0, 0, 5]}
+              />
+              <group position={[-2.6, 0, 0]}>
+                <R3FButton
+                  label="Ver Clases"
+                  onClick={() => navigate('clases')}
+                  backgroundColor="#4D6A6D"
+                  textColor="#EAE0CC"
+                />
+              </group>
+              <group position={[2.6, 0, 0]}>
+                <R3FButton
+                  label="Próximos Eventos"
+                  onClick={() => navigate('eventos')}
+                  isOutline
+                  backgroundColor="#C9ADA1"
+                  textColor="#EAE0CC"
+                />
+              </group>
+            </Canvas>
+          </div>
+
         </div>
       </div>
 
