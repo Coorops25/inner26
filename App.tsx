@@ -49,7 +49,9 @@ const App: React.FC = () => {
       {/* Canvas2D ink particle trail — follows cursor globally */}
       <SplashCursor />
 
-      {/* R3F WebGL glow cursor — soft ink drop overlay */}
+      {/* R3F WebGL glow cursor — soft ink drop overlay.
+          pointer-events: none must be set on the inner <canvas> via onCreated
+          because CSS pointer-events is NOT inherited in HTML (only SVG). */}
       <div
         style={{
           position: 'fixed',
@@ -58,7 +60,13 @@ const App: React.FC = () => {
           zIndex: 9998,
         }}
       >
-        <Canvas gl={{ alpha: true }} style={{ width: '100%', height: '100%' }}>
+        <Canvas
+          gl={{ alpha: true }}
+          style={{ width: '100%', height: '100%' }}
+          onCreated={({ gl }) => {
+            gl.domElement.style.pointerEvents = 'none';
+          }}
+        >
           <SplashCursorR3F />
         </Canvas>
       </div>
