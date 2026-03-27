@@ -42,4 +42,8 @@ export interface BookingDetails {
     price: number;
     imageUrl: string;
     illustrationName?: string;
+    eventSlug?: string;
+    availableSlots?: string[];
+    preselectedSlot?: string;
+    source?: 'site' | 'instagram' | 'whatsapp';
 }

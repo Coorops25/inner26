@@ -1,20 +1,60 @@
-
-import React, { useContext, useState } from 'react';
+﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { CartContext } from '../context/CartContext';
 import { CloseIcon } from '../constants';
 import { Illustration } from '../src/assets/Illustrations';
 
-const availableTimeSlots = [
-  'Lunes, 7:00 AM',
-  'Miércoles, 6:30 AM',
-  'Viernes, 6:30 AM',
-  'Sábado, 8:00 AM',
-  'Domingo, 8:00 AM',
-];
+const defaultSlotsByType = {
+  class: [
+    'Lunes, 7:00 AM',
+    'Miercoles, 6:30 AM',
+    'Viernes, 6:30 AM',
+    'Sabado, 8:00 AM',
+    'Domingo, 8:00 AM',
+  ],
+  event: ['Proxima fecha disponible', 'Lista de espera'],
+} as const;
+
+const sourceLabel = (source: string | undefined): string => {
+  if (source === 'instagram') {
+    return 'IG CTA';
+  }
+  if (source === 'whatsapp') {
+    return 'WhatsApp CTA';
+  }
+  return 'Web';
+};
 
 const BookingModal: React.FC = () => {
   const { isBookingModalOpen, closeBookingModal, bookingDetails, addToCart } = useContext(CartContext);
-  const [selectedSlot, setSelectedSlot] = useState<string | null>(availableTimeSlots[0]);
+
+  const availableTimeSlots = useMemo(() => {
+    if (!bookingDetails) {
+      return [] as string[];
+    }
+
+    if (bookingDetails.availableSlots && bookingDetails.availableSlots.length > 0) {
+      return bookingDetails.availableSlots;
+    }
+
+    return [...defaultSlotsByType[bookingDetails.type]];
+  }, [bookingDetails]);
+
+  const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!bookingDetails) {
+      setSelectedSlot(null);
+      return;
+    }
+
+    const preferredSlot = bookingDetails.preselectedSlot;
+    if (preferredSlot && availableTimeSlots.includes(preferredSlot)) {
+      setSelectedSlot(preferredSlot);
+      return;
+    }
+
+    setSelectedSlot(availableTimeSlots[0] ?? null);
+  }, [bookingDetails, availableTimeSlots]);
 
   if (!isBookingModalOpen || !bookingDetails) return null;
 
@@ -28,7 +68,7 @@ const BookingModal: React.FC = () => {
         illustrationName: bookingDetails.illustrationName,
         quantity: 1,
         type: bookingDetails.type,
-        details: selectedSlot,
+        details: `${selectedSlot} · ${sourceLabel(bookingDetails.source)}`,
       });
       closeBookingModal();
     } else {
@@ -73,29 +113,38 @@ const BookingModal: React.FC = () => {
           <h3 className="text-sm font-bold uppercase tracking-wider mb-3" style={{ color: '#798478' }}>
             Selecciona un horario
           </h3>
-          <div className="space-y-2">
-            {availableTimeSlots.map((slot) => (
-              <label
-                key={slot}
-                className={`flex items-center p-3 border rounded-sm cursor-pointer transition-colors`}
-                style={{
-                  background: selectedSlot === slot ? 'rgba(77,106,109,0.08)' : 'transparent',
-                  borderColor: selectedSlot === slot ? '#4D6A6D' : 'rgba(160,160,131,0.35)',
-                }}
-              >
-                <input
-                  type="radio"
-                  name="time-slot"
-                  value={slot}
-                  checked={selectedSlot === slot}
-                  onChange={() => setSelectedSlot(slot)}
-                  className="h-4 w-4"
-                  style={{ accentColor: '#4D6A6D' }}
-                />
-                <span className="ml-3 text-sm" style={{ color: '#252520' }}>{slot}</span>
-              </label>
-            ))}
-          </div>
+
+          {availableTimeSlots.length === 0 ? (
+            <p className="text-sm" style={{ color: '#798478' }}>
+              No hay horarios cargados para este evento.
+            </p>
+          ) : (
+            <div className="space-y-2">
+              {availableTimeSlots.map((slot) => (
+                <label
+                  key={slot}
+                  className="flex items-center p-3 border rounded-sm cursor-pointer transition-colors"
+                  style={{
+                    background: selectedSlot === slot ? 'rgba(77,106,109,0.08)' : 'transparent',
+                    borderColor: selectedSlot === slot ? '#4D6A6D' : 'rgba(160,160,131,0.35)',
+                  }}
+                >
+                  <input
+                    type="radio"
+                    name="time-slot"
+                    value={slot}
+                    checked={selectedSlot === slot}
+                    onChange={() => setSelectedSlot(slot)}
+                    className="h-4 w-4"
+                    style={{ accentColor: '#4D6A6D' }}
+                  />
+                  <span className="ml-3 text-sm" style={{ color: '#252520' }}>
+                    {slot}
+                  </span>
+                </label>
+              ))}
+            </div>
+          )}
 
           <div className="mt-8 flex justify-between items-center">
             <p className="text-xl font-bold font-mono" style={{ color: '#252520' }}>
@@ -105,6 +154,7 @@ const BookingModal: React.FC = () => {
               onClick={handleAddToCart}
               className="font-semibold py-3 px-7 rounded-full transition-all duration-300 hover:opacity-90 active:scale-95 text-sm uppercase tracking-wide"
               style={{ background: '#4D6A6D', color: '#EAE0CC' }}
+              disabled={availableTimeSlots.length === 0}
             >
               Confirmar
             </button>

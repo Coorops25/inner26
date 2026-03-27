@@ -3,7 +3,10 @@
     "allow": [
       "Bash(npm run:*)",
       "Bash(npx tsc:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(git remote:*)",
+      "Bash(ls \"/c/Users/Fabian Leal/documents/inner/\"*.css)",
+      "Bash(gh run:*)"
     ]
   }
 }

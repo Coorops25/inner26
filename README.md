@@ -138,4 +138,17 @@ El servidor de desarrollo estará disponible en `http://localhost:3000`.
 
 <p align="center">
   © 2024 Inner Spirit Studio. Todos los derechos reservados.
-</p>
+</p>
+## Ecosistema de Eventos e Instagram (2026)
+
+Se agrego una arquitectura modular para eventos y publicaciones de Instagram:
+
+- `src/modules/events/data/events.ts`: fuente unica de eventos.
+- `src/modules/events/services/instagramFeed.ts`: lectura del feed por evento (API + fallback local).
+- `src/modules/events/hooks/useEventInstagramFeed.ts`: actualizacion reactiva en UI.
+- `src/modules/events/components/EventInstagramFeed.tsx`: cards de publicaciones con CTA.
+- `src/modules/events/utils/toBookingDetails.ts`: integracion directa con `BookingModal`.
+
+Con esto, cada evento puede tener sus publicaciones IG activas y cada publicacion puede disparar un CTA de reserva.
+
+Checklist operativo en: `docs/ECOSISTEMA_SOLIDO.md`.
