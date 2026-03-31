@@ -65,27 +65,25 @@ const Header: React.FC = () => {
 
         {/* Brand */}
         <div className="w-1/4 flex justify-start">
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); handleNavigate('home'); }}
-            className="text-lg md:text-xl tracking-[0.08em] font-heading font-bold uppercase transition-colors duration-300 relative z-50"
+          <button
+            onClick={() => handleNavigate('home')}
+            className="text-lg md:text-xl tracking-[0.08em] font-heading font-bold uppercase transition-colors duration-300 relative z-50 bg-transparent border-none cursor-pointer"
           >
             Inner Spirit
-          </a>
+          </button>
         </div>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex flex-1 justify-center items-center space-x-10 xl:space-x-14">
+        <nav className="hidden md:flex flex-1 justify-center items-center space-x-6 lg:space-x-10 xl:space-x-14">
           {navLinks.map((link) => (
-            <a
+            <button
               key={link.page}
-              href={`#${link.page}`}
-              onClick={(e) => { e.preventDefault(); handleNavigate(link.page); }}
-              className="text-[11px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 opacity-80 hover:opacity-100"
+              onClick={() => handleNavigate(link.page)}
+              className="text-xs font-bold uppercase tracking-widest transition-colors duration-300 opacity-80 hover:opacity-100 bg-transparent border-none cursor-pointer"
               style={{ color: 'inherit' }}
             >
               {link.label}
-            </a>
+            </button>
           ))}
         </nav>
 
@@ -127,15 +125,14 @@ const Header: React.FC = () => {
       >
         <nav className="flex flex-col items-center space-y-8 text-center">
           {navLinks.map((link, idx) => (
-            <a
+            <button
               key={link.page}
-              href={`#${link.page}`}
-              onClick={(e) => { e.preventDefault(); handleNavigate(link.page); }}
-              className={`text-4xl font-heading transition-all duration-500 ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
+              onClick={() => handleNavigate(link.page)}
+              className={`text-4xl font-heading transition-all duration-500 bg-transparent border-none cursor-pointer ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
               style={{ color: '#252520', transitionDelay: `${idx * 50}ms` }}
             >
               {link.label}
-            </a>
+            </button>
           ))}
         </nav>
         <div className="mt-14 flex gap-6 text-sm tracking-widest uppercase" style={{ color: '#798478' }}>
