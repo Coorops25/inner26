@@ -66,7 +66,7 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className="fixed top-0 w-full z-50 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] py-5 md:py-7"
+      className="fixed top-0 w-full z-50 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] py-5 md:py-7"
       style={headerStyle}
     >
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">

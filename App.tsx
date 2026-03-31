@@ -61,6 +61,9 @@ const PageRenderer: React.FC = () => {
   }
 };
 
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 const AppContent: React.FC = () => {
   const { page } = useContext(CartContext);
 
@@ -78,30 +81,34 @@ const AppContent: React.FC = () => {
 
   return (
     <>
-      <ErrorBoundary>
-        <SplashCursor />
-      </ErrorBoundary>
+      {!prefersReducedMotion() && (
+        <ErrorBoundary>
+          <SplashCursor />
+        </ErrorBoundary>
+      )}
 
-      <ErrorBoundary>
-        <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            pointerEvents: 'none',
-            zIndex: 9998,
-          }}
-        >
-          <Canvas
-            gl={{ alpha: true }}
-            style={{ width: '100%', height: '100%' }}
-            onCreated={({ gl }) => {
-              gl.domElement.style.pointerEvents = 'none';
+      {!prefersReducedMotion() && (
+        <ErrorBoundary>
+          <div
+            style={{
+              position: 'fixed',
+              inset: 0,
+              pointerEvents: 'none',
+              zIndex: 9998,
             }}
           >
-            <SplashCursorR3F />
-          </Canvas>
-        </div>
-      </ErrorBoundary>
+            <Canvas
+              gl={{ alpha: true }}
+              style={{ width: '100%', height: '100%' }}
+              onCreated={({ gl }) => {
+                gl.domElement.style.pointerEvents = 'none';
+              }}
+            >
+              <SplashCursorR3F />
+            </Canvas>
+          </div>
+        </ErrorBoundary>
+      )}
 
       <div style={{ position: 'relative' }} className="bg-base text-base-text antialiased">
         <div style={{ position: 'relative', zIndex: 10 }}>

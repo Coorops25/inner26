@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
         >
           {/* Location */}
           <div className="space-y-3">
-            <span className="text-[10px] font-bold uppercase tracking-widest block" style={{ color: '#4D6A6D' }}>Ubicación</span>
+            <span className="text-xs font-bold uppercase tracking-widest block" style={{ color: '#4D6A6D' }}>Ubicación</span>
             <p className="font-light leading-relaxed" style={{ color: '#C9ADA1' }}>
               Transversal 1 # 17-29<br />
               La Candelaria, Bogotá<br />
@@ -96,7 +96,7 @@ const Footer: React.FC = () => {
 
           {/* Legal */}
           <div className="space-y-3">
-            <span className="text-[10px] font-bold uppercase tracking-widest block" style={{ color: '#4D6A6D' }}>Navegación</span>
+            <span className="text-xs font-bold uppercase tracking-widest block" style={{ color: '#4D6A6D' }}>Navegación</span>
             <div className="flex flex-col gap-2 text-sm">
               {(['clases', 'eventos', 'nosotros', 'tienda', 'contacto'] as const).map(p => (
                 <a
@@ -121,7 +121,7 @@ const Footer: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
           className="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-transform hover:scale-110 z-40"
-          style={{ background: '#25D366', color: '#fff' }}
+          style={{ background: '#25D366', color: '#fff', touchAction: 'manipulation' }}
           aria-label="Escríbenos por WhatsApp"
         >
           <WhatsAppSVG />

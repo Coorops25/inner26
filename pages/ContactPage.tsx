@@ -122,38 +122,46 @@ const ContactPage: React.FC = () => {
                             <input type="text" name="honeypot" value={formState.honeypot} onChange={handleInputChange} className="hidden" aria-hidden="true" tabIndex={-1} />
 
                             <div>
-                                <input 
-                                    type="text" 
-                                    name="name" 
-                                    value={formState.name} 
-                                    onChange={handleInputChange} 
+                                <label htmlFor="contact-name" className="sr-only">Tu Nombre</label>
+                                <input
+                                    id="contact-name"
+                                    type="text"
+                                    name="name"
+                                    value={formState.name}
+                                    onChange={handleInputChange}
                                     onFocus={() => setFocusedField('name')}
                                     onBlur={() => setFocusedField(null)}
-                                    placeholder="Tu Nombre" 
+                                    placeholder="Tu Nombre"
                                     className={getInputClass('name')}
-                                    required 
+                                    autoComplete="name"
+                                    required
                                 />
                             </div>
 
                             <div>
-                                <input 
-                                    type="email" 
-                                    name="email" 
-                                    value={formState.email} 
-                                    onChange={handleInputChange} 
+                                <label htmlFor="contact-email" className="sr-only">Tu Email</label>
+                                <input
+                                    id="contact-email"
+                                    type="email"
+                                    name="email"
+                                    value={formState.email}
+                                    onChange={handleInputChange}
                                     onFocus={() => setFocusedField('email')}
                                     onBlur={() => setFocusedField(null)}
-                                    placeholder="Tu Email" 
+                                    placeholder="Tu Email"
                                     className={getInputClass('email')}
-                                    required 
+                                    autoComplete="email"
+                                    required
                                 />
                             </div>
 
                             <div>
-                                <select 
-                                    name="type" 
-                                    value={formState.type} 
-                                    onChange={handleInputChange} 
+                                <label htmlFor="contact-type" className="sr-only">Motivo de consulta</label>
+                                <select
+                                    id="contact-type"
+                                    name="type"
+                                    value={formState.type}
+                                    onChange={handleInputChange}
                                     onFocus={() => setFocusedField('type')}
                                     onBlur={() => setFocusedField(null)}
                                     className={`${getInputClass('type')} cursor-pointer appearance-none`}
@@ -166,14 +174,16 @@ const ContactPage: React.FC = () => {
                             </div>
 
                             <div>
-                                <textarea 
-                                    name="message" 
-                                    value={formState.message} 
-                                    onChange={handleInputChange} 
+                                <label htmlFor="contact-message" className="sr-only">Mensaje</label>
+                                <textarea
+                                    id="contact-message"
+                                    name="message"
+                                    value={formState.message}
+                                    onChange={handleInputChange}
                                     onFocus={() => setFocusedField('message')}
                                     onBlur={() => setFocusedField(null)}
-                                    placeholder="¿En qué podemos acompañarte?" 
-                                    rows={4} 
+                                    placeholder="¿En qué podemos acompañarte?"
+                                    rows={4}
                                     className={`${getInputClass('message')} resize-none`}
                                     required
                                 ></textarea>

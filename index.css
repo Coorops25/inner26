@@ -58,7 +58,7 @@
 /* Responsive typography */
 @media (max-width: 640px) {
   html {
-    font-size: 14px;
+    font-size: 16px; /* 16px min prevents iOS auto-zoom on inputs */
   }
 }
 

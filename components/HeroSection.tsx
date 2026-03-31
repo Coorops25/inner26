@@ -51,7 +51,7 @@ const HeroSection: React.FC = () => {
         <div className="animate-fade-in-up flex flex-col items-center w-full max-w-5xl">
 
           {/* Badge */}
-          <span className="text-white/50 text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase mb-8 border border-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
+          <span className="text-white/50 text-xs font-bold tracking-[0.35em] uppercase mb-8 border border-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
             La Candelaria, Bogotá &mdash; #1 Yoga Studio
           </span>
 
@@ -146,7 +146,7 @@ const HeroSection: React.FC = () => {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-35 animate-pulse" style={{ zIndex: 2 }}>
-        <span className="text-[9px] tracking-[0.3em] text-white uppercase">Descubre</span>
+        <span className="text-[10px] tracking-[0.3em] text-white uppercase">Descubre</span>
         <div className="w-px h-8 bg-white" />
       </div>
     </section>
