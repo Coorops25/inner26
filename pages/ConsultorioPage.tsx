@@ -30,8 +30,14 @@ const ConsultorioPage: React.FC = () => {
                 <p className="font-semibold text-accent text-2xl font-heading">No damos consejos. Caminamos contigo.</p>
             </div>
             <div className="mt-16">
-            <button onClick={() => navigate('contacto')} className="bg-accent hover:bg-opacity-80 text-white font-semibold py-3 px-10 rounded-full transition-all duration-400 transform hover:scale-105 inline-block">
-                Conversemos para agendar
+            <button
+              onClick={() => navigate('contacto')}
+              className="font-semibold py-3 px-10 rounded-full transition-all duration-300 transform hover:scale-105 inline-block"
+              style={{ background: '#4D6A6D', color: '#EAE0CC' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#3d5557'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = '#4D6A6D'; }}
+            >
+              Conversemos para agendar
             </button>
             </div>
         </div>

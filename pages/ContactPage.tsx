@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { InstagramIcon, WhatsAppIcon } from '../constants';
+import { useToast } from '../context/ToastContext';
 
 const ContactPage: React.FC = () => {
   useEffect(() => {
@@ -24,6 +25,7 @@ const ContactPage: React.FC = () => {
     return () => { document.head.removeChild(script); };
   }, []);
 
+  const { showToast } = useToast();
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -42,7 +44,7 @@ const ContactPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formState.honeypot) return; // Bot protection
-    alert('Gracias. Hemos recibido tu mensaje y te responderemos desde la calma.');
+    showToast('Gracias. Hemos recibido tu mensaje y te responderemos desde la calma.', 'success');
     setFormState({ name: '', email: '', message: '', type: 'clase', honeypot: '' });
   };
   
@@ -97,8 +99,8 @@ const ContactPage: React.FC = () => {
                              <div>
                                 <h4 className="font-heading text-2xl text-stone-800 mb-2">Conecta</h4>
                                 <div className="flex gap-4 mt-2">
-                                    <a href="#" className="hover:text-accent transition-colors"><InstagramIcon /></a>
-                                    <a href="#" className="hover:text-accent transition-colors"><WhatsAppIcon /></a>
+                                    <a href="https://instagram.com/innerspirit_studio" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors" aria-label="Instagram @innerspirit_studio"><InstagramIcon /></a>
+                                    <a href="https://wa.me/573212248261" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors" aria-label="WhatsApp +57 321 224 8261"><WhatsAppIcon /></a>
                                 </div>
                              </div>
                         </div>

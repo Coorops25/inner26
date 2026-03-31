@@ -23,36 +23,36 @@
 }
 
 /* Legacy utility classes */
-.bg-base { background-color: var(--sand-dune); }
-.text-base-text { color: var(--ink); }
+.bg-base { background-color: var(--color-sand-dune); }
+.text-base-text { color: var(--color-ink); }
 
-.bg-accent { background-color: var(--almond-silk); }
-.text-accent { color: var(--almond-silk); }
-.border-accent { border-color: var(--almond-silk); }
+.bg-accent { background-color: var(--color-almond-silk); }
+.text-accent { color: var(--color-almond-silk); }
+.border-accent { border-color: var(--color-almond-silk); }
 
-.bg-sage { background-color: var(--dry-sage); }
-.text-sage { color: var(--dry-sage); }
+.bg-sage { background-color: var(--color-dry-sage); }
+.text-sage { color: var(--color-dry-sage); }
 
-.bg-olive { background-color: var(--grey-olive); }
-.text-olive { color: var(--grey-olive); }
+.bg-olive { background-color: var(--color-grey-olive); }
+.text-olive { color: var(--color-grey-olive); }
 
-.bg-slate-is { background-color: var(--blue-slate); }
-.text-slate-is { color: var(--blue-slate); }
-.border-slate-is { border-color: var(--blue-slate); }
+.bg-slate-is { background-color: var(--color-blue-slate); }
+.text-slate-is { color: var(--color-blue-slate); }
+.border-slate-is { border-color: var(--color-blue-slate); }
 
 /* Legacy aliases */
-.bg-detail { background-color: var(--dry-sage); }
-.text-detail { color: var(--dry-sage); }
-.bg-stone-is { background-color: var(--grey-olive); }
-.text-stone-is { color: var(--grey-olive); }
+.bg-detail { background-color: var(--color-dry-sage); }
+.text-detail { color: var(--color-dry-sage); }
+.bg-stone-is { background-color: var(--color-grey-olive); }
+.text-stone-is { color: var(--color-grey-olive); }
 
 /* Dark backgrounds */
-.bg-ink { background-color: var(--ink); }
+.bg-ink { background-color: var(--color-ink); }
 .bg-deep-slate { background-color: #1c2829; }
 .bg-dark-panel { background-color: #1f2c2e; }
 
 /* Cream sections */
-.bg-cream { background-color: var(--cream-light); }
+.bg-cream { background-color: var(--color-cream-light); }
 .bg-sand-light { background-color: #F3EDE2; }
 
 /* Responsive typography */

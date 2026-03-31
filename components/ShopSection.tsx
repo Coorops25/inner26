@@ -26,7 +26,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           style={{ color: '#C9ADA1' } as React.CSSProperties}
         />
 
-        {/* Quick add */}
+        {/* Quick add — always visible on touch, hover on desktop */}
         <button
           onClick={() => addToCart({
             id: `prod-${product.id}`,
@@ -37,7 +37,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             quantity: 1,
             type: 'product',
           })}
-          className="absolute bottom-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-white text-lg font-bold opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-10"
+          className="absolute bottom-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-white text-lg font-bold md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-300 z-10"
           style={{ background: '#4D6A6D' }}
           aria-label="Añadir al carrito"
         >

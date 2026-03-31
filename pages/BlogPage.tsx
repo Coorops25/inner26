@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import type { BlogPost } from '../types';
 import { Illustration } from '../src/assets/Illustrations';
+import { useToast } from '../context/ToastContext';
 
 const blogPosts: BlogPost[] = [
   {
@@ -47,6 +48,7 @@ const blogPosts: BlogPost[] = [
 ];
 
 const BlogPage: React.FC = () => {
+  const { showToast } = useToast();
   useEffect(() => {
     const blogSchema = {
       "@context": "https://schema.org",
@@ -69,7 +71,7 @@ const BlogPage: React.FC = () => {
 
   const handleReadMore = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    alert('Artículo próximamente disponible.');
+    showToast('Artículo próximamente disponible.', 'info');
   };
 
   return (

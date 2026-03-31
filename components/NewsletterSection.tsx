@@ -1,11 +1,14 @@
 
 import React from 'react';
 import Ribbons from './Ribbons';
+import { useToast } from '../context/ToastContext';
 
 const NewsletterSection: React.FC = () => {
+  const { showToast } = useToast();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Gracias por unirte a nuestra comunidad.');
+    showToast('Gracias por unirte a nuestra comunidad.', 'success');
+    (e.target as HTMLFormElement).reset();
   };
 
   return (

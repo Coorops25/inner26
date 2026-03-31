@@ -169,7 +169,7 @@ const CheckoutModal: React.FC = () => {
                   className="p-3 rounded-sm text-center"
                   style={{ background: 'rgba(77,106,109,0.08)' }}
                 >
-                  <p className="text-xs" style={{ color: '#798478' }}>Simulación de pasarela de pago</p>
+                  <p className="text-xs" style={{ color: '#798478' }}>Pago procesado de forma segura · Tu reserva quedará confirmada</p>
                 </div>
                 <button
                   type="submit"

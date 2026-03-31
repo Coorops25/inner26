@@ -42,7 +42,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
               type: 'product',
             });
           }}
-          className="absolute bottom-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-white text-lg font-bold translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 shadow-lg"
+          className="absolute bottom-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-white text-lg font-bold md:translate-y-4 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-300 shadow-lg"
           style={{ background: '#4D6A6D' }}
           aria-label="Añadir"
         >

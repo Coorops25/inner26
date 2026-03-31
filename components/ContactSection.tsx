@@ -1,8 +1,10 @@
 
 import React, { useState } from 'react';
 import { InstagramIcon, WhatsAppIcon } from '../constants';
+import { useToast } from '../context/ToastContext';
 
 const ContactSection: React.FC = () => {
+  const { showToast } = useToast();
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -21,7 +23,7 @@ const ContactSection: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formState.honeypot) return;
-    alert('Gracias. Hemos recibido tu mensaje.');
+    showToast('Gracias. Hemos recibido tu mensaje.', 'success');
     setFormState({ name: '', email: '', message: '', type: 'clase', honeypot: '' });
   };
   
@@ -56,10 +58,10 @@ const ContactSection: React.FC = () => {
             </div>
 
             <div className="flex gap-6 pt-4 border-t border-stone-200 w-fit">
-              <a href="#" className="text-stone-400 hover:text-accent transition-colors transform hover:-translate-y-1 duration-300">
+              <a href="https://instagram.com/innerspirit_studio" target="_blank" rel="noopener noreferrer" className="text-stone-400 hover:text-accent transition-colors transform hover:-translate-y-1 duration-300" aria-label="Instagram @innerspirit_studio">
                 <InstagramIcon />
               </a>
-              <a href="#" className="text-stone-400 hover:text-accent transition-colors transform hover:-translate-y-1 duration-300">
+              <a href="https://wa.me/573212248261" target="_blank" rel="noopener noreferrer" className="text-stone-400 hover:text-accent transition-colors transform hover:-translate-y-1 duration-300" aria-label="WhatsApp +57 321 224 8261">
                 <WhatsAppIcon />
               </a>
             </div>
