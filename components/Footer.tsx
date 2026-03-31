@@ -82,13 +82,14 @@ const Footer: React.FC = () => {
               >
                 +57 321 224 8261
               </a>
-              <button
-                onClick={() => navigate('contacto')}
+              <a
+                href="/contacto"
+                onClick={(e) => { e.preventDefault(); navigate('contacto'); }}
                 className="block mx-auto transition-colors hover:text-white pb-0.5"
                 style={{ borderBottom: '1px solid rgba(121,132,120,0.4)' }}
               >
                 hola@innerspirit.co
-              </button>
+              </a>
             </div>
             <p className="text-xs tracking-widest uppercase" style={{ color: '#4D6A6D' }}>@innerspirit_studio</p>
           </div>
@@ -97,14 +98,15 @@ const Footer: React.FC = () => {
           <div className="space-y-3">
             <span className="text-[10px] font-bold uppercase tracking-widest block" style={{ color: '#4D6A6D' }}>Navegación</span>
             <div className="flex flex-col gap-2 text-sm">
-              {['clases', 'eventos', 'nosotros', 'tienda', 'contacto'].map(p => (
-                <button
+              {(['clases', 'eventos', 'nosotros', 'tienda', 'contacto'] as const).map(p => (
+                <a
                   key={p}
-                  onClick={() => navigate(p)}
+                  href={`/${p}`}
+                  onClick={(e) => { e.preventDefault(); navigate(p); }}
                   className="capitalize transition-colors hover:text-white text-left md:text-center"
                 >
                   {p.charAt(0).toUpperCase() + p.slice(1)}
-                </button>
+                </a>
               ))}
             </div>
             <p className="text-xs mt-4" style={{ color: 'rgba(121,132,120,0.5)' }}>

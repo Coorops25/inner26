@@ -38,15 +38,16 @@ const AboutSection: React.FC = () => {
             </div>
 
             <div className="mt-12 flex flex-wrap gap-6">
-              <button
-                onClick={() => navigate('nosotros')}
-                className="font-heading text-xl pb-1 transition-all duration-300"
+              <a
+                href="/nosotros"
+                onClick={(e) => { e.preventDefault(); navigate('nosotros'); }}
+                className="font-heading text-xl pb-1 transition-all duration-300 inline-block"
                 style={{ color: '#252520', borderBottom: '1px solid #A0A083' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = '#4D6A6D'; (e.currentTarget as HTMLButtonElement).style.borderBottomColor = '#4D6A6D'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = '#252520'; (e.currentTarget as HTMLButtonElement).style.borderBottomColor = '#A0A083'; }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#4D6A6D'; (e.currentTarget as HTMLAnchorElement).style.borderBottomColor = '#4D6A6D'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#252520'; (e.currentTarget as HTMLAnchorElement).style.borderBottomColor = '#A0A083'; }}
               >
                 Conoce nuestra historia &rarr;
-              </button>
+              </a>
               <a
                 href="https://wa.me/573212248261?text=Hola%2C%20quiero%20info%20sobre%20clases"
                 target="_blank"

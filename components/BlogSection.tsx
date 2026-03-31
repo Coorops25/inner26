@@ -39,24 +39,26 @@ const BlogSection: React.FC = () => {
       <div className="container mx-auto px-6 max-w-5xl">
         <div className="flex justify-between items-baseline mb-8">
           <h2 className="text-3xl md:text-4xl font-heading" style={{ color: '#1A1A18' }}>Journal</h2>
-          <button
-            onClick={() => navigate('blog')}
+          <a
+            href="/blog"
+            onClick={(e) => { e.preventDefault(); navigate('blog'); }}
             className="text-sm font-bold uppercase tracking-widest transition-colors"
             style={{ color: '#A0A083' }}
-            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = '#4D6A6D'; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = '#A0A083'; }}
+            onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#4D6A6D'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#A0A083'; }}
           >
             Ver Todo
-          </button>
+          </a>
         </div>
 
         <div className="space-y-8">
           {blogPosts.map((post) => (
-            <div
+            <a
               key={post.id}
-              className="group flex flex-col md:flex-row gap-8 items-center cursor-pointer pb-8 border-b last:border-0"
+              href="/blog"
+              onClick={(e) => { e.preventDefault(); navigate('blog'); }}
+              className="group flex flex-col md:flex-row gap-8 items-center cursor-pointer pb-8 border-b last:border-0 no-underline"
               style={{ borderColor: '#EAE0CC' }}
-              onClick={() => navigate('blog')}
             >
               {/* Illustration */}
               <div
@@ -88,7 +90,7 @@ const BlogSection: React.FC = () => {
                   Leer Artículo
                 </span>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>

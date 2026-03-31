@@ -77,15 +77,16 @@ const ShopSection: React.FC = () => {
         </div>
 
         <div className="text-center mt-12">
-          <button
-            onClick={() => navigate('tienda')}
-            className="font-heading text-lg pb-1 transition-all duration-300"
+          <a
+            href="/tienda"
+            onClick={(e) => { e.preventDefault(); navigate('tienda'); }}
+            className="font-heading text-lg pb-1 transition-all duration-300 inline-block"
             style={{ color: '#252520', borderBottom: '1px solid #A0A083' }}
-            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = '#4D6A6D'; (e.currentTarget as HTMLButtonElement).style.borderBottomColor = '#4D6A6D'; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = '#252520'; (e.currentTarget as HTMLButtonElement).style.borderBottomColor = '#A0A083'; }}
+            onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#4D6A6D'; (e.currentTarget as HTMLAnchorElement).style.borderBottomColor = '#4D6A6D'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#252520'; (e.currentTarget as HTMLAnchorElement).style.borderBottomColor = '#A0A083'; }}
           >
             Ver colección completa &rarr;
-          </button>
+          </a>
         </div>
       </div>
     </section>

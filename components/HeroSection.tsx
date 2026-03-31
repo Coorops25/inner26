@@ -78,23 +78,25 @@ const HeroSection: React.FC = () => {
             Un refugio para calmar la mente y despertar el espíritu a los pies de Monserrate.
           </p>
 
-          {/* CTA — 3D buttons (desktop) / HTML buttons (mobile) */}
+          {/* CTA — 3D buttons (desktop) / HTML anchors (mobile) */}
           {/* Mobile */}
           <div className="flex sm:hidden flex-col items-center gap-5 w-full">
-            <button
-              onClick={() => navigate('clases')}
-              className="px-9 py-4 font-heading text-lg tracking-wide rounded-sm min-w-[200px] transition-all duration-400"
+            <a
+              href="/clases"
+              onClick={(e) => { e.preventDefault(); navigate('clases'); }}
+              className="px-9 py-4 font-heading text-lg tracking-wide rounded-sm min-w-[200px] transition-all duration-400 text-center inline-block"
               style={{ background: '#4D6A6D', color: '#EAE0CC', border: '1px solid #4D6A6D' }}
             >
               Ver Clases
-            </button>
-            <button
-              onClick={() => navigate('eventos')}
-              className="px-9 py-4 text-white/70 hover:text-white font-heading text-lg tracking-wide italic min-w-[200px] transition-all duration-400"
+            </a>
+            <a
+              href="/eventos"
+              onClick={(e) => { e.preventDefault(); navigate('eventos'); }}
+              className="px-9 py-4 text-white/70 hover:text-white font-heading text-lg tracking-wide italic min-w-[200px] transition-all duration-400 text-center inline-block"
               style={{ borderBottom: '1px solid rgba(255,255,255,0.25)' }}
             >
               Próximos Eventos &rarr;
-            </button>
+            </a>
           </div>
 
           {/* Desktop — R3F 3D buttons inside WebGL Canvas */}

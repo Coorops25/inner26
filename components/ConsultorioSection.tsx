@@ -59,15 +59,16 @@ const ConsultorioSection: React.FC = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button
-            onClick={() => navigate('consultorio')}
-            className="px-10 py-4 font-heading text-xl transition-all duration-300 rounded-none"
+          <a
+            href="/consultorio"
+            onClick={(e) => { e.preventDefault(); navigate('consultorio'); }}
+            className="px-10 py-4 font-heading text-xl transition-all duration-300 rounded-none inline-block"
             style={{ border: '1px solid rgba(77,106,109,0.6)', color: '#EAE0CC' }}
-            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#4D6A6D'; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'transparent'; }}
+            onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = '#4D6A6D'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = 'transparent'; }}
           >
             Ver Consultorio
-          </button>
+          </a>
           <a
             href="https://wa.me/573212248261?text=Hola%2C%20me%20interesa%20una%20sesi%C3%B3n%20individual"
             target="_blank"
