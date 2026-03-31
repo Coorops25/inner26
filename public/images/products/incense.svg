@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="#C9ADA1" stroke-width="1.5">
+  <!-- Incense Sticks -->
+  <line x1="50" y1="85" x2="50" y2="45" stroke-linecap="round"/>
+  <path d="M50,40 C54,32 46,24 50,16" stroke-linecap="round" opacity="0.7">
+    <animate attributeName="d" values="M50,40 C54,32 46,24 50,16;M50,40 C46,32 54,24 50,16;M50,40 C54,32 46,24 50,16" dur="3s" repeatCount="indefinite"/>
+  </path>
+  <line x1="44" y1="85" x2="56" y2="85" stroke-linecap="round" stroke-width="1" opacity="0.5"/>
+</svg>

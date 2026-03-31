@@ -1,5 +1,6 @@
-﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState, useCallback } from 'react';
 import { CartContext } from '../context/CartContext';
+import { ToastContext, useToast } from '../context/ToastContext';
 import { CloseIcon } from '../constants';
 import { Illustration } from '../src/assets/Illustrations';
 
@@ -26,6 +27,7 @@ const sourceLabel = (source: string | undefined): string => {
 
 const BookingModal: React.FC = () => {
   const { isBookingModalOpen, closeBookingModal, bookingDetails, addToCart } = useContext(CartContext);
+  const { showToast } = useToast();
 
   const availableTimeSlots = useMemo(() => {
     if (!bookingDetails) {
@@ -56,6 +58,27 @@ const BookingModal: React.FC = () => {
     setSelectedSlot(availableTimeSlots[0] ?? null);
   }, [bookingDetails, availableTimeSlots]);
 
+  const handleClose = useCallback(() => {
+    closeBookingModal();
+  }, [closeBookingModal]);
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isBookingModalOpen) {
+        handleClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isBookingModalOpen, handleClose]);
+
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      handleClose();
+    }
+  };
+
   if (!isBookingModalOpen || !bookingDetails) return null;
 
   const handleAddToCart = () => {
@@ -70,23 +93,31 @@ const BookingModal: React.FC = () => {
         type: bookingDetails.type,
         details: `${selectedSlot} · ${sourceLabel(bookingDetails.source)}`,
       });
-      closeBookingModal();
+      showToast(`Reserva confirmada: ${bookingDetails.title}`, 'success');
+      handleClose();
     } else {
-      alert('Por favor, selecciona un horario.');
+      showToast('Por favor, selecciona un horario.', 'error');
     }
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 z-50 flex justify-center items-center p-4">
+    <div 
+      className="fixed inset-0 bg-black/60 z-50 flex justify-center items-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="booking-modal-title"
+      aria-describedby="booking-modal-description"
+      onClick={handleBackdropClick}
+    >
       <div
         className="rounded-sm shadow-2xl w-full max-w-md relative animate-fade-in-up border"
         style={{ background: '#EAE0CC', borderColor: 'rgba(160,160,131,0.25)' }}
       >
         <button
-          onClick={closeBookingModal}
-          className="absolute top-4 right-4 transition-colors"
+          onClick={handleClose}
+          className="absolute top-4 right-4 transition-colors hover:scale-110"
           style={{ color: '#A0A083' }}
-          aria-label="Cerrar"
+          aria-label="Cerrar modal de reserva"
         >
           <CloseIcon className="w-5 h-5" />
         </button>
@@ -95,7 +126,7 @@ const BookingModal: React.FC = () => {
           <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#4D6A6D' }}>
             Reservar
           </p>
-          <h2 className="text-3xl font-heading font-bold mb-6" style={{ color: '#252520' }}>
+          <h2 id="booking-modal-title" className="text-3xl font-heading font-bold mb-6" style={{ color: '#252520' }}>
             {bookingDetails.title}
           </h2>
 
@@ -119,11 +150,11 @@ const BookingModal: React.FC = () => {
               No hay horarios cargados para este evento.
             </p>
           ) : (
-            <div className="space-y-2">
+            <div className="space-y-2" role="radiogroup" aria-label="Horarios disponibles">
               {availableTimeSlots.map((slot) => (
                 <label
                   key={slot}
-                  className="flex items-center p-3 border rounded-sm cursor-pointer transition-colors"
+                  className="flex items-center p-3 border rounded-sm cursor-pointer transition-all duration-200 hover:border-[#4D6A6D]"
                   style={{
                     background: selectedSlot === slot ? 'rgba(77,106,109,0.08)' : 'transparent',
                     borderColor: selectedSlot === slot ? '#4D6A6D' : 'rgba(160,160,131,0.35)',
@@ -152,7 +183,7 @@ const BookingModal: React.FC = () => {
             </p>
             <button
               onClick={handleAddToCart}
-              className="font-semibold py-3 px-7 rounded-full transition-all duration-300 hover:opacity-90 active:scale-95 text-sm uppercase tracking-wide"
+              className="font-semibold py-3 px-7 rounded-full transition-all duration-300 hover:opacity-90 active:scale-95 text-sm uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ background: '#4D6A6D', color: '#EAE0CC' }}
               disabled={availableTimeSlots.length === 0}
             >

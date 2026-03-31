@@ -12,6 +12,10 @@ const normalizePost = (
   eventSlug: string,
 ): InstagramEventPost => {
   const normalizedId = rawPost.id ?? `${eventSlug}-${fallbackPost.id}`;
+  const ctaLabel = rawPost.ctaLabel ?? fallbackPost.ctaLabel;
+  if (!ctaLabel) {
+    throw new Error('ctaLabel is required');
+  }
   return {
     id: normalizedId,
     eventSlug,
@@ -19,7 +23,7 @@ const normalizePost = (
     caption: rawPost.caption ?? fallbackPost.caption,
     publishDate: rawPost.publishDate ?? fallbackPost.publishDate,
     permalink: rawPost.permalink ?? fallbackPost.permalink,
-    ctaLabel: rawPost.ctaLabel ?? fallbackPost.ctaLabel,
+    ctaLabel,
   };
 };
 
@@ -50,9 +54,17 @@ export const getInstagramPostsForEvent = async (
       return event.instagramPosts;
     }
 
-    const normalized = posts.map((post, index) =>
-      normalizePost(post, event.instagramPosts[index % event.instagramPosts.length], event.slug),
-    );
+    if (event.instagramPosts.length === 0) {
+      throw new Error(`Event ${event.slug} has no fallback Instagram posts`);
+    }
+
+    const normalized = posts.map((post, index) => {
+      const fallbackPost = event.instagramPosts[index % event.instagramPosts.length];
+      if (!fallbackPost) {
+        throw new Error(`Failed to get fallback post for index ${index}`);
+      }
+      return normalizePost(post, fallbackPost, event.slug);
+    });
 
     feedCache.set(event.slug, normalized);
     return normalized;

@@ -1,24 +1,31 @@
 
-import React, { useContext } from 'react';
+import React, { useContext, lazy, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { CartProvider, CartContext } from './context/CartContext';
+import { ToastProvider } from './context/ToastContext';
 import BookingModal from './components/BookingModal';
 import CheckoutModal from './components/CheckoutModal';
+import ToastContainer from './components/ToastContainer';
 import SplashCursor from './components/SplashCursor';
 import SplashCursorR3F from './components/SplashCursorR3F';
+import ErrorBoundary from './components/ErrorBoundary';
 
-// Import Page Components
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ClassesPage from './pages/ClassesPage';
-import EventsPage from './pages/EventsPage';
-import ConsultorioPage from './pages/ConsultorioPage';
-import ShopPage from './pages/ShopPage';
-import BlogPage from './pages/BlogPage';
-import ContactPage from './pages/ContactPage';
+const HomePage = lazy(() => import('./pages/HomePage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ClassesPage = lazy(() => import('./pages/ClassesPage'));
+const EventsPage = lazy(() => import('./pages/EventsPage'));
+const ConsultorioPage = lazy(() => import('./pages/ConsultorioPage'));
+const ShopPage = lazy(() => import('./pages/ShopPage'));
+const BlogPage = lazy(() => import('./pages/BlogPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 
+const LoadingSpinner: React.FC = () => (
+  <div className="flex items-center justify-center min-h-[50vh]" role="status" aria-label="Cargando página">
+    <div className="w-8 h-8 border-4 border-slate-is border-t-transparent rounded-full animate-spin" />
+  </div>
+);
 
 const PageRenderer: React.FC = () => {
   const { page } = useContext(CartContext);
@@ -43,40 +50,41 @@ const PageRenderer: React.FC = () => {
   }
 };
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
   return (
-    <CartProvider>
-      {/* Canvas2D ink particle trail — follows cursor globally */}
-      <SplashCursor />
+    <>
+      <ErrorBoundary>
+        <SplashCursor />
+      </ErrorBoundary>
 
-      {/* R3F WebGL glow cursor — soft ink drop overlay.
-          pointer-events: none must be set on the inner <canvas> via onCreated
-          because CSS pointer-events is NOT inherited in HTML (only SVG). */}
-      <div
-        style={{
-          position: 'fixed',
-          inset: 0,
-          pointerEvents: 'none',
-          zIndex: 9998,
-        }}
-      >
-        <Canvas
-          gl={{ alpha: true }}
-          style={{ width: '100%', height: '100%' }}
-          onCreated={({ gl }) => {
-            gl.domElement.style.pointerEvents = 'none';
+      <ErrorBoundary>
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            pointerEvents: 'none',
+            zIndex: 9998,
           }}
         >
-          <SplashCursorR3F />
-        </Canvas>
-      </div>
+          <Canvas
+            gl={{ alpha: true }}
+            style={{ width: '100%', height: '100%' }}
+            onCreated={({ gl }) => {
+              gl.domElement.style.pointerEvents = 'none';
+            }}
+          >
+            <SplashCursorR3F />
+          </Canvas>
+        </div>
+      </ErrorBoundary>
 
-      {/* Main site */}
       <div style={{ position: 'relative' }} className="bg-base text-base-text antialiased">
         <div style={{ position: 'relative', zIndex: 10 }}>
           <Header />
-          <main>
-            <PageRenderer />
+          <main id="main-content">
+            <Suspense fallback={<LoadingSpinner />}>
+              <PageRenderer />
+            </Suspense>
           </main>
           <Footer />
         </div>
@@ -84,8 +92,19 @@ const App: React.FC = () => {
         <div style={{ position: 'relative', zIndex: 60 }}>
           <BookingModal />
           <CheckoutModal />
+          <ToastContainer />
         </div>
       </div>
+    </>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <CartProvider>
+      <ToastProvider>
+        <AppContent />
+      </ToastProvider>
     </CartProvider>
   );
 };

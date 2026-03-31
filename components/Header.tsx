@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import { ShoppingCartIcon } from '../constants';
 
-const navLinks = [
+const navLinks: Array<{ page: 'nosotros' | 'clases' | 'eventos' | 'consultorio' | 'tienda' | 'contacto'; label: string }> = [
   { page: 'nosotros', label: 'Nosotros' },
   { page: 'clases', label: 'Clases' },
   { page: 'eventos', label: 'Eventos' },
@@ -23,6 +23,29 @@ const Header: React.FC = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Close mobile menu on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isOpen]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   const handleNavigate = (page: string) => {
     navigate(page);

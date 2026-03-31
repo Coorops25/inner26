@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="#C9ADA1" stroke-width="1.5">
+  <!-- Palo Santo -->
+  <rect x="42" y="30" width="8" height="55" rx="2" transform="rotate(-15 42 30)"/>
+  <path d="M62,25 C66,18 58,10 62,4" stroke-width="1" opacity="0.45" stroke-linecap="round"/>
+</svg>

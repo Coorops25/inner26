@@ -1,0 +1,28 @@
+User-agent: *
+Allow: /
+
+# AI Bots - Allow all
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Disallow admin/private areas
+Disallow: /api/
+Disallow: /*.json$
+
+# Sitemap
+Sitemap: https://innerspirit.co/sitemap.xml

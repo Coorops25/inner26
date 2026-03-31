@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="#C9ADA1" stroke-width="1.5">
+  <!-- Dance -->
+  <path d="M20,55 C20,55 35,20 50,55 C65,90 80,55 80,55" stroke-linecap="round"/>
+  <circle cx="50" cy="18" r="4" opacity="0.6"/>
+</svg>
