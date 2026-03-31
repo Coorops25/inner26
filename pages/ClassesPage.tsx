@@ -1,5 +1,4 @@
-
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { CartContext } from '../context/CartContext';
 import { Illustration } from '../src/assets/Illustrations';
 
@@ -40,6 +39,52 @@ const classes = [
 
 const ClassesPage: React.FC = () => {
   const { openBookingModal } = useContext(CartContext);
+
+  useEffect(() => {
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué tipos de yoga ofrecen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ofrecemos Hatha, Vinyasa, Yin, AcroYoga y Kundalini. Cada estilo tiene su enfoque: desde flujos dinámicos hasta prácticas restaurativas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Necesito experiencia previa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, nuestras clases son para todos los niveles. Nuestros guías adaptan las instrucciones para principiantes y avanzados."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta una clase?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cada sesión tiene un valor de $36.000 COP. También tenemos promociones mensuales: 3 sesiones por $100.000 COP."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Las clases son en español o inglés?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ofrecemos clases en español e inglés. Nuestro espacio es bilingual y welcoming para visitantes internacionales."
+          }
+        }
+      ]
+    };
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(faqSchema);
+    document.head.appendChild(script);
+    return () => { document.head.removeChild(script); };
+  }, []);
 
   return (
     <div className="animate-fade-in-up">
@@ -101,7 +146,6 @@ const ClassesPage: React.FC = () => {
             ))}
           </div>
 
-          {/* Promo block */}
           <div
             className="mt-16 p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 rounded-sm"
             style={{ background: '#F3EDE2', border: '1px solid #D9D1C0' }}

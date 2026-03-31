@@ -1,4 +1,4 @@
-﻿import React, { useContext, useState } from 'react';
+﻿import React, { useContext, useState, useEffect } from 'react';
 import { CartContext } from '../context/CartContext';
 import { Illustration } from '../src/assets/Illustrations';
 import EventInstagramFeed from '../src/modules/events/components/EventInstagramFeed';
@@ -9,6 +9,38 @@ const EventsPage: React.FC = () => {
   const { openBookingModal } = useContext(CartContext);
   const [activeSlug, setActiveSlug] = useState(studioEvents[0]?.slug ?? '');
   const activeEvent = studioEvents.find((event) => event.slug === activeSlug) ?? studioEvents[0];
+
+  useEffect(() => {
+    const eventSchema = {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Rituales y Encuentros - Inner Spirit Studio",
+      "description": "Eventos de yoga, meditación, sonido y crecimiento espiritual en Inner Spirit Studio, Bogotá.",
+      "url": "https://innerspirit.co/eventos",
+      "location": {
+        "@type": "Place",
+        "name": "Inner Spirit Studio",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Transversal 1 # 17-29",
+          "addressLocality": "La Candelaria",
+          "addressRegion": "Bogotá",
+          "addressCountry": "CO"
+        }
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": "Inner Spirit Studio",
+        "url": "https://innerspirit.co"
+      },
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode"
+    };
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(eventSchema);
+    document.head.appendChild(script);
+    return () => { document.head.removeChild(script); };
+  }, []);
 
   const reserveEvent = (eventSlug: string, source: 'site' | 'instagram') => {
     const event = studioEvents.find((item) => item.slug === eventSlug);

@@ -1,5 +1,5 @@
 
-import React, { useContext, lazy, Suspense } from 'react';
+import React, { useContext, lazy, Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -11,6 +11,17 @@ import ToastContainer from './components/ToastContainer';
 import SplashCursor from './components/SplashCursor';
 import SplashCursorR3F from './components/SplashCursorR3F';
 import ErrorBoundary from './components/ErrorBoundary';
+
+const pageCanonicalUrls: Record<string, string> = {
+  home: 'https://innerspirit.co/',
+  nosotros: 'https://innerspirit.co/nosotros',
+  clases: 'https://innerspirit.co/clases',
+  eventos: 'https://innerspirit.co/eventos',
+  consultorio: 'https://innerspirit.co/consultorio',
+  tienda: 'https://innerspirit.co/tienda',
+  blog: 'https://innerspirit.co/blog',
+  contacto: 'https://innerspirit.co/contacto',
+};
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -51,6 +62,20 @@ const PageRenderer: React.FC = () => {
 };
 
 const AppContent: React.FC = () => {
+  const { page } = useContext(CartContext);
+
+  useEffect(() => {
+    const canonicalUrl = pageCanonicalUrls[page] || pageCanonicalUrls.home;
+    let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.rel = 'canonical';
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.href = canonicalUrl;
+  }, [page]);
+
   return (
     <>
       <ErrorBoundary>

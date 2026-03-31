@@ -1,8 +1,29 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { InstagramIcon, WhatsAppIcon } from '../constants';
 
 const ContactPage: React.FC = () => {
+  useEffect(() => {
+    const contactSchema = {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contacto - Inner Spirit Studio",
+      "description": "Contáctanos para clases de yoga, eventos o consultas en Inner Spirit Studio, Bogotá.",
+      "url": "https://innerspirit.co/contacto",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "Inner Spirit Studio",
+        "telephone": "+573212248261",
+        "email": "hola@innerspirit.co"
+      }
+    };
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(contactSchema);
+    document.head.appendChild(script);
+    return () => { document.head.removeChild(script); };
+  }, []);
+
   const [formState, setFormState] = useState({
     name: '',
     email: '',

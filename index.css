@@ -1,4 +1,18 @@
 /* Inner Spirit Studio — global stylesheet */
+@import "tailwindcss";
+
+/* Inner Spirit Design Tokens */
+@theme {
+  --color-sand-dune: #EAE0CC;
+  --color-almond-silk: #C9ADA1;
+  --color-dry-sage: #8B9A8B;
+  --color-grey-olive: #5C6B5C;
+  --color-deep-teal: #2D4A4D;
+  --color-blue-slate: #4D6A6D;
+  --color-ink: #1A1A18;
+  --color-cream-light: #FAF7F2;
+  --color-warm-black: #121210;
+}
 
 /* Responsive typography */
 @media (max-width: 640px) {

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { BlogPost } from '../types';
 import { Illustration } from '../src/assets/Illustrations';
 
@@ -47,6 +47,26 @@ const blogPosts: BlogPost[] = [
 ];
 
 const BlogPage: React.FC = () => {
+  useEffect(() => {
+    const blogSchema = {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Blog - Inner Spirit Studio",
+      "description": "Artículos sobre yoga, meditación, crecimiento espiritual y bienestar integral.",
+      "url": "https://innerspirit.co/blog",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Inner Spirit Studio",
+        "url": "https://innerspirit.co"
+      }
+    };
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(blogSchema);
+    document.head.appendChild(script);
+    return () => { document.head.removeChild(script); };
+  }, []);
+
   const handleReadMore = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     alert('Artículo próximamente disponible.');
