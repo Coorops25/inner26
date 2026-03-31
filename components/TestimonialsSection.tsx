@@ -24,8 +24,8 @@ const TestimonialsSection: React.FC = () => {
   const loop = [...testimonials, ...testimonials, ...testimonials];
 
   return (
-    <section className="py-24 overflow-hidden border-t" style={{ background: '#1c2829', borderColor: 'rgba(77,106,109,0.15)' }}>
-      <div className="container mx-auto px-6 mb-10 text-center">
+    <section className="py-12 md:py-16 overflow-hidden border-t" style={{ background: '#121210', borderColor: 'rgba(77,106,109,0.15)' }}>
+      <div className="container mx-auto px-6 mb-8 text-center">
         <span className="text-xs font-bold tracking-[0.25em] uppercase" style={{ color: '#4D6A6D' }}>Comunidad</span>
         <div className="flex items-center justify-center gap-3 mt-3">
           <span className="text-3xl font-heading" style={{ color: '#C9ADA1' }}>4.9</span>

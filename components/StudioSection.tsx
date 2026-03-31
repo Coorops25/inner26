@@ -29,25 +29,25 @@ const getSvgDataUrl = (name: string): string => {
 
 const StudioSection: React.FC = () => {
   return (
-    <section id="studio" className="py-16 md:py-24 bg-base relative overflow-hidden">
+    <section id="studio" className="py-12 md:py-16 bg-base relative overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl">
 
         {/* Editorial heading */}
-        <div className="flex flex-col items-center text-center mb-12">
-          <span className="uppercase tracking-[0.2em] text-sm font-semibold mb-6" style={{ color: '#4D6A6D' }}>El Espacio</span>
-          <h2 className="text-4xl md:text-5xl font-heading leading-tight mb-6" style={{ color: '#252520' }}>
+        <div className="flex flex-col items-center text-center mb-8">
+          <span className="uppercase tracking-[0.2em] text-xs font-semibold mb-4" style={{ color: '#4D6A6D' }}>El Espacio</span>
+          <h2 className="text-3xl md:text-4xl font-heading leading-tight mb-4" style={{ color: '#1A1A18' }}>
             No somos un gimnasio.<br />
-            <span style={{ color: '#798478' }}>Somos un santuario.</span>
+            <span style={{ color: '#5C6B5C' }}>Somos un santuario.</span>
           </h2>
-          <div className="w-14 h-px my-6" style={{ background: '#C9ADA1' }} />
-          <p className="text-lg md:text-xl font-light max-w-2xl leading-relaxed" style={{ color: '#5c5c52' }}>
+          <div className="w-10 h-px my-4" style={{ background: '#C9ADA1' }} />
+          <p className="text-base md:text-lg font-light max-w-2xl leading-relaxed" style={{ color: '#5c5c52' }}>
             Yoga, meditación, danza, breathwork y sound healing integrados en un espacio de 100&nbsp;m²
             a los pies del cerro Monserrate. Clases en español e inglés.
           </p>
         </div>
 
         {/* Pillar cards — R3FImagePlane adds a ripple wave effect on hover */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8">
           {pillars.map((item) => (
             <div
               key={item.illustration}

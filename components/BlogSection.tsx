@@ -35,10 +35,10 @@ const BlogSection: React.FC = () => {
   const { navigate } = useContext(CartContext);
 
   return (
-    <section id="blog" className="py-20 border-t" style={{ background: '#FAF7F2', borderColor: '#EAE0CC' }}>
+    <section id="blog" className="py-12 md:py-16 border-t" style={{ background: '#FAF7F2', borderColor: '#EAE0CC' }}>
       <div className="container mx-auto px-6 max-w-5xl">
-        <div className="flex justify-between items-baseline mb-10">
-          <h2 className="text-4xl font-heading" style={{ color: '#252520' }}>Journal</h2>
+        <div className="flex justify-between items-baseline mb-8">
+          <h2 className="text-3xl md:text-4xl font-heading" style={{ color: '#1A1A18' }}>Journal</h2>
           <button
             onClick={() => navigate('blog')}
             className="text-sm font-bold uppercase tracking-widest transition-colors"

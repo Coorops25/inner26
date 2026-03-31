@@ -19,7 +19,7 @@ const EventsSection: React.FC = () => {
   };
 
   return (
-    <section id="eventos" className="py-20" style={{ background: '#EAE0CC' }}>
+    <section id="eventos" className="py-12 md:py-16" style={{ background: '#EAE0CC' }}>
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="flex gap-3 mb-6 justify-center flex-wrap">
           {studioEvents.map((currentEvent, index) => (

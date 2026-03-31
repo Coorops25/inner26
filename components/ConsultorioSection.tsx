@@ -37,24 +37,24 @@ const ConsultorioSection: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 text-center text-white py-16">
-        <span className="block text-xs font-bold tracking-[0.35em] uppercase mb-5 opacity-70" style={{ color: '#A0A083' }}>
+      <div className="relative z-10 container mx-auto px-6 text-center text-white py-12 md:py-16">
+        <span className="block text-xs font-bold tracking-[0.35em] uppercase mb-4 opacity-70" style={{ color: '#A0A083' }}>
           Sesiones 1:1
         </span>
-        <h2 className="text-5xl md:text-7xl font-heading font-medium text-white mb-8 leading-tight">
+        <h2 className="text-4xl md:text-5xl font-heading font-medium text-white mb-6 leading-tight">
           Acompañamiento <br />
           <span className="italic font-light" style={{ color: '#C9ADA1' }}>Individual</span>
         </h2>
 
         <div
-          className="w-12 h-px mx-auto mb-8"
+          className="w-10 h-px mx-auto mb-6"
           style={{ background: '#4D6A6D' }}
         />
 
-        <p className="max-w-xl mx-auto text-xl font-light leading-relaxed mb-4" style={{ color: '#C9ADA1' }}>
+        <p className="max-w-xl mx-auto text-lg font-light leading-relaxed mb-3" style={{ color: '#C9ADA1' }}>
           A veces, el camino necesita un testigo. Un espacio seguro para explorar lo que emerge en el silencio.
         </p>
-        <p className="text-base font-light mb-12" style={{ color: '#798478' }}>
+        <p className="text-sm font-light mb-8" style={{ color: '#798478' }}>
           Yoga terapéutico · Meditación guiada · Breathwork · Arte terapia
         </p>
 

@@ -134,20 +134,20 @@ const FindYourPracticeSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category>('movimiento');
 
   return (
-    <section className="py-20" style={{ background: '#FAF7F2' }}>
+    <section className="py-12 md:py-16" style={{ background: '#FAF7F2' }}>
       <div className="container mx-auto px-6 max-w-6xl">
-        <div className="mb-10 text-center">
-          <h2 className="text-4xl md:text-5xl font-heading mb-8" style={{ color: '#252520' }}>
+        <div className="mb-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-heading mb-6" style={{ color: '#1A1A18' }}>
             ¿Qué buscas hoy?
           </h2>
-          <div className="flex justify-center gap-8 md:gap-16 border-b" style={{ borderColor: '#D9D1C0' }}>
+          <div className="flex justify-center gap-6 md:gap-12 border-b" style={{ borderColor: '#D9D1C0' }}>
             <CategoryTab label="Calma"       active={activeCategory === 'calma'}       onClick={() => setActiveCategory('calma')} />
             <CategoryTab label="Movimiento"  active={activeCategory === 'movimiento'}  onClick={() => setActiveCategory('movimiento')} />
             <CategoryTab label="Conexión"    active={activeCategory === 'conexion'}    onClick={() => setActiveCategory('conexion')} />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 animate-fade-in-up">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in-up">
           {practiceData[activeCategory].map((item, idx) => (
             <PracticeCard key={`${activeCategory}-${idx}`} item={item} />
           ))}

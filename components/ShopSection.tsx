@@ -59,7 +59,7 @@ const ShopSection: React.FC = () => {
   const { navigate } = useContext(CartContext);
 
   return (
-    <section id="tienda" className="py-20" style={{ background: '#FAF7F2' }}>
+    <section id="tienda" className="py-12 md:py-16" style={{ background: '#FAF7F2' }}>
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="flex flex-col items-center mb-12">
           <span className="text-xs font-bold tracking-[0.2em] uppercase mb-4" style={{ color: '#A0A083' }}>

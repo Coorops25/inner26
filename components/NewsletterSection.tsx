@@ -10,7 +10,7 @@ const NewsletterSection: React.FC = () => {
 
   return (
     <section
-      className="relative py-16 md:py-20 border-t overflow-hidden"
+      className="relative py-12 md:py-16 border-t overflow-hidden"
       style={{ background: '#EAE0CC', borderColor: '#D9D1C0' }}
     >
       {/* Animated ribbon waves as section background */}
@@ -19,13 +19,13 @@ const NewsletterSection: React.FC = () => {
       </div>
 
       <div className="relative container mx-auto px-6 text-center max-w-3xl" style={{ zIndex: 10 }}>
-        <span className="text-xs font-bold tracking-[0.25em] uppercase mb-4 block" style={{ color: '#4D6A6D' }}>
+        <span className="text-xs font-bold tracking-[0.25em] uppercase mb-3 block" style={{ color: '#4D6A6D' }}>
           Comunidad
         </span>
-        <h2 className="text-4xl md:text-5xl font-heading mb-6" style={{ color: '#252520' }}>
+        <h2 className="text-3xl md:text-4xl font-heading mb-4" style={{ color: '#1A1A18' }}>
           Cartas desde la Calma
         </h2>
-        <p className="text-lg font-light mb-8 leading-relaxed" style={{ color: '#798478' }}>
+        <p className="text-base font-light mb-6 leading-relaxed" style={{ color: '#5C6B5C' }}>
           Recibe inspiración, fechas de rituales y noticias de nuestra comunidad.<br className="hidden md:block" />
           Directamente a tu bandeja, sin ruido innecesario.
         </p>
