@@ -7,8 +7,12 @@ const NewsletterSection: React.FC = () => {
   const { showToast } = useToast();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    showToast('Gracias por unirte a nuestra comunidad.', 'success');
-    (e.target as HTMLFormElement).reset();
+    const form = e.target as HTMLFormElement;
+    const email = (form.querySelector('input[type="email"]') as HTMLInputElement)?.value ?? '';
+    const text = encodeURIComponent(`Hola Inner Spirit, quiero unirme a la comunidad y recibir noticias. Mi correo es: ${email}`);
+    showToast('Abriendo WhatsApp para confirmar tu suscripción...', 'success');
+    setTimeout(() => window.open(`https://wa.me/573212248261?text=${text}`, '_blank'), 500);
+    form.reset();
   };
 
   return (

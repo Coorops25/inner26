@@ -23,7 +23,14 @@ const ContactSection: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formState.honeypot) return;
-    showToast('Gracias. Hemos recibido tu mensaje.', 'success');
+    const typeLabel: Record<string, string> = {
+      clase: 'Clases', evento: 'Eventos', producto: 'Tienda', otro: 'Otro',
+    };
+    const text = encodeURIComponent(
+      `Hola Inner Spirit, me llamo ${formState.name} (${formState.email}).\nMotivo: ${typeLabel[formState.type] ?? formState.type}\n\n${formState.message}`
+    );
+    showToast('Abriendo WhatsApp con tu mensaje...', 'success');
+    setTimeout(() => window.open(`https://wa.me/573212248261?text=${text}`, '_blank'), 500);
     setFormState({ name: '', email: '', message: '', type: 'clase', honeypot: '' });
   };
   
