@@ -1,21 +1,22 @@
-
-import React, { useState, useEffect, useContext } from 'react';
-import { CartContext } from '../context/CartContext';
+import React, { useContext, useEffect, useState } from 'react';
 import { ShoppingCartIcon } from '../constants';
+import { CartContext } from '../context/CartContext';
+import { pageToPath, type PageName } from '../context/NavigationContext';
 
-const navLinks: Array<{ page: 'nosotros' | 'clases' | 'eventos' | 'consultorio' | 'tienda' | 'contacto'; label: string }> = [
-  { page: 'nosotros', label: 'Nosotros' },
-  { page: 'clases', label: 'Clases' },
-  { page: 'eventos', label: 'Eventos' },
-  { page: 'consultorio', label: 'Consultorio' },
-  { page: 'tienda', label: 'Tienda' },
-  { page: 'contacto', label: 'Contacto' },
+const navLinks: Array<{ page: Exclude<PageName, 'home'>; label: string; href: string }> = [
+  { page: 'nosotros', label: 'Nosotros', href: pageToPath('nosotros') },
+  { page: 'clases', label: 'Clases', href: pageToPath('clases') },
+  { page: 'eventos', label: 'Eventos', href: pageToPath('eventos') },
+  { page: 'consultorio', label: 'Consultorio', href: pageToPath('consultorio') },
+  { page: 'tienda', label: 'Tienda', href: pageToPath('tienda') },
+  { page: 'blog', label: 'Blog', href: pageToPath('blog') },
+  { page: 'contacto', label: 'Contacto', href: pageToPath('contacto') },
 ];
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { cart, toggleCheckoutModal, navigate } = useContext(CartContext);
+  const { cart, toggleCheckoutModal, navigate, page } = useContext(CartContext);
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   useEffect(() => {
@@ -24,10 +25,9 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on escape key
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isOpen) {
         setIsOpen(false);
       }
     };
@@ -35,25 +35,33 @@ const Header: React.FC = () => {
     return () => document.removeEventListener('keydown', handleEscape);
   }, [isOpen]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
   }, [isOpen]);
 
-  const handleNavigate = (page: string) => {
-    navigate(page);
+  const handleNavigate = (targetPage: PageName) => {
+    navigate(targetPage);
     setIsOpen(false);
   };
 
+  const handleLinkClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    targetPage: PageName
+  ) => {
+    event.preventDefault();
+    handleNavigate(targetPage);
+  };
+
   const headerStyle: React.CSSProperties = scrolled
-    ? { background: 'rgba(234,224,204,0.97)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(160,160,131,0.2)', color: '#252520' }
+    ? {
+        background: 'rgba(234,224,204,0.97)',
+        backdropFilter: 'blur(12px)',
+        borderBottom: '1px solid rgba(160,160,131,0.2)',
+        color: '#252520',
+      }
     : { background: 'transparent', color: '#ffffff' };
 
   return (
@@ -62,37 +70,40 @@ const Header: React.FC = () => {
       style={headerStyle}
     >
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-
-        {/* Brand */}
         <div className="w-1/4 flex justify-start">
-          <button
-            onClick={() => handleNavigate('home')}
-            className="text-lg md:text-xl tracking-[0.08em] font-heading font-bold uppercase transition-colors duration-300 relative z-50 bg-transparent border-none cursor-pointer"
+          <a
+            href={pageToPath('home')}
+            onClick={(event) => handleLinkClick(event, 'home')}
+            className="text-lg md:text-xl tracking-[0.08em] font-heading font-bold uppercase transition-colors duration-300 relative z-50"
+            aria-current={page === 'home' ? 'page' : undefined}
           >
             Inner Spirit
-          </button>
+          </a>
         </div>
 
-        {/* Desktop Nav */}
         <nav className="hidden md:flex flex-1 justify-center items-center space-x-6 lg:space-x-10 xl:space-x-14">
           {navLinks.map((link) => (
-            <button
+            <a
               key={link.page}
-              onClick={() => handleNavigate(link.page)}
-              className="text-xs font-bold uppercase tracking-widest transition-colors duration-300 opacity-80 hover:opacity-100 bg-transparent border-none cursor-pointer"
+              href={link.href}
+              onClick={(event) => handleLinkClick(event, link.page)}
+              className={`text-xs font-bold uppercase tracking-widest transition-colors duration-300 hover:opacity-100 ${
+                page === link.page ? 'opacity-100' : 'opacity-80'
+              }`}
               style={{ color: 'inherit' }}
+              aria-current={page === link.page ? 'page' : undefined}
             >
               {link.label}
-            </button>
+            </a>
           ))}
         </nav>
 
-        {/* Right Actions */}
         <div className="w-1/4 flex justify-end items-center space-x-6">
           <button
             onClick={toggleCheckoutModal}
             className="relative group p-1 opacity-80 hover:opacity-100 transition-opacity"
             aria-label="Carrito"
+            type="button"
           >
             <ShoppingCartIcon />
             {totalItems > 0 && (
@@ -105,39 +116,60 @@ const Header: React.FC = () => {
             )}
           </button>
 
-          {/* Mobile hamburger */}
           <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden flex flex-col justify-center items-end w-8 h-8 space-y-1.5 focus:outline-none z-50"
-            aria-label="Menú"
+            onClick={() => setIsOpen((prev) => !prev)}
+            className="md:hidden flex flex-col justify-center items-end w-8 h-8 space-y-1.5 focus:outline-none z-50"
+            aria-label="Menu"
+            type="button"
           >
-            <span className={`block h-0.5 bg-current transition-all duration-300 ease-out ${isOpen ? 'w-6 rotate-45 translate-y-2' : 'w-6'}`} />
-            <span className={`block h-0.5 bg-current transition-all duration-300 ease-out ${isOpen ? 'w-6 opacity-0' : 'w-4'}`} />
-            <span className={`block h-0.5 bg-current transition-all duration-300 ease-out ${isOpen ? 'w-6 -rotate-45 -translate-y-2' : 'w-6'}`} />
+            <span
+              className={`block h-0.5 bg-current transition-all duration-300 ease-out ${
+                isOpen ? 'w-6 rotate-45 translate-y-2' : 'w-6'
+              }`}
+            />
+            <span
+              className={`block h-0.5 bg-current transition-all duration-300 ease-out ${
+                isOpen ? 'w-6 opacity-0' : 'w-4'
+              }`}
+            />
+            <span
+              className={`block h-0.5 bg-current transition-all duration-300 ease-out ${
+                isOpen ? 'w-6 -rotate-45 -translate-y-2' : 'w-6'
+              }`}
+            />
           </button>
         </div>
       </div>
 
-      {/* Mobile Overlay */}
       <div
-        className={`fixed inset-0 z-40 flex flex-col items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}
+        className={`fixed inset-0 z-40 flex flex-col items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+        }`}
         style={{ background: '#EAE0CC' }}
       >
         <nav className="flex flex-col items-center space-y-8 text-center">
           {navLinks.map((link, idx) => (
-            <button
+            <a
               key={link.page}
-              onClick={() => handleNavigate(link.page)}
-              className={`text-4xl font-heading transition-all duration-500 bg-transparent border-none cursor-pointer ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
+              href={link.href}
+              onClick={(event) => handleLinkClick(event, link.page)}
+              className={`text-4xl font-heading transition-all duration-500 ${
+                isOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+              }`}
               style={{ color: '#252520', transitionDelay: `${idx * 50}ms` }}
+              aria-current={page === link.page ? 'page' : undefined}
             >
               {link.label}
-            </button>
+            </a>
           ))}
         </nav>
         <div className="mt-14 flex gap-6 text-sm tracking-widest uppercase" style={{ color: '#798478' }}>
-          <a href="https://instagram.com/innerspirit_studio" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a href="https://wa.me/573212248261" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a href="https://instagram.com/innerspirit_studio" target="_blank" rel="noopener noreferrer">
+            Instagram
+          </a>
+          <a href="https://wa.me/573212248261" target="_blank" rel="noopener noreferrer">
+            WhatsApp
+          </a>
         </div>
       </div>
     </header>
