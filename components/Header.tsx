@@ -153,7 +153,7 @@ const Header: React.FC = () => {
               key={link.page}
               href={link.href}
               onClick={(event) => handleLinkClick(event, link.page)}
-              className={`text-4xl font-heading transition-all duration-500 ${
+              className={`text-3xl md:text-4xl font-heading transition-all duration-500 ${
                 isOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
               }`}
               style={{ color: '#252520', transitionDelay: `${idx * 50}ms` }}
@@ -163,7 +163,7 @@ const Header: React.FC = () => {
             </a>
           ))}
         </nav>
-        <div className="mt-14 flex gap-6 text-sm tracking-widest uppercase" style={{ color: '#798478' }}>
+        <div className="mt-8 md:mt-14 flex gap-6 text-sm tracking-widest uppercase" style={{ color: '#798478' }}>
           <a href="https://instagram.com/innerspirit_studio" target="_blank" rel="noopener noreferrer">
             Instagram
           </a>

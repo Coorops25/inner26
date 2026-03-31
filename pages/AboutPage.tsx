@@ -15,13 +15,13 @@ const AboutPage: React.FC = () => {
         style={{ background: 'linear-gradient(135deg, #1c2829 0%, #2a3f42 50%, #252520 100%)' }}
       >
         <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
-          <Illustration name="abstract-spirit" className="w-[600px] h-[600px]" style={{ color: '#4D6A6D' } as React.CSSProperties} />
+          <Illustration name="abstract-spirit" className="w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] md:w-[600px] md:h-[600px]" style={{ color: '#4D6A6D' } as React.CSSProperties} />
         </div>
         <div className="container mx-auto px-6 relative z-10 text-center text-white">
           <span className="text-xs font-bold tracking-[0.3em] uppercase mb-6 block" style={{ color: '#4D6A6D' }}>
             Inner Spirit Studio
           </span>
-          <h1 className="text-5xl md:text-7xl font-heading font-semibold mb-6" style={{ color: '#EAE0CC' }}>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-heading font-semibold mb-6" style={{ color: '#EAE0CC' }}>
             Somos un espacio<br />para recordar
           </h1>
           <p className="mt-4 text-xl max-w-3xl mx-auto font-light leading-relaxed" style={{ color: '#A0A083' }}>
@@ -33,7 +33,7 @@ const AboutPage: React.FC = () => {
       {/* Philosophy */}
       <section className="py-20 md:py-32 bg-base">
         <div className="container mx-auto px-6 max-w-3xl text-center">
-          <h2 className="text-4xl md:text-5xl font-heading font-semibold mb-8" style={{ color: '#4D6A6D' }}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-semibold mb-8" style={{ color: '#4D6A6D' }}>
             Nuestra Filosofía
           </h2>
           <div className="text-xl font-light leading-relaxed space-y-8" style={{ color: '#5c5c52' }}>

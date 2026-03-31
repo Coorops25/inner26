@@ -24,14 +24,14 @@ const ConsultorioSection: React.FC = () => {
       <div className="absolute inset-0 flex items-center justify-end pointer-events-none opacity-10 pr-8 md:pr-20">
         <Illustration
           name="abstract-spirit"
-          className="w-96 h-96"
+          className="w-56 h-56 md:w-72 md:h-72 lg:w-96 lg:h-96"
           style={{ color: '#4D6A6D' } as React.CSSProperties}
         />
       </div>
       <div className="absolute inset-0 flex items-center justify-start pointer-events-none opacity-5 pl-8 md:pl-20">
         <Illustration
           name="lotus"
-          className="w-64 h-64"
+          className="w-40 h-40 md:w-52 md:h-52 lg:w-64 lg:h-64"
           style={{ color: '#C9ADA1' } as React.CSSProperties}
         />
       </div>
@@ -62,7 +62,7 @@ const ConsultorioSection: React.FC = () => {
           <a
             href="/consultorio"
             onClick={(e) => { e.preventDefault(); navigate('consultorio'); }}
-            className="px-10 py-4 font-heading text-xl transition-all duration-300 rounded-none inline-block"
+            className="px-6 sm:px-10 py-3 sm:py-4 font-heading text-lg sm:text-xl transition-all duration-300 rounded-none inline-block"
             style={{ border: '1px solid rgba(77,106,109,0.6)', color: '#EAE0CC' }}
             onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = '#4D6A6D'; }}
             onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = 'transparent'; }}
@@ -73,7 +73,7 @@ const ConsultorioSection: React.FC = () => {
             href="https://wa.me/573212248261?text=Hola%2C%20me%20interesa%20una%20sesi%C3%B3n%20individual"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-10 py-4 font-heading text-xl transition-all duration-300 rounded-none"
+            className="px-6 sm:px-10 py-3 sm:py-4 font-heading text-lg sm:text-xl transition-all duration-300 rounded-none"
             style={{ background: '#4D6A6D', color: '#EAE0CC', border: '1px solid #4D6A6D' }}
             onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = '#3d5557'; }}
             onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = '#4D6A6D'; }}

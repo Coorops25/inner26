@@ -128,7 +128,7 @@ const ArticleModal: React.FC<{ post: BlogPost; onClose: () => void }> = ({ post,
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div
-        className="w-full max-w-2xl my-8 rounded-sm shadow-2xl animate-fade-in-up"
+        className="w-full max-w-2xl my-4 md:my-8 rounded-sm shadow-2xl animate-fade-in-up"
         style={{ background: '#FAF7F2' }}
       >
         <div className="sticky top-0 flex justify-between items-center px-8 py-5 border-b z-10 rounded-t-sm" style={{ background: '#FAF7F2', borderColor: '#EAE0CC' }}>
@@ -138,7 +138,7 @@ const ArticleModal: React.FC<{ post: BlogPost; onClose: () => void }> = ({ post,
           </button>
         </div>
 
-        <div className="px-8 py-10">
+        <div className="px-5 py-7 md:px-8 md:py-10">
           <div className="flex items-center justify-center aspect-[3/1] mb-8 rounded-sm" style={{ background: '#EAE0CC' }}>
             <Illustration
               name={post.illustrationName ?? 'meditation'}
@@ -254,7 +254,7 @@ const BlogPage: React.FC = () => {
                   <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: '#4D6A6D' }}>
                     {post.category}
                   </p>
-                  <h3 className="text-2xl font-heading font-bold leading-tight mb-3 transition-colors" style={{ color: '#252520' }}>
+                  <h3 className="text-xl md:text-2xl font-heading font-bold leading-tight mb-3 transition-colors" style={{ color: '#252520' }}>
                     {post.title}
                   </h3>
                   <p className="font-light leading-relaxed mb-4" style={{ color: '#798478' }}>

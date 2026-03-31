@@ -38,7 +38,7 @@ const EventsSection: React.FC = () => {
           ))}
         </div>
 
-        <div className="flex flex-col md:flex-row items-stretch min-h-[480px] overflow-hidden">
+        <div className="flex flex-col md:flex-row items-stretch md:min-h-[480px] overflow-hidden">
           <div className="md:w-5/12 relative overflow-hidden group min-h-[320px]">
             <img
               src={event.coverImageUrl}
@@ -58,7 +58,7 @@ const EventsSection: React.FC = () => {
             </div>
           </div>
 
-          <div className="md:w-7/12 flex flex-col justify-center p-12 md:p-16" style={{ background: '#1f2c2e', color: '#C9ADA1' }}>
+          <div className="md:w-7/12 flex flex-col justify-center p-6 md:p-12 lg:p-16" style={{ background: '#1f2c2e', color: '#C9ADA1' }}>
             <span className="text-xs font-bold tracking-[0.25em] uppercase mb-5 block" style={{ color: '#4D6A6D' }}>
               {event.tag}
             </span>

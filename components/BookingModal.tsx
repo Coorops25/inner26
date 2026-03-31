@@ -122,7 +122,7 @@ const BookingModal: React.FC = () => {
           <CloseIcon className="w-5 h-5" />
         </button>
 
-        <div className="p-8">
+        <div className="p-5 md:p-8">
           <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#4D6A6D' }}>
             Reservar
           </p>

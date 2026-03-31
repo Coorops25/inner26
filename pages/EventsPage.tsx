@@ -73,7 +73,7 @@ const EventsPage: React.FC = () => {
                 className="rounded-sm md:flex items-stretch max-w-5xl mx-auto overflow-hidden group border"
                 style={{ background: '#FAF7F2', borderColor: '#EAE0CC' }}
               >
-                <div className="md:w-5/12 overflow-hidden relative min-h-[260px]">
+                <div className="md:w-5/12 overflow-hidden relative min-h-[200px] md:min-h-[260px]">
                   <img
                     src={event.coverImageUrl}
                     alt={`Portada del evento ${event.title}`}
@@ -92,7 +92,7 @@ const EventsPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="md:w-7/12 p-10 md:p-12 flex flex-col justify-center">
+                <div className="md:w-7/12 p-6 md:p-10 lg:p-12 flex flex-col justify-center">
                   <span className="text-xs font-bold tracking-widest uppercase mb-2 block" style={{ color: '#4D6A6D' }}>
                     {event.tag}
                   </span>

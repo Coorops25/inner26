@@ -84,7 +84,7 @@ const HeroSection: React.FC = () => {
             <a
               href="/clases"
               onClick={(e) => { e.preventDefault(); navigate('clases'); }}
-              className="px-9 py-4 font-heading text-lg tracking-wide rounded-sm min-w-[200px] transition-all duration-400 text-center inline-block"
+              className="px-9 py-4 font-heading text-lg tracking-wide rounded-sm min-w-[min(200px,80vw)] transition-all duration-400 text-center inline-block"
               style={{ background: '#4D6A6D', color: '#EAE0CC', border: '1px solid #4D6A6D' }}
             >
               Ver Clases
@@ -92,7 +92,7 @@ const HeroSection: React.FC = () => {
             <a
               href="/eventos"
               onClick={(e) => { e.preventDefault(); navigate('eventos'); }}
-              className="px-9 py-4 text-white/70 hover:text-white font-heading text-lg tracking-wide italic min-w-[200px] transition-all duration-400 text-center inline-block"
+              className="px-9 py-4 text-white/70 hover:text-white font-heading text-lg tracking-wide italic min-w-[min(200px,80vw)] transition-all duration-400 text-center inline-block"
               style={{ borderBottom: '1px solid rgba(255,255,255,0.25)' }}
             >
               Próximos Eventos &rarr;

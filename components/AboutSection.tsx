@@ -63,7 +63,7 @@ const AboutSection: React.FC = () => {
           {/* Right: Illustration */}
           <div className="lg:w-1/2 order-1 lg:order-2 relative">
             <div
-              className="relative aspect-[3/4] overflow-hidden flex items-center justify-center p-14"
+              className="relative aspect-[3/4] overflow-hidden flex items-center justify-center p-8 md:p-12 lg:p-14"
               style={{ background: '#EAE0CC' }}
             >
               <Illustration

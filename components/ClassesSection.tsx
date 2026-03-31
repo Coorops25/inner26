@@ -38,7 +38,7 @@ const ClassesSection: React.FC = () => {
       <div className="container mx-auto px-6 max-w-7xl">
 
         <div
-          className="flex flex-col md:flex-row justify-between items-end mb-20 border-b pb-10"
+          className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-20 border-b pb-10"
           style={{ borderColor: '#EAE0CC' }}
         >
           <div>
@@ -55,7 +55,7 @@ const ClassesSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
           {classes.map((item, index) => (
             <div
               key={index}

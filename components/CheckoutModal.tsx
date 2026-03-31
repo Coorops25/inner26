@@ -53,7 +53,7 @@ const CheckoutModal: React.FC = () => {
       onClick={handleBackdropClick}
     >
       <div
-        className="rounded-sm shadow-2xl w-full max-w-lg relative my-8 animate-fade-in-up border"
+        className="rounded-sm shadow-2xl w-full max-w-lg relative my-4 md:my-8 animate-fade-in-up border"
         style={{ background: '#EAE0CC', borderColor: 'rgba(160,160,131,0.25)' }}
       >
         <div
@@ -89,7 +89,7 @@ const CheckoutModal: React.FC = () => {
             </div>
           ) : (
             <>
-              <div className="space-y-4 mb-6 max-h-64 overflow-y-auto pr-2" role="list" aria-label="Productos en el carrito">
+              <div className="space-y-4 mb-6 max-h-48 md:max-h-64 overflow-y-auto pr-2" role="list" aria-label="Productos en el carrito">
                 {cart.map(item => (
                   <div key={item.id} className="flex items-center justify-between" role="listitem">
                     <div className="flex items-center space-x-4">
