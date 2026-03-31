@@ -12,7 +12,48 @@
   --color-ink: #1A1A18;
   --color-cream-light: #FAF7F2;
   --color-warm-black: #121210;
+  --color-base: #EAE0CC;
+  --color-base-text: #1A1A18;
+  --color-accent: #C9ADA1;
+  --color-sage: #8B9A8B;
+  --color-olive: #5C6B5C;
+  --color-slate-is: #4D6A6D;
+  --color-detail: #8B9A8B;
+  --color-stone-is: #5C6B5C;
 }
+
+/* Legacy utility classes */
+.bg-base { background-color: var(--sand-dune); }
+.text-base-text { color: var(--ink); }
+
+.bg-accent { background-color: var(--almond-silk); }
+.text-accent { color: var(--almond-silk); }
+.border-accent { border-color: var(--almond-silk); }
+
+.bg-sage { background-color: var(--dry-sage); }
+.text-sage { color: var(--dry-sage); }
+
+.bg-olive { background-color: var(--grey-olive); }
+.text-olive { color: var(--grey-olive); }
+
+.bg-slate-is { background-color: var(--blue-slate); }
+.text-slate-is { color: var(--blue-slate); }
+.border-slate-is { border-color: var(--blue-slate); }
+
+/* Legacy aliases */
+.bg-detail { background-color: var(--dry-sage); }
+.text-detail { color: var(--dry-sage); }
+.bg-stone-is { background-color: var(--grey-olive); }
+.text-stone-is { color: var(--grey-olive); }
+
+/* Dark backgrounds */
+.bg-ink { background-color: var(--ink); }
+.bg-deep-slate { background-color: #1c2829; }
+.bg-dark-panel { background-color: #1f2c2e; }
+
+/* Cream sections */
+.bg-cream { background-color: var(--cream-light); }
+.bg-sand-light { background-color: #F3EDE2; }
 
 /* Responsive typography */
 @media (max-width: 640px) {
