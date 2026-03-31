@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="py-16 md:py-24" style={{ background: '#1c2829', color: '#A0A083' }}>
+    <footer className="py-12 md:py-16" style={{ background: '#121210', color: '#A0A083' }}>
       <div className="container mx-auto px-6 max-w-7xl flex flex-col items-center text-center">
 
         {/* Big brand word */}

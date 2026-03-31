@@ -46,7 +46,7 @@ const HeroSection: React.FC = () => {
       {/* Main Content */}
       <div
         className="relative flex flex-col items-center justify-center text-center px-4 md:px-6"
-        style={{ zIndex: 2, minHeight: '100svh', paddingTop: '5rem', paddingBottom: '5rem' }}
+        style={{ zIndex: 2, minHeight: '100svh', paddingTop: '4rem', paddingBottom: '2rem' }}
       >
         <div className="animate-fade-in-up flex flex-col items-center w-full max-w-5xl">
 
