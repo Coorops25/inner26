@@ -1,6 +1,5 @@
 
 import React, { useContext, lazy, Suspense, useEffect } from 'react';
-import { Canvas } from '@react-three/fiber';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { CartProvider, CartContext } from './context/CartContext';
@@ -9,7 +8,6 @@ import BookingModal from './components/BookingModal';
 import CheckoutModal from './components/CheckoutModal';
 import ToastContainer from './components/ToastContainer';
 import SplashCursor from './components/SplashCursor';
-import SplashCursorR3F from './components/SplashCursorR3F';
 import ErrorBoundary from './components/ErrorBoundary';
 
 const pageCanonicalUrls: Record<string, string> = {
@@ -70,7 +68,6 @@ const AppContent: React.FC = () => {
   useEffect(() => {
     const canonicalUrl = pageCanonicalUrls[page] || pageCanonicalUrls.home;
     let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
-    
     if (!canonicalLink) {
       canonicalLink = document.createElement('link');
       canonicalLink.rel = 'canonical';
@@ -81,46 +78,29 @@ const AppContent: React.FC = () => {
 
   return (
     <>
+      {/* Particle cursor — 2D canvas, pointer-events:none, skipped if reduced-motion */}
       {!prefersReducedMotion() && (
-        <ErrorBoundary>
+        <ErrorBoundary fallback={null}>
           <SplashCursor />
         </ErrorBoundary>
       )}
 
-      {!prefersReducedMotion() && (
-        <ErrorBoundary>
-          <div
-            style={{
-              position: 'fixed',
-              inset: 0,
-              pointerEvents: 'none',
-              zIndex: 9998,
-            }}
-          >
-            <Canvas
-              gl={{ alpha: true }}
-              style={{ width: '100%', height: '100%' }}
-              onCreated={({ gl }) => {
-                gl.domElement.style.pointerEvents = 'none';
-              }}
-            >
-              <SplashCursorR3F />
-            </Canvas>
-          </div>
-        </ErrorBoundary>
-      )}
-
       <div style={{ position: 'relative' }} className="bg-base text-base-text antialiased">
-        <div style={{ position: 'relative', zIndex: 10 }}>
-          <Header />
-          <main id="main-content">
+        {/* Header is fixed/z-50 — always on top */}
+        <Header />
+
+        {/* Main page content — wrapped in ErrorBoundary so WebGL crashes don't break nav */}
+        <main id="main-content">
+          <ErrorBoundary>
             <Suspense fallback={<LoadingSpinner />}>
               <PageRenderer />
             </Suspense>
-          </main>
-          <Footer />
-        </div>
+          </ErrorBoundary>
+        </main>
 
+        <Footer />
+
+        {/* Modals layer — above everything */}
         <div style={{ position: 'relative', zIndex: 60 }}>
           <BookingModal />
           <CheckoutModal />
