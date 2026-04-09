@@ -15,7 +15,6 @@ const navLinks: Array<{ page: Exclude<PageName, 'home'>; label: string; href: st
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const { cart, toggleCheckoutModal, navigate, page } = useContext(CartContext);
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -55,14 +54,12 @@ const Header: React.FC = () => {
     handleNavigate(targetPage);
   };
 
-  const headerStyle: React.CSSProperties = scrolled
-    ? {
-        background: 'rgba(234,224,204,0.97)',
-        backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(160,160,131,0.2)',
-        color: '#252520',
-      }
-    : { background: 'transparent', color: '#ffffff' };
+  const headerStyle: React.CSSProperties = {
+    background: 'rgba(234,224,204,0.97)',
+    backdropFilter: 'blur(12px)',
+    borderBottom: '1px solid rgba(160,160,131,0.2)',
+    color: '#252520',
+  };
 
   return (
     <header
