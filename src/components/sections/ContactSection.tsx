@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { InstagramIcon, WhatsAppIcon } from '../constants';
-import { useToast } from '../context/ToastContext';
+import { InstagramIcon, WhatsAppIcon } from '../../constants';
+import { useToast } from '../../context/ToastContext';
 
 const ContactSection: React.FC = () => {
   const { showToast } = useToast();

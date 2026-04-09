@@ -1,14 +1,14 @@
 
 import React, { useContext, lazy, Suspense, useEffect } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import { CartProvider, CartContext } from './context/CartContext';
-import { ToastProvider } from './context/ToastContext';
-import BookingModal from './components/BookingModal';
-import CheckoutModal from './components/CheckoutModal';
-import ToastContainer from './components/ToastContainer';
-import SplashCursor from './components/SplashCursor';
-import ErrorBoundary from './components/ErrorBoundary';
+import Header from './src/components/layout/Header';
+import Footer from './src/components/layout/Footer';
+import { CartProvider, CartContext } from './src/context/CartContext';
+import { ToastProvider } from './src/context/ToastContext';
+import BookingModal from './src/components/modals/BookingModal';
+import CheckoutModal from './src/components/modals/CheckoutModal';
+import ToastContainer from './src/components/ui/ToastContainer';
+import SplashCursor from './src/components/effects/SplashCursor';
+import ErrorBoundary from './src/components/ui/ErrorBoundary';
 
 const pageCanonicalUrls: Record<string, string> = {
   home: 'https://innerspirit.co/',
@@ -21,14 +21,14 @@ const pageCanonicalUrls: Record<string, string> = {
   contacto: 'https://innerspirit.co/contacto',
 };
 
-const HomePage = lazy(() => import('./pages/HomePage'));
-const AboutPage = lazy(() => import('./pages/AboutPage'));
-const ClassesPage = lazy(() => import('./pages/ClassesPage'));
-const EventsPage = lazy(() => import('./pages/EventsPage'));
-const ConsultorioPage = lazy(() => import('./pages/ConsultorioPage'));
-const ShopPage = lazy(() => import('./pages/ShopPage'));
-const BlogPage = lazy(() => import('./pages/BlogPage'));
-const ContactPage = lazy(() => import('./pages/ContactPage'));
+const HomePage = lazy(() => import('./src/pages/HomePage'));
+const AboutPage = lazy(() => import('./src/pages/AboutPage'));
+const ClassesPage = lazy(() => import('./src/pages/ClassesPage'));
+const EventsPage = lazy(() => import('./src/pages/EventsPage'));
+const ConsultorioPage = lazy(() => import('./src/pages/ConsultorioPage'));
+const ShopPage = lazy(() => import('./src/pages/ShopPage'));
+const BlogPage = lazy(() => import('./src/pages/BlogPage'));
+const ContactPage = lazy(() => import('./src/pages/ContactPage'));
 
 const LoadingSpinner: React.FC = () => (
   <div className="flex items-center justify-center min-h-[50vh]" role="status" aria-label="Cargando página">

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Illustration } from '../src/assets/Illustrations';
+import { Illustration } from '../assets/Illustrations';
 
 const galleryIllustrations = ['yoga', 'meditation', 'lotus'];
 const galleryLabels = ['Movimiento Consciente', 'Silencio Interior', 'Florecimiento'];

@@ -6,7 +6,15 @@
       "Bash(npm install:*)",
       "Bash(git remote:*)",
       "Bash(ls \"/c/Users/Fabian Leal/documents/inner/\"*.css)",
-      "Bash(gh run:*)"
+      "Bash(gh run:*)",
+      "Bash(find . -not -path */node_modules/* -not -path */.git/* -not -path */dist/* -type f -name *.tsx -o -name *.ts -o -name *.jsx -o -name *.js)",
+      "Bash(grep -r from.*src/ components/ pages/)",
+      "Bash(tsc --noEmit)",
+      "Bash(npx vercel:*)",
+      "Bash(grep -r \"from ''''../src\" components/ pages/ --include=\"*.tsx\")",
+      "Bash(netstat -ano)",
+      "Bash(taskkill //F //PID 22924)",
+      "Bash(taskkill //F //PID 8300)"
     ]
   }
 }

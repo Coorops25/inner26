@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import R3FImagePlane from './R3FImagePlane';
+import R3FImagePlane from '../effects/R3FImagePlane';
 
 const stats = [
   { value: '4.9', label: 'Calificación Google', sub: '143+ reseñas' },

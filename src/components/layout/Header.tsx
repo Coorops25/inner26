@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ShoppingCartIcon } from '../constants';
-import { CartContext } from '../context/CartContext';
-import { pageToPath, type PageName } from '../context/NavigationContext';
+import { ShoppingCartIcon } from '../../constants';
+import { CartContext } from '../../context/CartContext';
+import { pageToPath, type PageName } from '../../context/NavigationContext';
 
 const navLinks: Array<{ page: Exclude<PageName, 'home'>; label: string; href: string }> = [
   { page: 'nosotros', label: 'Nosotros', href: pageToPath('nosotros') },

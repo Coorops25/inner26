@@ -1,7 +1,7 @@
 
 import React, { useState, useContext } from 'react';
-import { CartContext } from '../context/CartContext';
-import { Illustration } from '../src/assets/Illustrations';
+import { CartContext } from '../../context/CartContext';
+import { Illustration } from '../../assets/Illustrations';
 
 interface PracticeItem {
   type: 'class' | 'event' | 'service' | 'blog';

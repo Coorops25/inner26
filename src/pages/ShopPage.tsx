@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 import type { Product } from '../types';
 import { CartContext } from '../context/CartContext';
-import { Illustration } from '../src/assets/Illustrations';
+import { Illustration } from '../assets/Illustrations';
 
 const products: Product[] = [
   { id: 1, name: 'Cristal de Cuarzo',   price: '45.000', imageUrl: '', illustrationName: 'crystal'   },

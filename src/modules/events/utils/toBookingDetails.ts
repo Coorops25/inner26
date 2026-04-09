@@ -1,4 +1,4 @@
-import type { BookingDetails } from '@/types';
+import type { BookingDetails } from '../../../types';
 import type { StudioEvent } from '../types';
 
 export const toEventBookingDetails = (

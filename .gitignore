@@ -1,9 +1,14 @@
-# Environment variables — never commit secrets
+# ═══════════════════════════════════════════════════════════════════════════
+# Inner Spirit Studio — .gitignore
+# ═══════════════════════════════════════════════════════════════════════════
+
+# ── Environment variables & secrets ─────────────────────────────────────────
 .env
 .env.local
 .env.*.local
+!.env.example
 
-# Logs
+# ── Logs ─────────────────────────────────────────────────────────────────────
 logs
 *.log
 npm-debug.log*
@@ -12,12 +17,13 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# ── Dependencies ─────────────────────────────────────────────────────────────
 node_modules
 dist
 dist-ssr
 *.local
 
-# Editor directories and files
+# ── Editor & IDE ─────────────────────────────────────────────────────────────
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -28,3 +34,27 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# ── Testing & Coverage ──────────────────────────────────────────────────────
+coverage
+.nyc_output
+test-results
+playwright-report
+
+# ── Cache & Temp ───────────────────────────────────────────────────────────
+.cache
+.parcel-cache
+.turbo
+tmp
+temp
+*.tmp
+
+# ── Build artifacts ───────────────────────────────────────────────────────────
+*.tsbuildinfo
+next
+.nuxt
+.output
+
+# ── OS generated ─────────────────────────────────────────────────────────────
+Thumbs.db
+desktop.ini

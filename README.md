@@ -13,7 +13,7 @@ Inner Spirit Studio es un sitio web de una página única (SPA) desarrollado par
 ### Características Principales
 
 - **Diseño SPA (Single Page Application)** - Navegación fluida sin recargas
-- **Experiencias 3D** - Implementedas con React Three Fiber (Three.js)
+- **Experiencias 3D** - Implementadas con React Three Fiber (Three.js)
 - **E-commerce** - Tienda online con carrito de compras y checkout
 - **Reservas** - Sistema de reservas para clases y eventos
 - **Diseño responsivo** - Optimizado para todos los dispositivos
@@ -30,39 +30,43 @@ Inner Spirit Studio es un sitio web de una página única (SPA) desarrollado par
 | 3D Graphics | Three.js + React Three Fiber |
 | 3D Utilities | @react-three/drei, three-stdlib |
 | WebGL | OGL |
+| Testing | Vitest |
 
 ## Estructura del Proyecto
 
 ```
 inner/
-├── components/          # Componentes React reutilizables
-│   ├── Header.tsx       # Navegación principal
-│   ├── Footer.tsx       # Pie de página
-│   ├── HeroSection.tsx  # Sección hero con efectos 3D
-│   ├── Galaxy.tsx       # Componente 3D de fondo
-│   ├── ShopSection.tsx  # Catálogo de productos
-│   └── ...              # Más componentes de secciones
-├── pages/               # Páginas del sitio
-│   ├── HomePage.tsx     # Página principal
-│   ├── AboutPage.tsx    # Nosotros
-│   ├── ClassesPage.tsx  # Clases de yoga
-│   ├── EventsPage.tsx   # Eventos
-│   ├── ShopPage.tsx     # Tienda
-│   └── ...
-├── context/             # Contextos de React
-│   └── CartContext.tsx  # Estado global del carrito
-├── constants.tsx        # Iconos y constantes globales
-├── types.ts             # Definiciones de tipos TypeScript
-├── App.tsx              # Componente raíz
-├── index.html           # Entry point HTML
-└── vite.config.ts       # Configuración de Vite
+├── src/
+│   ├── assets/              # Ilustraciones SVG
+│   ├── components/
+│   │   ├── effects/         # Componentes 3D (Galaxy, Ribbons, SplashCursor)
+│   │   ├── layout/          # Header, Footer
+│   │   ├── modals/          # BookingModal, CheckoutModal
+│   │   ├── sections/        # Secciones de página
+│   │   └── ui/              # Componentes UI (Button, ErrorBoundary)
+│   ├── constants/           # Iconos y constantes globales
+│   ├── context/             # React Context (Cart, Toast, Navigation)
+│   ├── features/            # Módulos por feature
+│   │   └── events/          # Eventos + Instagram feed
+│   ├── hooks/               # Custom hooks globales
+│   ├── pages/               # Páginas del sitio
+│   ├── types/               # Definiciones de TypeScript
+│   └── utils/               # Utilidades globales
+├── tests/                   # Tests
+├── public/                  # Assets estáticos
+├── App.tsx                  # Componente raíz
+├── index.tsx                # Entry point
+├── vite.config.ts           # Configuración de Vite
+├── tsconfig.json            # Configuración de TypeScript
+├── Makefile                 # Comandos unificados
+└── .env.example             # Variables de entorno (plantilla)
 ```
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm o pnpm
 
 ### Instalación
@@ -85,8 +89,21 @@ El servidor de desarrollo estará disponible en `http://localhost:3000`.
 | `npm run build` | Construir para producción |
 | `npm run preview` | Vista previa de la build |
 | `npm run lint` | Verificar tipos TypeScript |
+| `npm test` | Ejecutar tests |
+| `make help` | Ver todos los comandos |
 
+### Makefile
 
+También puedes usar Makefile para comandos unificados:
+
+```bash
+make install    # Instalar dependencias
+make dev        # Levantar servidor
+make build      # Build de producción
+make lint        # Verificar tipos
+make test       # Ejecutar tests
+make clean      # Limpiar artefactos
+```
 
 ## Diseño y Estilo
 
@@ -106,18 +123,14 @@ El servidor de desarrollo estará disponible en `http://localhost:3000`.
 - **Headings:** Cormorant Garamond (serif, elegante)
 - **Body:** Inter (sans-serif, legible)
 
-## Secciones del Sitio
+## Variables de Ambiente
 
-1. **Hero** - Presentación con efectos 3D inmersivos
-2. **Studio** - Información sobre el espacio
-3. **About** - Historia y filosofía
-4. **Find Your Practice** - Diferentes tipos de práctica
-5. **Events** - Eventos especiales y talleres
-6. **Consultorio** - Servicios de consulta
-7. **Testimonials** - Testimonios de clientes
-8. **Shop** - Tienda de productos
-9. **Blog** - Artículos sobre bienestar
-10. **Newsletter** - Suscripción al boletín
+Ver `.env.example` para las variables requeridas. Copia a `.env.local` y configura tus valores:
+
+- `VITE_WHATSAPP_NUMBER` - Número de WhatsApp para reservas
+- `VITE_STUDIO_NAME` - Nombre del estudio
+- `VITE_STUDIO_EMAIL` - Email de contacto
+- `VITE_BOOKING_URL` - URL de herramienta de reservas (opcional)
 
 ## Contribución
 
@@ -139,16 +152,3 @@ El servidor de desarrollo estará disponible en `http://localhost:3000`.
 <p align="center">
   © 2024 Inner Spirit Studio. Todos los derechos reservados.
 </p>
-## Ecosistema de Eventos e Instagram (2026)
-
-Se agrego una arquitectura modular para eventos y publicaciones de Instagram:
-
-- `src/modules/events/data/events.ts`: fuente unica de eventos.
-- `src/modules/events/services/instagramFeed.ts`: lectura del feed por evento (API + fallback local).
-- `src/modules/events/hooks/useEventInstagramFeed.ts`: actualizacion reactiva en UI.
-- `src/modules/events/components/EventInstagramFeed.tsx`: cards de publicaciones con CTA.
-- `src/modules/events/utils/toBookingDetails.ts`: integracion directa con `BookingModal`.
-
-Con esto, cada evento puede tener sus publicaciones IG activas y cada publicacion puede disparar un CTA de reserva.
-
-Checklist operativo en: `docs/ECOSISTEMA_SOLIDO.md`.

@@ -2,10 +2,10 @@
 import React, { useContext } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrthographicCamera } from '@react-three/drei';
-import { CartContext } from '../context/CartContext';
-import Galaxy from './Galaxy';
-import VariableProximity from './VariableProximity';
-import R3FButton from './R3FButton';
+import { CartContext } from '../../context/CartContext';
+import Galaxy from '../effects/Galaxy';
+import VariableProximity from '../effects/VariableProximity';
+import R3FButton from '../effects/R3FButton';
 
 const HeroSection: React.FC = () => {
   const { navigate } = useContext(CartContext);

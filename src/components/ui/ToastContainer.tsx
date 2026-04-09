@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useToast } from '../context/ToastContext';
+import { useToast } from '../../context/ToastContext';
 
 const toastStyles = {
   success: {

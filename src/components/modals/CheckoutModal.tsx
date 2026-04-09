@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useCallback } from 'react';
-import { CartContext } from '../context/CartContext';
-import { useToast } from '../context/ToastContext';
-import { CloseIcon } from '../constants';
-import { Illustration } from '../src/assets/Illustrations';
+import { CartContext } from '../../context/CartContext';
+import { useToast } from '../../context/ToastContext';
+import { CloseIcon } from '../../constants';
+import { Illustration } from '../../assets/Illustrations';
 
 const CheckoutModal: React.FC = () => {
   const { isCheckoutModalOpen, toggleCheckoutModal, cart, removeFromCart, clearCart } = useContext(CartContext);

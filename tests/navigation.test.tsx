@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
-import { CartProvider, CartContext } from '../../context/CartContext';
-import { ToastProvider } from '../../context/ToastContext';
+import { CartProvider, CartContext } from '../context/CartContext';
+import { ToastProvider } from '../context/ToastContext';
 
 // Minimal consumer component to test navigate
 const NavigationConsumer: React.FC = () => {

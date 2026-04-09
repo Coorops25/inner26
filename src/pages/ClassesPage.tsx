@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { CartContext } from '../context/CartContext';
-import { Illustration } from '../src/assets/Illustrations';
+import { Illustration } from '../assets/Illustrations';
 
 const classes = [
   {

@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import type { BlogPost } from '../types';
-import { Illustration } from '../src/assets/Illustrations';
+import { Illustration } from '../assets/Illustrations';
 import { CloseIcon } from '../constants';
 
 interface ArticleContent {

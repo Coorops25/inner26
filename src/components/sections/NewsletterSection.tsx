@@ -1,7 +1,7 @@
 
 import React from 'react';
-import Ribbons from './Ribbons';
-import { useToast } from '../context/ToastContext';
+import Ribbons from '../effects/Ribbons';
+import { useToast } from '../../context/ToastContext';
 
 const NewsletterSection: React.FC = () => {
   const { showToast } = useToast();

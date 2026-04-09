@@ -1,7 +1,7 @@
 
 import React, { useContext } from 'react';
-import { CartContext } from '../context/CartContext';
-import { Illustration } from '../src/assets/Illustrations';
+import { CartContext } from '../../context/CartContext';
+import { Illustration } from '../../assets/Illustrations';
 
 const ConsultorioSection: React.FC = () => {
   const { navigate } = useContext(CartContext);

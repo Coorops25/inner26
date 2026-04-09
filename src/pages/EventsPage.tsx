@@ -1,9 +1,9 @@
 ﻿import React, { useContext, useState, useEffect } from 'react';
 import { CartContext } from '../context/CartContext';
-import { Illustration } from '../src/assets/Illustrations';
-import EventInstagramFeed from '../src/modules/events/components/EventInstagramFeed';
-import { studioEvents } from '../src/modules/events/data/events';
-import { toEventBookingDetails } from '../src/modules/events/utils/toBookingDetails';
+import { Illustration } from '../assets/Illustrations';
+import EventInstagramFeed from '../modules/events/components/EventInstagramFeed';
+import { studioEvents } from '../modules/events/data/events';
+import { toEventBookingDetails } from '../modules/events/utils/toBookingDetails';
 
 const EventsPage: React.FC = () => {
   const { openBookingModal } = useContext(CartContext);

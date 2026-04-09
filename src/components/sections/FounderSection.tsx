@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Illustration } from '../src/assets/Illustrations';
+import { Illustration } from '../../assets/Illustrations';
 
 const FounderSection: React.FC = () => {
   return (
