@@ -184,7 +184,8 @@ const AppContent: React.FC = () => {
         <Header />
 
         {/* Main page content — wrapped in ErrorBoundary so WebGL crashes don't break nav */}
-        <main id="main-content">
+        {/* Homepage hero handles its own spacing (full-screen); other pages need pt to clear fixed header */}
+        <main id="main-content" className={page !== 'home' ? 'pt-20 md:pt-24' : ''}>
           <ErrorBoundary>
             <Suspense fallback={<LoadingSpinner />}>
               <PageRenderer />

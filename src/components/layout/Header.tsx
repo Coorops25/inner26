@@ -3,7 +3,7 @@ import { ShoppingCartIcon } from '../../constants';
 import { CartContext } from '../../context/CartContext';
 import { useNavigation, pageToPath, type PageName } from '../../context/NavigationContext';
 
-const navLinks: Array<{ page: Exclude<PageName, 'home'>; label: string; href: string }> = [
+const navLinks: Array<{ page: Exclude<PageName, 'home' | '404'>; label: string; href: string }> = [
   { page: 'nosotros', label: 'Nosotros', href: pageToPath('nosotros') },
   { page: 'clases', label: 'Clases', href: pageToPath('clases') },
   { page: 'eventos', label: 'Eventos', href: pageToPath('eventos') },
@@ -19,6 +19,10 @@ const Header: React.FC = () => {
   const { cart, toggleCheckoutModal } = useContext(CartContext);
   const { page, navigate } = useNavigation();
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  // On homepage hero, header is transparent with white text until scrolled
+  const isHeroPage = page === 'home';
+  const isTransparent = isHeroPage && !scrolled;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -58,11 +62,19 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] backdrop-blur-xl text-ink ${
-        scrolled ? 'py-3 md:py-4 shadow-sm border-b border-sage/20' : 'py-5 md:py-7 border-b border-transparent'
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        scrolled ? 'py-3 md:py-4 shadow-sm' : 'py-5 md:py-7'
+      } ${
+        isTransparent
+          ? 'text-white border-b border-white/10'
+          : 'text-ink backdrop-blur-xl border-b border-sage/20'
       }`}
       style={{
-        background: scrolled ? 'rgba(234,224,204,0.98)' : 'rgba(234,224,204,0.9)',
+        background: isTransparent
+          ? 'transparent'
+          : scrolled
+            ? 'rgba(234,224,204,0.98)'
+            : 'rgba(234,224,204,0.95)',
       }}
     >
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
@@ -84,7 +96,7 @@ const Header: React.FC = () => {
               href={link.href}
               onClick={(event) => handleLinkClick(event, link.page)}
               className={`text-xs font-bold uppercase tracking-widest transition-colors duration-300 hover:opacity-100 ${
-                page === link.page ? 'opacity-100' : 'opacity-80'
+                page === link.page ? 'opacity-100' : 'opacity-70'
               }`}
               aria-current={page === link.page ? 'page' : undefined}
             >
