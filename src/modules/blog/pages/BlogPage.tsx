@@ -1,8 +1,13 @@
 
 import React, { useEffect, useState } from 'react';
-import type { BlogPost } from '../types';
-import { Illustration } from '../assets/Illustrations';
-import { CloseIcon } from '../constants';
+import type { BlogPost } from '../../../types';
+import { Illustration } from '../../../assets/Illustrations';
+import { CloseIcon } from '../../../constants';
+
+
+
+
+
 
 interface ArticleContent {
   body: string[];
@@ -154,10 +159,10 @@ const ArticleModal: React.FC<{ post: BlogPost; onClose: () => void }> = ({ post,
           <div className="space-y-5">
             {content?.body.map((paragraph, i) => {
               if (paragraph.startsWith('**') && paragraph.includes('\n')) {
-                const [heading, ...rest] = paragraph.split('\n');
+                const [heading = '', ...rest] = paragraph.split('\n');
                 return (
                   <div key={i}>
-                    <p className="font-semibold text-lg font-heading mb-1" style={{ color: '#252520' }}>
+                    <p className="font-semibold text-lg font-heading mb-1 text-ink">
                       {heading.replace(/\*\*/g, '')}
                     </p>
                     <p className="font-light leading-relaxed" style={{ color: '#5C5C58' }}>{rest.join(' ')}</p>
@@ -218,17 +223,17 @@ const BlogPage: React.FC = () => {
         <ArticleModal post={selectedPost} onClose={() => setSelectedPost(null)} />
       )}
 
-      <section id="blog-page" className="py-20 md:py-32" style={{ background: '#FAF7F2' }}>
+      <section id="blog-page" className="py-20 md:py-32 bg-cream">
         <div className="container mx-auto px-6 max-w-7xl">
 
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <span className="text-xs font-bold tracking-[0.3em] uppercase mb-4 block" style={{ color: '#4D6A6D' }}>
+            <span className="text-xs font-bold tracking-[0.3em] uppercase mb-4 block text-slate-is">
               Journal
             </span>
-            <h1 className="text-5xl md:text-6xl font-heading font-semibold" style={{ color: '#4D6A6D' }}>
+            <h1 className="text-5xl md:text-6xl font-heading font-semibold text-slate-is">
               Palabras para el Camino
             </h1>
-            <p className="mt-6 text-xl font-light leading-relaxed" style={{ color: '#798478' }}>
+            <p className="mt-6 text-xl font-light leading-relaxed text-muted-light">
               Recursos, guías e inspiración para nutrir tu viaje interior.
             </p>
           </div>
@@ -237,13 +242,13 @@ const BlogPage: React.FC = () => {
             {blogPosts.map((post) => (
               <div
                 key={post.id}
-                className="group cursor-pointer"
+                className="group cursor-pointer focus-visible:outline-2 focus-visible:outline-slate-is focus-visible:outline-offset-4"
+                role="button"
+                tabIndex={0}
                 onClick={() => setSelectedPost(post)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedPost(post); } }}
               >
-                <div
-                  className="overflow-hidden aspect-[3/2] mb-6 flex items-center justify-center transition-colors duration-500"
-                  style={{ background: '#EAE0CC' }}
-                >
+                <div className="overflow-hidden aspect-[3/2] mb-6 flex items-center justify-center transition-colors duration-500 bg-base">
                   <Illustration
                     name={post.illustrationName ?? 'meditation'}
                     className="w-2/5 h-2/5 transition-all duration-700 group-hover:scale-110"
@@ -251,24 +256,18 @@ const BlogPage: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: '#4D6A6D' }}>
+                  <p className="text-xs font-bold uppercase tracking-widest mb-2 text-slate-is">
                     {post.category}
                   </p>
-                  <h3 className="text-xl md:text-2xl font-heading font-bold leading-tight mb-3 transition-colors" style={{ color: '#252520' }}>
+                  <h3 className="text-xl md:text-2xl font-heading font-bold leading-tight mb-3 transition-colors text-ink">
                     {post.title}
                   </h3>
-                  <p className="font-light leading-relaxed mb-4" style={{ color: '#798478' }}>
+                  <p className="font-light leading-relaxed mb-4 text-muted-light">
                     {post.excerpt}
                   </p>
-                  <button
-                    onClick={(e) => { e.stopPropagation(); setSelectedPost(post); }}
-                    className="inline-block text-sm font-semibold pb-0.5 transition-all bg-transparent border-0 p-0 cursor-pointer"
-                    style={{ color: '#252520', borderBottom: '1px solid #C9ADA1' }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = '#4D6A6D'; (e.currentTarget as HTMLButtonElement).style.borderBottomColor = '#4D6A6D'; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = '#252520'; (e.currentTarget as HTMLButtonElement).style.borderBottomColor = '#C9ADA1'; }}
-                  >
+                  <span className="inline-block text-sm font-semibold pb-0.5 text-ink border-b border-accent hover:text-slate-is hover:border-slate-is transition-all">
                     Leer artículo
-                  </button>
+                  </span>
                 </div>
               </div>
             ))}

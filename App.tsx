@@ -1,9 +1,10 @@
 
-import React, { useContext, lazy, Suspense, useEffect } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import Header from './src/components/layout/Header';
 import Footer from './src/components/layout/Footer';
-import { CartProvider, CartContext } from './src/context/CartContext';
+import { CartProvider } from './src/context/CartContext';
 import { ToastProvider } from './src/context/ToastContext';
+import { NavigationProvider, useNavigation } from './src/context/NavigationContext';
 import BookingModal from './src/components/modals/BookingModal';
 import CheckoutModal from './src/components/modals/CheckoutModal';
 import ToastContainer from './src/components/ui/ToastContainer';
@@ -26,8 +27,8 @@ const AboutPage = lazy(() => import('./src/pages/AboutPage'));
 const ClassesPage = lazy(() => import('./src/pages/ClassesPage'));
 const EventsPage = lazy(() => import('./src/pages/EventsPage'));
 const ConsultorioPage = lazy(() => import('./src/pages/ConsultorioPage'));
-const ShopPage = lazy(() => import('./src/pages/ShopPage'));
-const BlogPage = lazy(() => import('./src/pages/BlogPage'));
+const ShopPage = lazy(() => import('./src/modules/shop/pages/ShopPage'));
+const BlogPage = lazy(() => import('./src/modules/blog/pages/BlogPage'));
 const ContactPage = lazy(() => import('./src/pages/ContactPage'));
 
 const LoadingSpinner: React.FC = () => (
@@ -37,7 +38,7 @@ const LoadingSpinner: React.FC = () => (
 );
 
 const PageRenderer: React.FC = () => {
-  const { page } = useContext(CartContext);
+  const { page } = useNavigation();
 
   switch (page) {
     case 'nosotros':
@@ -63,7 +64,7 @@ const prefersReducedMotion = () =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const AppContent: React.FC = () => {
-  const { page } = useContext(CartContext);
+  const { page } = useNavigation();
 
   useEffect(() => {
     const canonicalUrl = pageCanonicalUrls[page] || pageCanonicalUrls.home;
@@ -113,11 +114,13 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <CartProvider>
-      <ToastProvider>
-        <AppContent />
-      </ToastProvider>
-    </CartProvider>
+    <NavigationProvider>
+      <CartProvider>
+        <ToastProvider>
+          <AppContent />
+        </ToastProvider>
+      </CartProvider>
+    </NavigationProvider>
   );
 };
 

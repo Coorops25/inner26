@@ -87,18 +87,20 @@ const SplashCursorR3F: React.FC = () => {
     if (!meshRef.current) return;
     
     const mat = meshRef.current.material as THREE.ShaderMaterial;
-    mat.uniforms.uTime.value = state.clock.getElapsedTime();
+    const uTime = mat.uniforms.uTime;
+    const uMouse = mat.uniforms.uMouse;
+    if (!uTime || !uMouse) return;
+    uTime.value = state.clock.getElapsedTime();
 
     // Smoothly interpolate (Lerp) the shader mouse value towards the real mouse value
-    // This creates a pleasing "delay" or "fluid" feeling
-    const currentX = mat.uniforms.uMouse.value.x;
-    const currentY = mat.uniforms.uMouse.value.y;
+    const currentX = uMouse.value.x;
+    const currentY = uMouse.value.y;
     const targetX = mouseRef.current.x;
     const targetY = mouseRef.current.y;
-    const ease = 0.15; // Adjust for more/less lag
+    const ease = 0.15;
 
-    mat.uniforms.uMouse.value.x += (targetX - currentX) * ease;
-    mat.uniforms.uMouse.value.y += (targetY - currentY) * ease;
+    uMouse.value.x += (targetX - currentX) * ease;
+    uMouse.value.y += (targetY - currentY) * ease;
   });
 
   return (

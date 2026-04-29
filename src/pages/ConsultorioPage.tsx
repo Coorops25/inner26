@@ -1,9 +1,9 @@
 
-import React, { useContext } from 'react';
-import { CartContext } from '../context/CartContext';
+import React from 'react';
+import { useNavigation } from '../context/NavigationContext';
 
 const ConsultorioPage: React.FC = () => {
-  const { navigate } = useContext(CartContext);
+  const { navigate } = useNavigation();
   return (
     <div className="animate-fade-in-up">
       <section className="relative py-24 md:py-40 bg-stone-900 text-white overflow-hidden">

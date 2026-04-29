@@ -1,8 +1,11 @@
-
 import React, { useContext } from 'react';
-import type { Product } from '../types';
-import { CartContext } from '../context/CartContext';
-import { Illustration } from '../assets/Illustrations';
+import type { Product } from '../../../types';
+import { CartContext } from '../../../context/CartContext';
+import { Illustration } from '../../../assets/Illustrations';
+
+
+
+
 
 const products: Product[] = [
   { id: 1, name: 'Cristal de Cuarzo',   price: '45.000', imageUrl: '', illustrationName: 'crystal'   },
@@ -21,8 +24,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   return (
     <div className="group text-center cursor-pointer">
       <div
-        className="overflow-hidden rounded-sm aspect-square relative mb-5 flex items-center justify-center transition-colors duration-500"
-        style={{ background: '#F3EDE2' }}
+        className="overflow-hidden rounded-sm aspect-square relative mb-5 flex items-center justify-center transition-colors duration-500 bg-sand-light"
       >
         <Illustration
           name={product.illustrationName ?? ''}
@@ -42,15 +44,14 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
               type: 'product',
             });
           }}
-          className="absolute bottom-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-white text-lg font-bold md:translate-y-4 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-300 shadow-lg"
-          style={{ background: '#4D6A6D' }}
+          className="absolute bottom-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-white text-lg font-bold md:translate-y-4 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-300 shadow-lg bg-slate-is"
           aria-label="Añadir"
         >
           +
         </button>
       </div>
-      <h3 className="text-lg font-heading" style={{ color: '#252520' }}>{product.name}</h3>
-      <p className="font-mono text-sm mt-1" style={{ color: '#A0A083' }}>${product.price} COP</p>
+      <h3 className="text-lg font-heading text-ink">{product.name}</h3>
+      <p className="font-mono text-sm mt-1 text-muted">${product.price} COP</p>
     </div>
   );
 };
@@ -58,16 +59,16 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 const ShopPage: React.FC = () => {
   return (
     <div className="animate-fade-in-up">
-      <section id="tienda-page" className="py-20 md:py-32" style={{ background: '#FAF7F2' }}>
+      <section id="tienda-page" className="py-20 md:py-32 bg-cream">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <span className="text-xs font-bold tracking-[0.3em] uppercase mb-4 block" style={{ color: '#4D6A6D' }}>
+            <span className="text-xs font-bold tracking-[0.3em] uppercase mb-4 block text-slate-is">
               La Tienda
             </span>
-            <h1 className="text-5xl md:text-6xl font-heading font-semibold" style={{ color: '#4D6A6D' }}>
+            <h1 className="text-5xl md:text-6xl font-heading font-semibold text-slate-is">
               Herramientas para la Presencia
             </h1>
-            <p className="mt-6 text-xl font-light leading-relaxed" style={{ color: '#798478' }}>
+            <p className="mt-6 text-xl font-light leading-relaxed text-muted-light">
               Objetos conscientes para acompañar tu práctica y rituales diarios.
             </p>
           </div>

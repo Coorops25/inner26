@@ -1,6 +1,6 @@
 
-import React, { useContext } from 'react';
-import { CartContext } from '../../context/CartContext';
+import React from 'react';
+import { useNavigation } from '../../context/NavigationContext';
 
 const InstagramSVG = () => (
   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -15,11 +15,11 @@ const WhatsAppSVG = () => (
 );
 
 const Footer: React.FC = () => {
-  const { navigate } = useContext(CartContext);
+  const { navigate } = useNavigation();
   const year = new Date().getFullYear();
 
   return (
-    <footer className="py-12 md:py-16" style={{ background: '#121210', color: '#A0A083' }}>
+    <footer className="py-12 md:py-16 bg-warm-black text-muted">
       <div className="container mx-auto px-6 max-w-7xl flex flex-col items-center text-center">
 
         {/* Big brand word */}
@@ -29,23 +29,20 @@ const Footer: React.FC = () => {
         >
           INNER SPIRIT
         </h2>
-        <p className="text-xs tracking-[0.3em] uppercase mb-10" style={{ color: '#4D6A6D' }}>
+        <p className="text-xs tracking-[0.3em] uppercase mb-10 text-slate-is">
           Studio — La Candelaria, Bogotá
         </p>
 
-        <div
-          className="grid grid-cols-1 md:grid-cols-3 w-full gap-12 md:gap-0 border-t pt-12"
-          style={{ borderColor: 'rgba(77,106,109,0.2)' }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-12 md:gap-0 border-t border-slate-is/20 pt-12">
           {/* Location */}
           <div className="space-y-3">
-            <span className="text-xs font-bold uppercase tracking-widest block" style={{ color: '#4D6A6D' }}>Ubicación</span>
-            <p className="font-light leading-relaxed" style={{ color: '#C9ADA1' }}>
+            <span className="text-xs font-bold uppercase tracking-widest block text-slate-is">Ubicación</span>
+            <p className="font-light leading-relaxed text-accent">
               Transversal 1 # 17-29<br />
               La Candelaria, Bogotá<br />
               Colombia — CP 111711
             </p>
-            <div className="space-y-1 text-sm mt-2" style={{ color: '#A0A083' }}>
+            <div className="space-y-1 text-sm mt-2 text-muted">
               <p>Lun–Vie: 6:30 AM – 9:00 PM</p>
               <p>Sáb–Dom: 8:00 AM – 9:00 PM</p>
             </div>
@@ -53,7 +50,7 @@ const Footer: React.FC = () => {
 
           {/* Social & Contact */}
           <div className="space-y-6 flex flex-col items-center">
-            <div className="flex gap-6" style={{ color: '#798478' }}>
+            <div className="flex gap-6 text-muted-light">
               <a
                 href="https://instagram.com/innerspirit_studio"
                 target="_blank"
@@ -85,18 +82,17 @@ const Footer: React.FC = () => {
               <a
                 href="/contacto"
                 onClick={(e) => { e.preventDefault(); navigate('contacto'); }}
-                className="block mx-auto transition-colors hover:text-white pb-0.5"
-                style={{ borderBottom: '1px solid rgba(121,132,120,0.4)' }}
+                className="block mx-auto transition-colors hover:text-white pb-0.5 border-b border-muted-light/40"
               >
                 hola@innerspirit.co
               </a>
             </div>
-            <p className="text-xs tracking-widest uppercase" style={{ color: '#4D6A6D' }}>@innerspirit_studio</p>
+            <p className="text-xs tracking-widest uppercase text-slate-is">@innerspirit_studio</p>
           </div>
 
-          {/* Legal */}
+          {/* Navigation */}
           <div className="space-y-3">
-            <span className="text-xs font-bold uppercase tracking-widest block" style={{ color: '#4D6A6D' }}>Navegación</span>
+            <span className="text-xs font-bold uppercase tracking-widest block text-slate-is">Navegación</span>
             <div className="flex flex-col gap-2 text-sm">
               {(['clases', 'eventos', 'nosotros', 'tienda', 'contacto'] as const).map(p => (
                 <a
@@ -109,7 +105,7 @@ const Footer: React.FC = () => {
                 </a>
               ))}
             </div>
-            <p className="text-xs mt-4" style={{ color: 'rgba(121,132,120,0.5)' }}>
+            <p className="text-xs mt-4 text-muted-light/50">
               &copy; {year} Inner Spirit Studio. Todos los derechos reservados.
             </p>
           </div>
@@ -120,8 +116,8 @@ const Footer: React.FC = () => {
           href="https://wa.me/573212248261?text=Hola%2C%20quiero%20reservar%20una%20clase%20en%20Inner%20Spirit%20Studio"
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-transform hover:scale-110 z-40"
-          style={{ background: '#25D366', color: '#fff', touchAction: 'manipulation' }}
+          className="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-transform hover:scale-110 z-40 text-white"
+          style={{ background: '#25D366', touchAction: 'manipulation' }}
           aria-label="Escríbenos por WhatsApp"
         >
           <WhatsAppSVG />

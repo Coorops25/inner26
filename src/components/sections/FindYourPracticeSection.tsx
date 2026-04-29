@@ -1,6 +1,7 @@
 
 import React, { useState, useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
+import { useNavigation } from '../../context/NavigationContext';
 import { Illustration } from '../../assets/Illustrations';
 
 interface PracticeItem {
@@ -72,18 +73,17 @@ type Category = 'calma' | 'movimiento' | 'conexion';
 const CategoryTab: React.FC<{ label: string; active: boolean; onClick: () => void }> = ({ label, active, onClick }) => (
   <button
     onClick={onClick}
-    className={`pb-4 text-lg md:text-xl font-heading tracking-wide transition-all duration-300 border-b-2 ${active ? 'border-b-2' : 'border-transparent'}`}
-    style={{
-      color: active ? '#252520' : '#A0A083',
-      borderBottomColor: active ? '#4D6A6D' : 'transparent',
-    }}
+    className={`pb-4 text-lg md:text-xl font-heading tracking-wide transition-all duration-300 border-b-2 ${
+      active ? 'text-ink border-slate-is' : 'text-muted border-transparent'
+    }`}
   >
     {label}
   </button>
 );
 
 const PracticeCard: React.FC<{ item: PracticeItem }> = ({ item }) => {
-  const { openBookingModal, navigate } = useContext(CartContext);
+  const { openBookingModal } = useContext(CartContext);
+  const { navigate } = useNavigation();
 
   const handleClick = () => {
     if (item.type === 'class' || item.type === 'event') {
@@ -99,11 +99,14 @@ const PracticeCard: React.FC<{ item: PracticeItem }> = ({ item }) => {
   };
 
   return (
-    <div onClick={handleClick} className="group cursor-pointer">
-      <div
-        className="relative overflow-hidden aspect-[16/9] mb-5 flex items-center justify-center transition-colors duration-500"
-        style={{ background: '#F3EDE2' }}
-      >
+    <div
+      onClick={handleClick}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(); } }}
+      role="button"
+      tabIndex={0}
+      className="group cursor-pointer focus-visible:outline-2 focus-visible:outline-slate-is focus-visible:outline-offset-4"
+    >
+      <div className="relative overflow-hidden aspect-[16/9] mb-5 flex items-center justify-center transition-colors duration-500 bg-sand-light">
         <Illustration
           name={item.illustrationName}
           className="w-1/3 h-1/3 transition-colors duration-700"
@@ -112,17 +115,17 @@ const PracticeCard: React.FC<{ item: PracticeItem }> = ({ item }) => {
       </div>
       <div className="flex justify-between items-start">
         <div>
-          <h3 className="text-2xl font-heading transition-colors duration-300" style={{ color: '#252520' }}>
+          <h3 className="text-2xl font-heading transition-colors duration-300 text-ink">
             {item.title}
           </h3>
-          <p className="font-light mt-1 text-sm leading-relaxed max-w-xs" style={{ color: '#798478' }}>
+          <p className="font-light mt-1 text-sm leading-relaxed max-w-xs text-muted-light">
             {item.description}
           </p>
           {item.priceLabel && (
-            <p className="text-xs font-mono mt-2" style={{ color: '#A0A083' }}>{item.priceLabel}</p>
+            <p className="text-xs font-mono mt-2 text-muted">{item.priceLabel}</p>
           )}
         </div>
-        <span className="text-xl transition-transform duration-300 group-hover:translate-x-1" style={{ color: '#4D6A6D' }}>
+        <span className="text-xl transition-transform duration-300 group-hover:translate-x-1 text-slate-is">
           &rarr;
         </span>
       </div>
@@ -134,13 +137,13 @@ const FindYourPracticeSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category>('movimiento');
 
   return (
-    <section className="py-12 md:py-16" style={{ background: '#FAF7F2' }}>
+    <section className="py-12 md:py-16 bg-cream">
       <div className="container mx-auto px-6 max-w-6xl">
         <div className="mb-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-heading mb-6" style={{ color: '#1A1A18' }}>
+          <h2 className="text-3xl md:text-4xl font-heading mb-6 text-ink">
             ¿Qué buscas hoy?
           </h2>
-          <div className="flex justify-center gap-6 md:gap-12 border-b" style={{ borderColor: '#D9D1C0' }}>
+          <div className="flex justify-center gap-6 md:gap-12 border-b border-accent/30">
             <CategoryTab label="Calma"       active={activeCategory === 'calma'}       onClick={() => setActiveCategory('calma')} />
             <CategoryTab label="Movimiento"  active={activeCategory === 'movimiento'}  onClick={() => setActiveCategory('movimiento')} />
             <CategoryTab label="Conexión"    active={activeCategory === 'conexion'}    onClick={() => setActiveCategory('conexion')} />
@@ -148,7 +151,7 @@ const FindYourPracticeSection: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in-up">
-          {practiceData[activeCategory].map((item, idx) => (
+          {(practiceData[activeCategory] ?? []).map((item, idx) => (
             <PracticeCard key={`${activeCategory}-${idx}`} item={item} />
           ))}
         </div>

@@ -1,14 +1,11 @@
 
-import React, { useContext } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrthographicCamera } from '@react-three/drei';
-import { CartContext } from '../../context/CartContext';
+import React from 'react';
+import { useNavigation } from '../../context/NavigationContext';
 import Galaxy from '../effects/Galaxy';
 import VariableProximity from '../effects/VariableProximity';
-import R3FButton from '../effects/R3FButton';
 
 const HeroSection: React.FC = () => {
-  const { navigate } = useContext(CartContext);
+  const { navigate } = useNavigation();
 
   return (
     <section
@@ -52,7 +49,7 @@ const HeroSection: React.FC = () => {
 
           {/* Badge */}
           <span className="text-white/50 text-xs font-bold tracking-[0.35em] uppercase mb-8 border border-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
-            La Candelaria, Bogotá &mdash; #1 Yoga Studio
+            La Candelaria, Bogotá &mdash; #1 Estudio de Yoga
           </span>
 
           {/* Headline — "Movimiento" reacts to mouse proximity */}
@@ -78,67 +75,22 @@ const HeroSection: React.FC = () => {
             Un refugio para calmar la mente y despertar el espíritu a los pies de Monserrate.
           </p>
 
-          {/* CTA — 3D buttons (desktop) / HTML anchors (mobile) */}
-          {/* Mobile */}
-          <div className="flex sm:hidden flex-col items-center gap-5 w-full">
+          {/* CTA buttons */}
+          <div className="flex flex-col sm:flex-row items-center gap-5">
             <a
               href="/clases"
               onClick={(e) => { e.preventDefault(); navigate('clases'); }}
-              className="px-9 py-4 font-heading text-lg tracking-wide rounded-sm min-w-[min(200px,80vw)] transition-all duration-400 text-center inline-block"
-              style={{ background: '#4D6A6D', color: '#EAE0CC', border: '1px solid #4D6A6D' }}
+              className="px-9 py-4 font-heading text-lg tracking-wide min-w-[200px] text-center inline-block bg-slate-is text-sand-dune border border-slate-is hover:bg-deep-teal transition-all duration-300"
             >
               Ver Clases
             </a>
             <a
               href="/eventos"
               onClick={(e) => { e.preventDefault(); navigate('eventos'); }}
-              className="px-9 py-4 text-white/70 hover:text-white font-heading text-lg tracking-wide italic min-w-[min(200px,80vw)] transition-all duration-400 text-center inline-block"
-              style={{ borderBottom: '1px solid rgba(255,255,255,0.25)' }}
+              className="px-9 py-4 font-heading text-lg tracking-wide italic min-w-[200px] text-center inline-block text-white/70 hover:text-white border-b border-white/25 hover:border-white/60 transition-all duration-300"
             >
               Próximos Eventos &rarr;
             </a>
-          </div>
-
-          {/* Desktop — R3F 3D buttons inside WebGL Canvas */}
-          <div
-            className="hidden sm:block"
-            style={{ width: '480px', height: '72px', maxWidth: '90vw' }}
-          >
-            <Canvas
-              gl={{ alpha: true, antialias: true }}
-              style={{ width: '100%', height: '100%' }}
-            >
-              {/*
-                Orthographic frustum: x from -5 to 5 (10 units wide),
-                y from -0.75 to 0.75 (1.5 units tall).
-                Canvas 480×72 → aspect 6.67 = 10/1.5 ✓
-                Each RoundedBox is 4×1 units, placed at x=±2.6.
-              */}
-              <OrthographicCamera
-                makeDefault
-                left={-5} right={5}
-                top={0.75} bottom={-0.75}
-                near={0.1} far={100}
-                position={[0, 0, 5]}
-              />
-              <group position={[-2.6, 0, 0]}>
-                <R3FButton
-                  label="Ver Clases"
-                  onClick={() => navigate('clases')}
-                  backgroundColor="#4D6A6D"
-                  textColor="#EAE0CC"
-                />
-              </group>
-              <group position={[2.6, 0, 0]}>
-                <R3FButton
-                  label="Próximos Eventos"
-                  onClick={() => navigate('eventos')}
-                  isOutline
-                  backgroundColor="#C9ADA1"
-                  textColor="#EAE0CC"
-                />
-              </group>
-            </Canvas>
           </div>
 
         </div>

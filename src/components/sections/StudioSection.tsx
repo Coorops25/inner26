@@ -23,7 +23,7 @@ const illustrationSvgs: Record<string, string> = {
 };
 
 const getSvgDataUrl = (name: string): string => {
-  const svg = illustrationSvgs[name] ?? illustrationSvgs['yoga'];
+  const svg = illustrationSvgs[name] ?? illustrationSvgs['yoga'] ?? '';
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 };
 

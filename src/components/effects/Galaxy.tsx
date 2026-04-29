@@ -3,8 +3,8 @@ import React, { useEffect, useRef } from 'react';
 import { Renderer, Camera, Transform, Program, Mesh, Color, Vec3, Geometry } from 'ogl';
 
 interface GalaxyProps {
-  mouseRepulsion?: boolean;
   mouseInteraction?: boolean;
+  mouseRepulsion?: boolean;
   density?: number;
   glowIntensity?: number;
   saturation?: number;
@@ -98,16 +98,13 @@ const fragmentShader = `
 `;
 
 const Galaxy: React.FC<GalaxyProps> = ({
-  mouseRepulsion = true,
   mouseInteraction = true,
   density = 1,
-  glowIntensity = 0.3,
   saturation = 0,
   hueShift = 140,
   twinkleIntensity = 0.3,
   rotationSpeed = 0.1,
   repulsionStrength = 2,
-  autoCenterRepulsion = 0,
   starSpeed = 0.5,
   speed = 1,
 }) => {
@@ -134,11 +131,6 @@ const Galaxy: React.FC<GalaxyProps> = ({
     const randoms = new Float32Array(count);
 
     for (let i = 0; i < count; i++) {
-        // Spiral Distribution
-        const r = Math.random() * 10;
-        const theta = Math.random() * Math.PI * 2;
-        const phi = Math.random() * Math.PI; // Sphere for depth
-
         // Cylinder-ish
         positions[i * 3] = (Math.random() - 0.5) * 30; // X
         positions[i * 3 + 1] = (Math.random() - 0.5) * 20; // Y
@@ -153,23 +145,6 @@ const Galaxy: React.FC<GalaxyProps> = ({
         size: { size: 1, data: sizes },
         random: { size: 1, data: randoms },
     });
-
-    // Color handling
-    // Hue shift to rgb
-    // Hue 140 is roughly green/teal. 
-    // Assuming hueShift is 0-360.
-    // Simple conversion or just use a nice base color modified by uniforms
-    // For now, let's pick a base color that fits the "Spirit" theme (Earthy Gold/White) then shift it
-    // If hueShift=140, user implies a specific look.
-    // Let's use a base color of white/gold and let shader handle saturation.
-    
-    // Actually, let's interpret hueShift as setting the base hue.
-    const h = hueShift / 360;
-    const s = 0.5; 
-    const l = 0.8;
-    // HSL to RGB helper or static. 
-    // Let's just use a clean off-white/gold base color for now since saturation is passed as 0 in example.
-    const baseColor = new Color(0.9, 0.85, 0.7); // Warm white
 
     const program = new Program(gl, {
         vertex: vertexShader,

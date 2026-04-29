@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ShoppingCartIcon } from '../../constants';
 import { CartContext } from '../../context/CartContext';
-import { pageToPath, type PageName } from '../../context/NavigationContext';
+import { useNavigation, pageToPath, type PageName } from '../../context/NavigationContext';
 
 const navLinks: Array<{ page: Exclude<PageName, 'home'>; label: string; href: string }> = [
   { page: 'nosotros', label: 'Nosotros', href: pageToPath('nosotros') },
@@ -15,7 +15,9 @@ const navLinks: Array<{ page: Exclude<PageName, 'home'>; label: string; href: st
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { cart, toggleCheckoutModal, navigate, page } = useContext(CartContext);
+  const [scrolled, setScrolled] = useState(false);
+  const { cart, toggleCheckoutModal } = useContext(CartContext);
+  const { page, navigate } = useNavigation();
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   useEffect(() => {
@@ -54,17 +56,14 @@ const Header: React.FC = () => {
     handleNavigate(targetPage);
   };
 
-  const headerStyle: React.CSSProperties = {
-    background: 'rgba(234,224,204,0.97)',
-    backdropFilter: 'blur(12px)',
-    borderBottom: '1px solid rgba(160,160,131,0.2)',
-    color: '#252520',
-  };
-
   return (
     <header
-      className="fixed top-0 w-full z-50 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] py-5 md:py-7"
-      style={headerStyle}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] backdrop-blur-xl text-ink ${
+        scrolled ? 'py-3 md:py-4 shadow-sm border-b border-sage/20' : 'py-5 md:py-7 border-b border-transparent'
+      }`}
+      style={{
+        background: scrolled ? 'rgba(234,224,204,0.98)' : 'rgba(234,224,204,0.9)',
+      }}
     >
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
         <div className="w-1/4 flex justify-start">
@@ -87,7 +86,6 @@ const Header: React.FC = () => {
               className={`text-xs font-bold uppercase tracking-widest transition-colors duration-300 hover:opacity-100 ${
                 page === link.page ? 'opacity-100' : 'opacity-80'
               }`}
-              style={{ color: 'inherit' }}
               aria-current={page === link.page ? 'page' : undefined}
             >
               {link.label}
@@ -104,10 +102,7 @@ const Header: React.FC = () => {
           >
             <ShoppingCartIcon />
             {totalItems > 0 && (
-              <span
-                className="absolute -top-1 -right-1 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center"
-                style={{ background: '#4D6A6D' }}
-              >
+              <span className="absolute -top-1 -right-1 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center bg-slate-is">
                 {totalItems}
               </span>
             )}
@@ -139,10 +134,9 @@ const Header: React.FC = () => {
       </div>
 
       <div
-        className={`fixed inset-0 z-40 flex flex-col items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`fixed inset-0 z-40 flex flex-col items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] bg-base ${
           isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
-        style={{ background: '#EAE0CC' }}
       >
         <nav className="flex flex-col items-center space-y-8 text-center">
           {navLinks.map((link, idx) => (
@@ -150,17 +144,17 @@ const Header: React.FC = () => {
               key={link.page}
               href={link.href}
               onClick={(event) => handleLinkClick(event, link.page)}
-              className={`text-3xl md:text-4xl font-heading transition-all duration-500 ${
+              className={`text-3xl md:text-4xl font-heading text-ink transition-all duration-500 ${
                 isOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
               }`}
-              style={{ color: '#252520', transitionDelay: `${idx * 50}ms` }}
+              style={{ transitionDelay: `${idx * 50}ms` }}
               aria-current={page === link.page ? 'page' : undefined}
             >
               {link.label}
             </a>
           ))}
         </nav>
-        <div className="mt-8 md:mt-14 flex gap-6 text-sm tracking-widest uppercase" style={{ color: '#798478' }}>
+        <div className="mt-8 md:mt-14 flex gap-6 text-sm tracking-widest uppercase text-muted-light">
           <a href="https://instagram.com/innerspirit_studio" target="_blank" rel="noopener noreferrer">
             Instagram
           </a>

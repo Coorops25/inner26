@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState, useCallback } from 'react';
 import { CartContext } from '../../context/CartContext';
-import { ToastContext, useToast } from '../../context/ToastContext';
+import { useToast } from '../../context/ToastContext';
 import { CloseIcon } from '../../constants';
 import { Illustration } from '../../assets/Illustrations';
 

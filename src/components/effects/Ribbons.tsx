@@ -54,11 +54,11 @@ const Ribbons: React.FC<RibbonsProps> = ({ className = '' }) => {
         }
 
         ctx.beginPath();
-        ctx.moveTo(pts[0][0], pts[0][1]);
+        ctx.moveTo(pts[0]![0]!, pts[0]![1]!);
         for (let i = 1; i < pts.length - 1; i++) {
-          const mx = (pts[i][0] + pts[i + 1][0]) / 2;
-          const my = (pts[i][1] + pts[i + 1][1]) / 2;
-          ctx.quadraticCurveTo(pts[i][0], pts[i][1], mx, my);
+          const mx = (pts[i]![0]! + pts[i + 1]![0]!) / 2;
+          const my = (pts[i]![1]! + pts[i + 1]![1]!) / 2;
+          ctx.quadraticCurveTo(pts[i]![0]!, pts[i]![1]!, mx, my);
         }
         ctx.strokeStyle = r.color;
         ctx.lineWidth = r.width;

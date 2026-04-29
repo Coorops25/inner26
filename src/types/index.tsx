@@ -30,10 +30,10 @@ export interface CartItem {
     name:string;
     price: number;
     imageUrl: string;
-    illustrationName?: string;
+    illustrationName?: string | undefined;
     quantity: number;
     type: CartItemType;
-    details?: string;
+    details?: string | undefined;
 }
 
 export interface BookingDetails {
@@ -41,7 +41,7 @@ export interface BookingDetails {
     title: string;
     price: number;
     imageUrl: string;
-    illustrationName?: string;
+    illustrationName?: string | undefined;
     eventSlug?: string;
     availableSlots?: string[];
     preselectedSlot?: string;

@@ -1,12 +1,13 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
-import { CartProvider, CartContext } from '../context/CartContext';
+import { CartProvider } from '../context/CartContext';
 import { ToastProvider } from '../context/ToastContext';
+import { NavigationProvider, useNavigation } from '../context/NavigationContext';
 
 // Minimal consumer component to test navigate
 const NavigationConsumer: React.FC = () => {
-  const { page, navigate } = React.useContext(CartContext);
+  const { page, navigate } = useNavigation();
   return (
     <div>
       <span data-testid="current-page">{page}</span>
@@ -19,9 +20,11 @@ const NavigationConsumer: React.FC = () => {
 };
 
 const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <CartProvider>
-    <ToastProvider>{children}</ToastProvider>
-  </CartProvider>
+  <NavigationProvider>
+    <CartProvider>
+      <ToastProvider>{children}</ToastProvider>
+    </CartProvider>
+  </NavigationProvider>
 );
 
 describe('Navigation', () => {

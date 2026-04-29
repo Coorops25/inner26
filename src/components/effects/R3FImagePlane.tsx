@@ -58,16 +58,19 @@ const R3FImagePlane: React.FC<R3FImagePlaneProps> = ({ imageUrl }) => {
   useFrame((state) => {
     if (meshRef.current) {
       const mat = meshRef.current.material as THREE.ShaderMaterial;
-      const currentHover = mat.uniforms.uHover.value;
+      const uHover = mat.uniforms.uHover;
+      const uTime = mat.uniforms.uTime;
+      if (!uHover || !uTime) return;
+      const currentHover = uHover.value;
 
       // Optimization: Only animate time if active
       if (hovered || currentHover > 0.001) {
-         mat.uniforms.uTime.value = state.clock.getElapsedTime();
+         uTime.value = state.clock.getElapsedTime();
       }
 
       // Smooth interpolation for hover state
       if (Math.abs(currentHover - (hovered ? 1.0 : 0.0)) > 0.001) {
-        mat.uniforms.uHover.value = THREE.MathUtils.lerp(currentHover, hovered ? 1.0 : 0.0, 0.1);
+        uHover.value = THREE.MathUtils.lerp(currentHover, hovered ? 1.0 : 0.0, 0.1);
       }
     }
   });
@@ -76,12 +79,12 @@ const R3FImagePlane: React.FC<R3FImagePlaneProps> = ({ imageUrl }) => {
     <mesh
       ref={meshRef}
       scale={[1.5, 2, 1]}
-      onPointerOver={(e) => {
+      onPointerOver={(e: { uv?: THREE.Vector2 }) => {
         if (e.uv) { uniforms.uMouse.value.copy(e.uv); }
         setHovered(true);
       }}
       onPointerOut={() => setHovered(false)}
-      onPointerMove={(e) => {
+      onPointerMove={(e: { uv?: THREE.Vector2 }) => {
         if (e.uv) { uniforms.uMouse.value.copy(e.uv); }
       }}
     >

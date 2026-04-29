@@ -53,7 +53,7 @@ const SplashCursor: React.FC = () => {
           vy: (Math.random() - 0.5) * 2 - 0.8,
           life: 1,
           size: 2.5 + Math.random() * 3,
-          hue: hues[Math.floor(Math.random() * hues.length)] + (Math.random() - 0.5) * 20,
+          hue: (hues[Math.floor(Math.random() * hues.length)] ?? 0) + (Math.random() - 0.5) * 20,
         });
       }
     };
