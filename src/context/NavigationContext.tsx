@@ -1,17 +1,19 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-export type PageName = 
-  | 'home' 
-  | 'nosotros' 
-  | 'clases' 
-  | 'eventos' 
-  | 'consultorio' 
-  | 'tienda' 
-  | 'blog' 
-  | 'contacto';
+export type PageName =
+  | 'home'
+  | 'nosotros'
+  | 'clases'
+  | 'eventos'
+  | 'consultorio'
+  | 'tienda'
+  | 'blog'
+  | 'contacto'
+  | '404';
 
 export const PAGE_TO_PATH: Record<PageName, string> = {
+  '404': '/404',
   home: '/',
   nosotros: '/nosotros',
   clases: '/clases',
@@ -27,7 +29,7 @@ export const pathToPage = (pathname: string): PageName => {
   const found = (Object.entries(PAGE_TO_PATH) as Array<[PageName, string]>).find(
     ([, path]) => path === normalizedPath
   );
-  return found?.[0] ?? 'home';
+  return found?.[0] ?? '404';
 };
 
 export const pageToPath = (page: PageName): string => PAGE_TO_PATH[page];
