@@ -38,7 +38,7 @@ const ExperienceGatewaySection: React.FC = () => {
   const reserveFirstClass = () => {
     openBookingModal({
       type: 'class',
-      title: 'Clase de Yoga',
+      title: 'Yoga',
       price: 36000,
       imageUrl: '',
       illustrationName: 'yoga',
@@ -123,4 +123,3 @@ const ExperienceGatewaySection: React.FC = () => {
 };
 
 export default ExperienceGatewaySection;
-

@@ -51,7 +51,7 @@ const practiceData: Record<string, PracticeItem[]> = {
   conexion: [
     {
       type: 'event',
-      title: 'Inner Dance',
+      title: 'INNER DANCE',
       description: 'Ritual sonoro de expansión — danza interna, meditación musical y visual.',
       illustrationName: 'dance',
       price: 55000,

@@ -93,7 +93,7 @@ const BookingModal: React.FC = () => {
         type: bookingDetails.type,
         details: `${selectedSlot} · ${sourceLabel(bookingDetails.source)}`,
       });
-      showToast(`Reserva confirmada: ${bookingDetails.title}`, 'success');
+      showToast(`Agregado al carrito: ${bookingDetails.title}`, 'success');
       handleClose();
     } else {
       showToast('Por favor, selecciona un horario.', 'error');

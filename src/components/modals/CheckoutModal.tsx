@@ -1,13 +1,18 @@
-import React, { useContext, useEffect, useCallback } from 'react';
+import React, { useContext, useEffect, useCallback, useState } from 'react';
 import { CartContext } from '../../context/CartContext';
 import { useToast } from '../../context/ToastContext';
 import { CloseIcon } from '../../constants';
 import { Illustration } from '../../assets/Illustrations';
 
 const CheckoutModal: React.FC = () => {
-  const { isCheckoutModalOpen, toggleCheckoutModal, cart, removeFromCart, clearCart } = useContext(CartContext);
+  const { isCheckoutModalOpen, toggleCheckoutModal, cart, removeFromCart } = useContext(CartContext);
   const { showToast } = useToast();
+  const [provider, setProvider] = useState<'mercadopago' | 'wompi'>('mercadopago');
+  const [fulfillmentType, setFulfillmentType] = useState<'pickup' | 'delivery'>('pickup');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const hasProducts = cart.some((item) => item.type === 'product');
 
   const handleClose = useCallback(() => {
     toggleCheckoutModal();
@@ -32,11 +37,46 @@ const CheckoutModal: React.FC = () => {
 
   if (!isCheckoutModalOpen) return null;
 
-  const handlePayment = (e: React.FormEvent) => {
+  const handlePayment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    showToast('Gracias. Tu lugar ha sido reservado.', 'success');
-    clearCart();
-    handleClose();
+    setSubmitError(null);
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.currentTarget);
+    const customer = {
+      name: String(formData.get('name') || ''),
+      email: String(formData.get('email') || ''),
+      phone: String(formData.get('phone') || ''),
+    };
+
+    try {
+      const idempotencyKey =
+        typeof crypto !== 'undefined' && 'randomUUID' in crypto
+          ? crypto.randomUUID()
+          : `checkout-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Idempotency-Key': idempotencyKey },
+        body: JSON.stringify({
+          provider,
+          customer,
+          fulfillment: hasProducts
+            ? { type: fulfillmentType, address: String(formData.get('deliveryAddress') || '') }
+            : undefined,
+          items: cart,
+          idempotencyKey,
+        }),
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || 'No se pudo crear el pago');
+      showToast('Pago creado. Redirigiendo a la pasarela...', 'success');
+      window.location.assign(payload.checkoutUrl);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Error iniciando pago';
+      setSubmitError(message);
+      showToast(message, 'error');
+      setIsSubmitting(false);
+    }
   };
 
   const handleRemoveItem = (itemName: string, itemId: string) => {
@@ -145,6 +185,7 @@ const CheckoutModal: React.FC = () => {
                   </label>
                   <input
                     id="checkout-name"
+                    name="name"
                     type="text"
                     placeholder="Tu nombre"
                     className="w-full p-3 rounded-sm outline-none text-sm transition-colors focus:ring-2"
@@ -158,6 +199,7 @@ const CheckoutModal: React.FC = () => {
                   </label>
                   <input
                     id="checkout-email"
+                    name="email"
                     type="email"
                     placeholder="tu@email.com"
                     className="w-full p-3 rounded-sm outline-none text-sm transition-colors focus:ring-2"
@@ -165,18 +207,96 @@ const CheckoutModal: React.FC = () => {
                     required
                   />
                 </div>
+                <div>
+                  <label htmlFor="checkout-phone" className="text-xs font-semibold uppercase tracking-wider block mb-2" style={{ color: '#798478' }}>
+                    WhatsApp / telefono
+                  </label>
+                  <input
+                    id="checkout-phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="+57 300 000 0000"
+                    className="w-full p-3 rounded-sm outline-none text-sm transition-colors focus:ring-2"
+                    style={{ border: '1px solid rgba(160,160,131,0.4)', background: '#F3EDE2', color: '#252520' }}
+                    autoComplete="tel"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="checkout-provider" className="text-xs font-semibold uppercase tracking-wider block mb-2" style={{ color: '#798478' }}>
+                    Medio de pago
+                  </label>
+                  <select
+                    id="checkout-provider"
+                    value={provider}
+                    onChange={(event) => setProvider(event.target.value as 'mercadopago' | 'wompi')}
+                    className="w-full p-3 rounded-sm outline-none text-sm transition-colors focus:ring-2"
+                    style={{ border: '1px solid rgba(160,160,131,0.4)', background: '#F3EDE2', color: '#252520' }}
+                  >
+                    <option value="mercadopago">Mercado Pago</option>
+                    <option value="wompi">Wompi</option>
+                  </select>
+                </div>
+                {hasProducts && (
+                  <div className="space-y-3">
+                    <p className="text-xs font-semibold uppercase tracking-wider block" style={{ color: '#798478' }}>
+                      Entrega de articulos
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <label className="flex items-center gap-3 p-3 rounded-sm border cursor-pointer" style={{ borderColor: 'rgba(160,160,131,0.4)', background: '#F3EDE2' }}>
+                        <input
+                          type="radio"
+                          name="fulfillment"
+                          checked={fulfillmentType === 'pickup'}
+                          onChange={() => setFulfillmentType('pickup')}
+                          style={{ accentColor: '#4D6A6D' }}
+                        />
+                        <span className="text-sm" style={{ color: '#252520' }}>Retiro en estudio</span>
+                      </label>
+                      <label className="flex items-center gap-3 p-3 rounded-sm border cursor-pointer" style={{ borderColor: 'rgba(160,160,131,0.4)', background: '#F3EDE2' }}>
+                        <input
+                          type="radio"
+                          name="fulfillment"
+                          checked={fulfillmentType === 'delivery'}
+                          onChange={() => setFulfillmentType('delivery')}
+                          style={{ accentColor: '#4D6A6D' }}
+                        />
+                        <span className="text-sm" style={{ color: '#252520' }}>Envio local</span>
+                      </label>
+                    </div>
+                    {fulfillmentType === 'delivery' && (
+                      <div>
+                        <label htmlFor="checkout-delivery-address" className="sr-only">Direccion de entrega</label>
+                        <textarea
+                          id="checkout-delivery-address"
+                          name="deliveryAddress"
+                          rows={3}
+                          placeholder="Direccion completa de entrega"
+                          className="w-full p-3 rounded-sm outline-none text-sm transition-colors focus:ring-2 resize-none"
+                          style={{ border: '1px solid rgba(160,160,131,0.4)', background: '#F3EDE2', color: '#252520' }}
+                          required
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
                 <div
                   className="p-3 rounded-sm text-center"
                   style={{ background: 'rgba(77,106,109,0.08)' }}
                 >
-                  <p className="text-xs" style={{ color: '#798478' }}>Pago procesado de forma segura · Tu reserva quedará confirmada</p>
+                  <p className="text-xs" style={{ color: '#798478' }}>Tu compra se confirma solo cuando la pasarela apruebe el pago.</p>
                 </div>
+                {submitError && (
+                  <p className="text-sm" role="alert" style={{ color: '#7A2E2E' }}>
+                    {submitError}
+                  </p>
+                )}
                 <button
                   type="submit"
                   className="w-full font-semibold py-3 rounded-sm transition-all text-sm uppercase tracking-widest hover:opacity-90 active:scale-[0.98]"
                   style={{ background: '#4D6A6D', color: '#EAE0CC' }}
+                  disabled={isSubmitting}
                 >
-                  Confirmar pago · ${totalPrice.toLocaleString('es-CO')} COP
+                  {isSubmitting ? 'Creando pago...' : `Pagar - $${totalPrice.toLocaleString('es-CO')} COP`}
                 </button>
               </form>
             </>

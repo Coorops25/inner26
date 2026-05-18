@@ -39,6 +39,7 @@
   },
   "include": [
     "src",
+    "api",
     "vitest.config.ts"
   ],
   "exclude": [

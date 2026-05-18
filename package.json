@@ -16,7 +16,9 @@
   "dependencies": {
     "@react-three/drei": "9.108.3",
     "@react-three/fiber": "8.16.8",
+    "nodemailer": "^8.0.7",
     "ogl": "1.0.11",
+    "pg": "^8.20.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "three": "0.166.1",
@@ -29,6 +31,8 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^22.14.0",
+    "@types/nodemailer": "^8.0.0",
+    "@types/pg": "^8.20.0",
     "@vitejs/plugin-react": "^5.0.0",
     "husky": "^9.1.7",
     "jsdom": "^29.0.1",
