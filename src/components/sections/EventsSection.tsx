@@ -28,7 +28,8 @@ const EventsSection: React.FC = () => {
             <button
               key={currentEvent.slug}
               onClick={() => setActiveIdx(index)}
-              className={`text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full border transition-all duration-300 ${
+              aria-pressed={activeIdx === index}
+              className={`min-h-11 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full border transition-all duration-300 ${
                 activeIdx === index
                   ? 'bg-slate-is text-sand-dune border-slate-is'
                   : 'bg-transparent text-muted-light border-accent'

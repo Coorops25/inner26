@@ -44,8 +44,8 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
               type: 'product',
             });
           }}
-          className="absolute bottom-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-white text-lg font-bold md:translate-y-4 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-300 shadow-lg bg-slate-is"
-          aria-label="Añadir"
+          className="absolute bottom-4 right-4 min-h-11 min-w-11 rounded-full flex items-center justify-center text-white text-lg font-bold md:translate-y-4 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 md:group-focus-within:translate-y-0 md:group-focus-within:opacity-100 transition-all duration-300 shadow-lg bg-slate-is"
+          aria-label={`Añadir ${product.name} al carrito`}
         >
           +
         </button>

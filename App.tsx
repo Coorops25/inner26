@@ -168,6 +168,10 @@ const AppContent: React.FC = () => {
       document.head.appendChild(canonicalLink);
     }
     canonicalLink.href = seo.canonical;
+
+    requestAnimationFrame(() => {
+      document.getElementById('main-content')?.focus({ preventScroll: true });
+    });
   }, [page]);
 
   return (
@@ -185,7 +189,11 @@ const AppContent: React.FC = () => {
 
         {/* Main page content — wrapped in ErrorBoundary so WebGL crashes don't break nav */}
         {/* Homepage hero handles its own spacing (full-screen); other pages need pt to clear fixed header */}
-        <main id="main-content" className={page !== 'home' ? 'pt-20 md:pt-24' : ''}>
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className={`${page !== 'home' ? 'pt-20 md:pt-24' : ''} focus:outline-none`}
+        >
           <ErrorBoundary>
             <Suspense fallback={<LoadingSpinner />}>
               <PageRenderer />

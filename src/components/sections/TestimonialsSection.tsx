@@ -57,7 +57,7 @@ const TestimonialsSection: React.FC = () => {
         `}</style>
         <div className="marquee-content">
           {loop.map((t, i) => (
-            <div key={i} className="w-[360px] md:w-[520px] px-8 md:px-12 flex flex-col items-center text-center flex-shrink-0">
+            <div key={i} className="w-[calc(100vw-3rem)] max-w-[360px] md:w-[520px] md:max-w-none px-6 md:px-12 flex flex-col items-center text-center flex-shrink-0">
               <StarRating />
               <p className="font-heading text-xl md:text-2xl text-white leading-relaxed mb-5">"{t.quote}"</p>
               <p className="font-sans text-xs tracking-widest uppercase" style={{ color: '#A0A083' }}>{t.name}</p>

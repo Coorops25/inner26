@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
+import { usePrefersReducedMotion } from '../../hooks';
 import R3FImagePlane from '../effects/R3FImagePlane';
 
 const stats = [
@@ -28,6 +29,8 @@ const getSvgDataUrl = (name: string): string => {
 };
 
 const StudioSection: React.FC = () => {
+  const reduceMotion = usePrefersReducedMotion();
+
   return (
     <section id="studio" className="py-12 md:py-16 bg-base relative overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl">
@@ -60,13 +63,24 @@ const StudioSection: React.FC = () => {
                 The plane fills the canvas exactly.
               */}
               <div className="w-full aspect-[3/4] rounded-sm overflow-hidden mb-5">
-                <Canvas
-                  camera={{ position: [0, 0, 1], fov: 90 }}
-                  gl={{ alpha: false }}
-                  style={{ width: '100%', height: '100%' }}
-                >
-                  <R3FImagePlane imageUrl={getSvgDataUrl(item.illustration)} />
-                </Canvas>
+                {reduceMotion ? (
+                  <img
+                    src={getSvgDataUrl(item.illustration)}
+                    alt=""
+                    aria-hidden="true"
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                ) : (
+                  <Canvas
+                    camera={{ position: [0, 0, 1], fov: 90 }}
+                    dpr={[1, 1.5]}
+                    gl={{ alpha: false }}
+                    style={{ width: '100%', height: '100%' }}
+                  >
+                    <R3FImagePlane imageUrl={getSvgDataUrl(item.illustration)} />
+                  </Canvas>
+                )}
               </div>
               <span className="text-sm font-bold uppercase tracking-widest" style={{ color: '#798478' }}>
                 {item.label}

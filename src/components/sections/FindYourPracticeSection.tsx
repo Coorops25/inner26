@@ -73,7 +73,8 @@ type Category = 'calma' | 'movimiento' | 'conexion';
 const CategoryTab: React.FC<{ label: string; active: boolean; onClick: () => void }> = ({ label, active, onClick }) => (
   <button
     onClick={onClick}
-    className={`pb-4 text-lg md:text-xl font-heading tracking-wide transition-all duration-300 border-b-2 ${
+    aria-pressed={active}
+    className={`min-h-11 pb-4 text-lg md:text-xl font-heading tracking-wide transition-all duration-300 border-b-2 ${
       active ? 'text-ink border-slate-is' : 'text-muted border-transparent'
     }`}
   >

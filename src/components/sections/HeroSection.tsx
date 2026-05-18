@@ -1,11 +1,13 @@
 
 import React from 'react';
 import { useNavigation } from '../../context/NavigationContext';
+import { usePrefersReducedMotion } from '../../hooks';
 import Galaxy from '../effects/Galaxy';
 import VariableProximity from '../effects/VariableProximity';
 
 const HeroSection: React.FC = () => {
   const { navigate } = useNavigation();
+  const reduceMotion = usePrefersReducedMotion();
 
   return (
     <section
@@ -15,29 +17,30 @@ const HeroSection: React.FC = () => {
     >
       {/* Galaxy Background — pointer-events disabled so buttons are always clickable */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <Galaxy
-          mouseRepulsion
-          mouseInteraction
-          density={1.5}
-          glowIntensity={0.4}
-          saturation={0}
-          hueShift={185}
-          twinkleIntensity={0.4}
-          rotationSpeed={0.03}
-          repulsionStrength={2}
-          autoCenterRepulsion={0}
-          starSpeed={0.3}
-          speed={0.8}
-        />
+        {reduceMotion ? (
+          <div className="h-full w-full is-hero-static" />
+        ) : (
+          <Galaxy
+            mouseRepulsion
+            mouseInteraction
+            density={1.5}
+            glowIntensity={0.4}
+            saturation={0}
+            hueShift={185}
+            twinkleIntensity={0.4}
+            rotationSpeed={0.03}
+            repulsionStrength={2}
+            autoCenterRepulsion={0}
+            starSpeed={0.3}
+            speed={0.8}
+          />
+        )}
       </div>
 
       {/* Gradient vignette */}
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          zIndex: 1,
-          background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.75) 100%)',
-        }}
+        className="absolute inset-0 pointer-events-none is-hero-vignette"
+        style={{ zIndex: 1 }}
       />
 
       {/* Main Content */}
@@ -55,12 +58,14 @@ const HeroSection: React.FC = () => {
           {/* Headline — "Movimiento" reacts to mouse proximity */}
           <h1 className="text-6xl md:text-8xl lg:text-[8.5rem] font-heading text-white leading-[0.88] tracking-tight">
             <span className="block opacity-95">
-              <VariableProximity
-                text="Movimiento"
-                radius={220}
-                minWeight={300}
-                maxWeight={700}
-              />
+              {reduceMotion ? 'Movimiento' : (
+                <VariableProximity
+                  text="Movimiento"
+                  radius={220}
+                  minWeight={300}
+                  maxWeight={700}
+                />
+              )}
             </span>
             <span className="block font-light italic opacity-75 mt-2 md:mt-4" style={{ color: '#C9ADA1' }}>
               Consciente

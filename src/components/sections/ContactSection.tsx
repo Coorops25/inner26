@@ -77,12 +77,13 @@ const ContactSection: React.FC = () => {
           {/* Right Column: Minimalist Form */}
           <div className="lg:w-7/12">
             <form onSubmit={handleSubmit} className="space-y-8">
-              <input type="text" name="honeypot" value={formState.honeypot} onChange={handleInputChange} className="hidden" aria-hidden="true" />
+              <input type="text" name="honeypot" value={formState.honeypot} onChange={handleInputChange} className="hidden" aria-hidden="true" tabIndex={-1} />
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="relative">
+                  <label htmlFor="home-contact-name" className="sr-only">Tu Nombre</label>
                    <input 
-                    id="name" 
+                    id="home-contact-name"
                     type="text" 
                     name="name" 
                     value={formState.name} 
@@ -96,8 +97,9 @@ const ContactSection: React.FC = () => {
                 </div>
 
                 <div className="relative">
+                  <label htmlFor="home-contact-email" className="sr-only">Tu Email</label>
                    <input 
-                    id="email" 
+                    id="home-contact-email"
                     type="email" 
                     name="email" 
                     value={formState.email} 
@@ -112,8 +114,9 @@ const ContactSection: React.FC = () => {
               </div>
 
               <div className="relative">
+                <label htmlFor="home-contact-type" className="sr-only">Motivo de consulta</label>
                 <select 
-                  id="type" 
+                  id="home-contact-type"
                   name="type" 
                   value={formState.type} 
                   onChange={handleInputChange}
@@ -129,8 +132,9 @@ const ContactSection: React.FC = () => {
               </div>
 
               <div className="relative">
+                <label htmlFor="home-contact-message" className="sr-only">Mensaje</label>
                 <textarea 
-                  id="message" 
+                  id="home-contact-message"
                   name="message" 
                   value={formState.message} 
                   onChange={handleInputChange} 

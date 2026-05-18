@@ -1,6 +1,7 @@
 
 import React, { useEffect } from 'react';
 import HeroSection from '../components/sections/HeroSection';
+import ExperienceGatewaySection from '../components/sections/ExperienceGatewaySection';
 import StudioSection from '../components/sections/StudioSection';
 import AboutSection from '../components/sections/AboutSection';
 import FindYourPracticeSection from '../components/sections/FindYourPracticeSection';
@@ -73,6 +74,7 @@ const HomePage: React.FC = () => {
   return (
     <>
       <HeroSection />
+      <ExperienceGatewaySection />
       <StudioSection />
       <AboutSection />
       <FindYourPracticeSection />

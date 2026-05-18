@@ -22,7 +22,12 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center font-heading transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
+  const baseStyles = [
+    'inline-flex min-h-11 items-center justify-center rounded-sm border font-heading',
+    'transition-all duration-300 ease-out touch-manipulation',
+    'focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-is focus-visible:ring-offset-2',
+    'disabled:cursor-not-allowed disabled:opacity-50',
+  ].join(' ');
   
   const sizes: Record<ButtonSize, string> = {
     sm: 'px-4 py-2 text-sm',
@@ -30,27 +35,16 @@ const Button: React.FC<ButtonProps> = ({
     lg: 'px-8 py-4 text-lg',
   };
 
-  const getVariantStyles = () => {
-    switch (variant) {
-      case 'primary':
-        return { background: '#4D6A6D', color: '#EAE0CC' };
-      case 'secondary':
-        return { background: '#C9ADA1', color: '#1A1A18' };
-      case 'outline':
-        return { background: 'transparent', color: '#4D6A6D', border: '1px solid #4D6A6D' };
-      case 'ghost':
-        return { background: 'transparent', color: '#252520' };
-      default:
-        return { background: '#4D6A6D', color: '#EAE0CC' };
-    }
+  const variants: Record<ButtonVariant, string> = {
+    primary: 'border-slate-is bg-slate-is text-sand-dune hover:bg-deep-teal hover:border-slate-is active:scale-[0.98]',
+    secondary: 'border-accent bg-accent text-ink hover:bg-sand-light hover:border-slate-is active:scale-[0.98]',
+    outline: 'border-slate-is bg-transparent text-slate-is hover:bg-slate-is hover:text-sand-dune active:scale-[0.98]',
+    ghost: 'border-transparent bg-transparent text-ink hover:bg-sand-light hover:text-slate-is active:scale-[0.98]',
   };
-
-  const variantStyles = getVariantStyles();
 
   return (
     <button
-      className={`${baseStyles} ${sizes[size]} ${className}`}
-      style={variantStyles}
+      className={`${baseStyles} ${sizes[size]} ${variants[variant]} ${className}`}
       disabled={disabled || isLoading}
       {...props}
     >

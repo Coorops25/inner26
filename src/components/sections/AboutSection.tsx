@@ -33,7 +33,7 @@ const AboutSection: React.FC = () => {
                 Ofrecemos yoga, meditación, danza, breathwork, sound healing y arte terapia en un espacio
                 inclusivo para la comunidad local e internacional — clasificado como el
                 <strong className="text-slate-is"> #1 estudio de yoga en Bogotá</strong> con
-                4.9⭐ en Google (143+ reseñas).
+                4.9 en Google (143+ reseñas).
               </p>
             </div>
 

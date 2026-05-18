@@ -63,7 +63,7 @@ const Header: React.FC = () => {
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        scrolled ? 'py-3 md:py-4 shadow-sm' : 'py-5 md:py-7'
+        scrolled ? 'py-3 md:py-4 shadow-sm is-header-surface' : 'py-5 md:py-7'
       } ${
         isTransparent
           ? 'text-white border-b border-white/10'
@@ -77,8 +77,8 @@ const Header: React.FC = () => {
             : 'rgba(234,224,204,0.95)',
       }}
     >
-      <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-        <div className="w-1/4 flex justify-start">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 flex justify-between items-center">
+        <div className="w-auto lg:w-1/4 flex justify-start">
           <a
             href={pageToPath('home')}
             onClick={(event) => handleLinkClick(event, 'home')}
@@ -89,7 +89,7 @@ const Header: React.FC = () => {
           </a>
         </div>
 
-        <nav className="hidden md:flex flex-1 justify-center items-center space-x-6 lg:space-x-10 xl:space-x-14">
+        <nav className="hidden lg:flex flex-1 justify-center items-center space-x-6 xl:space-x-10">
           {navLinks.map((link) => (
             <a
               key={link.page}
@@ -105,10 +105,10 @@ const Header: React.FC = () => {
           ))}
         </nav>
 
-        <div className="w-1/4 flex justify-end items-center space-x-6">
+        <div className="w-auto lg:w-1/4 flex justify-end items-center space-x-2 sm:space-x-4">
           <button
             onClick={toggleCheckoutModal}
-            className="relative group p-1 opacity-80 hover:opacity-100 transition-opacity"
+            className="relative group flex h-11 w-11 items-center justify-center rounded-sm opacity-80 hover:opacity-100 transition-opacity"
             aria-label="Carrito"
             type="button"
           >
@@ -122,8 +122,10 @@ const Header: React.FC = () => {
 
           <button
             onClick={() => setIsOpen((prev) => !prev)}
-            className="md:hidden flex flex-col justify-center items-end w-8 h-8 space-y-1.5 focus:outline-none z-50"
-            aria-label="Menu"
+            className="lg:hidden flex h-11 w-11 flex-col justify-center items-center space-y-1.5 focus:outline-none z-50"
+            aria-label={isOpen ? 'Cerrar menu' : 'Abrir menu'}
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
             type="button"
           >
             <span
@@ -146,7 +148,9 @@ const Header: React.FC = () => {
       </div>
 
       <div
-        className={`fixed inset-0 z-40 flex flex-col items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] bg-base ${
+        id="mobile-navigation"
+        aria-hidden={!isOpen}
+        className={`fixed inset-0 z-40 flex flex-col items-center justify-center is-safe-bottom transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] bg-base ${
           isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
       >

@@ -17,10 +17,14 @@ const Ribbons: React.FC<RibbonsProps> = ({ className = '' }) => {
 
     let raf = 0;
     let t = 0;
+    let isVisible = !document.hidden;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width = Math.max(1, Math.floor(canvas.offsetWidth * dpr));
+      canvas.height = Math.max(1, Math.floor(canvas.offsetHeight * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     resize();
     const ro = new ResizeObserver(resize);
@@ -35,21 +39,23 @@ const Ribbons: React.FC<RibbonsProps> = ({ className = '' }) => {
 
     const draw = () => {
       if (!canvas || !ctx) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      t++;
+      const width = canvas.offsetWidth;
+      const height = canvas.offsetHeight;
+      ctx.clearRect(0, 0, width, height);
+      if (!reduceMotion) t++;
 
       for (const r of ribbons) {
         const pts: [number, number][] = [];
         const n = 90;
 
         for (let i = 0; i <= n; i++) {
-          const x = (i / n) * canvas.width;
+          const x = (i / n) * width;
           const y =
-            canvas.height * 0.5 +
+            height * 0.5 +
             Math.sin((i / n) * Math.PI * 2 * r.freq + t * r.speed * 100 + r.phase) *
-              canvas.height * r.amp +
+              height * r.amp +
             Math.sin((i / n) * Math.PI * 2 * r.freq * 2.7 + t * r.speed * 160 + r.phase * 1.4) *
-              canvas.height * r.amp * 0.35;
+              height * r.amp * 0.35;
           pts.push([x, y]);
         }
 
@@ -66,12 +72,25 @@ const Ribbons: React.FC<RibbonsProps> = ({ className = '' }) => {
         ctx.stroke();
       }
 
-      raf = requestAnimationFrame(draw);
+      if (!reduceMotion && isVisible) {
+        raf = requestAnimationFrame(draw);
+      }
     };
+
+    const handleVisibility = () => {
+      isVisible = !document.hidden;
+      if (isVisible && !reduceMotion) {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(draw);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibility);
     raf = requestAnimationFrame(draw);
 
     return () => {
       ro.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibility);
       cancelAnimationFrame(raf);
     };
   }, []);

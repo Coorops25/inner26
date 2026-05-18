@@ -57,9 +57,10 @@ const ClassesSection: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
           {classes.map((item, index) => (
-            <div
+            <button
               key={index}
-              className="group cursor-pointer"
+              type="button"
+              className="group cursor-pointer text-left w-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-is"
               onClick={() => openBookingModal({
                 type: 'class',
                 title: item.title,
@@ -67,6 +68,7 @@ const ClassesSection: React.FC = () => {
                 imageUrl: '',
                 illustrationName: item.illustrationName,
               })}
+              aria-label={`Ver horarios de ${item.title}`}
             >
               <div
                 className="relative overflow-hidden w-full aspect-[3/4] mb-6 flex items-center justify-center transition-colors duration-500"
@@ -79,15 +81,15 @@ const ClassesSection: React.FC = () => {
                 />
                 {/* Hover overlay */}
                 <div
-                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500"
+                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-all duration-500"
                   style={{ background: 'rgba(77,106,109,0.08)' }}
                 >
-                  <button
-                    className="px-6 py-3 font-heading text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-500"
+                  <span
+                    className="px-6 py-3 font-heading text-lg translate-y-4 group-hover:translate-y-0 group-focus-visible:translate-y-0 transition-transform duration-500"
                     style={{ background: 'rgba(234,224,204,0.95)', color: '#252520' }}
                   >
                     Ver Horarios
-                  </button>
+                  </span>
                 </div>
               </div>
 
@@ -106,7 +108,7 @@ const ClassesSection: React.FC = () => {
                 </p>
                 <p className="text-xs font-mono" style={{ color: '#A0A083' }}>{item.priceLabel}</p>
               </div>
-            </div>
+            </button>
           ))}
         </div>
 
