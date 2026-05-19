@@ -1,32 +1,35 @@
+# WordPress Backend Placeholder
 
-# Marcador de Posición para Backend de WordPress
+This directory is a placeholder for a possible future WordPress integration. It
+is not an active backend in the current project.
 
-Este directorio (`wp-backend/`) se ha creado como un marcador de posición para la futura integración de un backend de WordPress.
+## Current State
 
-## Propósito
+The production code that exists today is:
 
-En una aplicación de producción completa, un sistema de gestión de contenidos (CMS) como WordPress sería responsable de:
+- React/Vite frontend in `src/`.
+- Vercel serverless commerce API in `api/`.
+- PostgreSQL persistence through `api/_lib/db.ts`.
 
-1.  **Gestión de Contenido:**
-    *   Crear, editar y eliminar las entradas del blog que se muestran en la sección del blog.
-    *   Administrar el contenido de las páginas (textos, imágenes, etc.).
+No WordPress runtime, theme, plugin, Docker setup or CMS schema is currently
+implemented in this directory.
 
-2.  **E-commerce y Reservas (con plugins como WooCommerce):**
-    *   Gestionar el catálogo de productos de la tienda.
-    *   Procesar pedidos y pagos de forma segura.
-    *   Administrar el calendario de clases y eventos.
-    *   Gestionar las reservas y la disponibilidad de cupos.
+## Intended Future Purpose
 
-3.  **Gestión de Usuarios:**
-    *   Manejar las cuentas de usuario y los suscriptores del boletín.
+If the project moves toward a headless CMS, WordPress could own:
 
-## Integración con el Frontend
+- Blog posts and editorial content.
+- Page copy and media.
+- Product catalog content.
+- Class/event content.
+- User-facing CMS workflows for non-developers.
 
-El frontend de React se comunicaría con esta instalación de WordPress a través de su **API REST** o **GraphQL (con WPGraphQL)** para:
+The React app would consume WordPress through the REST API or GraphQL
+(for example WPGraphQL), while keeping the current frontend experience.
 
--   Obtener las publicaciones del blog.
--   Mostrar los productos de la tienda.
--   Enviar la información de reserva para ser procesada.
--   Procesar los pagos a través de la pasarela configurada en WooCommerce.
+## Commerce Note
 
-Esta estructura se conoce como **"Headless CMS"**, donde WordPress actúa como el "cerebro" (backend) y la aplicación de React actúa como la "cara" (frontend), ofreciendo una experiencia de usuario rápida y moderna.
+Checkout, payment webhooks, order persistence, PDF generation and email delivery
+already live in `api/`. If WordPress/WooCommerce is introduced later, decide
+whether commerce remains in the Vercel API or moves fully into WooCommerce
+before wiring both systems together.

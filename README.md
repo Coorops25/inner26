@@ -1,154 +1,199 @@
 # Inner Spirit Studio
 
-<div align="center">
-  <img width="1200" height="475" alt="Inner Spirit Studio Banner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+Sitio web y flujo de comercio para Inner Spirit Studio, un estudio de yoga,
+meditacion, danza y bienestar integral en La Candelaria, Bogota.
 
-> Centro de yoga, meditación, danza y bienestar integral en La Candelaria, Bogotá, Colombia.
+El proyecto combina una SPA React/Vite con endpoints serverless en Vercel para
+checkout, ordenes, webhooks de pago, PDF de confirmacion y correo transaccional.
 
-## Acerca del Proyecto
+## Estado Del Proyecto
 
-Inner Spirit Studio es un sitio web de una página única (SPA) desarrollado para un estudio de yoga y bienestar ubicado en el corazón histórico de Bogotá. El proyecto combina elementos 2D tradicionales con experiencias 3D inmersivas.
+El historial reciente del repositorio muestra cuatro lineas principales de trabajo:
 
-### Características Principales
+- `feat(payments): complete checkout fulfillment flow`: checkout con Mercado Pago y Wompi, persistencia de ordenes, webhooks, PDF y email.
+- `feat(ui): expand sanctuary design system`: tokens visuales, primitivas UI y mejoras de experiencia.
+- `fix(seo): titulos y meta descripciones por pagina, JSON-LD, 404, cache headers`: SEO por ruta y configuracion de Vercel.
+- `refactor: reorganize project structure into src/ with best practices`: separacion de componentes, modulos, contextos y utilidades.
 
-- **Diseño SPA (Single Page Application)** - Navegación fluida sin recargas
-- **Experiencias 3D** - Implementadas con React Three Fiber (Three.js)
-- **E-commerce** - Tienda online con carrito de compras y checkout
-- **Reservas** - Sistema de reservas para clases y eventos
-- **Diseño responsivo** - Optimizado para todos los dispositivos
-- **Estética premium** - Paleta de colores earthy con tipografía elegante
+## Funcionalidades
 
-### Tecnologías
+- SPA con rutas internas para inicio, nosotros, clases, eventos, consultorio, tienda, blog y contacto.
+- Navegacion sin recarga usando `NavigationContext` y `history.pushState`.
+- SEO dinamico por pagina desde `App.tsx`.
+- Carrito compartido para productos, clases y eventos.
+- Reserva de clases/eventos con slots disponibles y origen de conversion.
+- Checkout serverless con Mercado Pago o Wompi.
+- Persistencia de ordenes en PostgreSQL.
+- Webhooks firmados para confirmar pagos.
+- PDF de comprobante/entrada y email transaccional opcional.
+- Feed de Instagram por evento con fallback local.
+- Sistema visual documentado en `design-system/MASTER.md`.
 
-| Categoría | Tecnología |
-|-----------|------------|
-| Frontend Framework | React 18 |
-| Build Tool | Vite |
-| Lenguaje | TypeScript |
-| Estilos | Tailwind CSS + CSS Custom Properties |
-| 3D Graphics | Three.js + React Three Fiber |
-| 3D Utilities | @react-three/drei, three-stdlib |
-| WebGL | OGL |
-| Testing | Vitest |
+## Stack
 
-## Estructura del Proyecto
+| Capa | Tecnologia | Version |
+| --- | --- | --- |
+| Frontend | React | 18.3.1 |
+| Build | Vite | ^6.2.0 |
+| Lenguaje | TypeScript | ~5.8.2 |
+| Estilos | Tailwind CSS Vite plugin | ^4.2.2 |
+| 3D/WebGL | Three.js, React Three Fiber, Drei, OGL | ver `package.json` |
+| API | Vercel Serverless Functions | carpeta `api/` |
+| Base de datos | PostgreSQL via `pg` | ^8.20.0 |
+| Email | Nodemailer | ^8.0.7 |
+| Tests | Vitest + Testing Library | ver `package.json` |
 
-```
+## Documentacion
+
+- [Arquitectura](docs/ARCHITECTURE.md)
+- [API endpoints](docs/API_ENDPOINTS.md)
+- [Esquema de base de datos](docs/DATABASE_SCHEMA.md)
+- [Flujo Git y contribucion](docs/GIT_WORKFLOW.md)
+- [Sistema de diseno](design-system/MASTER.md)
+- [Ecosistema de eventos e Instagram](docs/ECOSISTEMA_SOLIDO.md)
+- [Placeholder WordPress](wp-backend/README.md)
+
+## Estructura
+
+```text
 inner/
-├── src/
-│   ├── assets/              # Ilustraciones SVG
-│   ├── components/
-│   │   ├── effects/         # Componentes 3D (Galaxy, Ribbons, SplashCursor)
-│   │   ├── layout/          # Header, Footer
-│   │   ├── modals/          # BookingModal, CheckoutModal
-│   │   ├── sections/        # Secciones de página
-│   │   └── ui/              # Componentes UI (Button, ErrorBoundary)
-│   ├── constants/           # Iconos y constantes globales
-│   ├── context/             # React Context (Cart, Toast, Navigation)
-│   ├── features/            # Módulos por feature
-│   │   └── events/          # Eventos + Instagram feed
-│   ├── hooks/               # Custom hooks globales
-│   ├── pages/               # Páginas del sitio
-│   ├── types/               # Definiciones de TypeScript
-│   └── utils/               # Utilidades globales
-├── tests/                   # Tests
-├── public/                  # Assets estáticos
-├── App.tsx                  # Componente raíz
-├── index.tsx                # Entry point
-├── vite.config.ts           # Configuración de Vite
-├── tsconfig.json            # Configuración de TypeScript
-├── Makefile                 # Comandos unificados
-└── .env.example             # Variables de entorno (plantilla)
+|-- api/                    # Endpoints serverless y librerias de comercio
+|   |-- _lib/               # DB, pagos, ordenes, PDF, email, catalogo
+|   |-- orders/             # status, confirmacion HTML y PDF
+|   `-- webhooks/           # Mercado Pago y Wompi
+|-- docs/                   # Documentacion tecnica del proyecto
+|-- design-system/          # Guia del sistema visual
+|-- public/                 # Assets publicos
+|-- src/
+|   |-- components/         # Layout, modales, secciones, UI y efectos
+|   |-- context/            # Cart, Toast y Navigation
+|   |-- modules/            # Blog, eventos y tienda
+|   |-- pages/              # Paginas principales de la SPA
+|   |-- hooks/              # Hooks compartidos
+|   |-- types/              # Tipos globales
+|   `-- utils/              # Utilidades compartidas
+|-- tests/                  # Tests existentes
+|-- wp-backend/             # Placeholder para CMS headless futuro
+|-- App.tsx                 # Componente raiz de la app
+|-- index.tsx               # Entry point React
+|-- index.css               # CSS global y tokens visuales
+|-- vite.config.ts          # Configuracion Vite
+`-- vercel.json             # Build, headers y rewrites para Vercel
 ```
 
-## Getting Started
+## Requisitos
 
-### Prerequisites
+- Node.js 18 o superior.
+- npm.
+- PostgreSQL accesible si se quiere probar checkout persistente.
+- Credenciales de Mercado Pago o Wompi para pagos reales.
+- SMTP opcional para envio de confirmaciones.
 
-- Node.js 18+
-- npm o pnpm
-
-### Instalación
+## Instalacion
 
 ```bash
-# Instalar dependencias
 npm install
-
-# Iniciar servidor de desarrollo
+cp .env.example .env.local
 npm run dev
 ```
 
-El servidor de desarrollo estará disponible en `http://localhost:3000`.
+El servidor Vite usa `http://localhost:3000`.
 
-### Scripts Disponibles
+## Variables De Entorno
 
-| Comando | Descripción |
-|---------|-------------|
-| `npm run dev` | Iniciar servidor de desarrollo |
-| `npm run build` | Construir para producción |
-| `npm run preview` | Vista previa de la build |
-| `npm run lint` | Verificar tipos TypeScript |
-| `npm test` | Ejecutar tests |
-| `make help` | Ver todos los comandos |
+El frontend usa variables `VITE_*`. Los endpoints de pago usan variables
+server-only en Vercel o en el entorno local.
 
-### Makefile
+Variables principales:
 
-También puedes usar Makefile para comandos unificados:
+| Variable | Uso |
+| --- | --- |
+| `VITE_WHATSAPP_NUMBER` | Numero publico para reservas o contacto |
+| `VITE_IG_FEED_ENDPOINT` | Endpoint opcional para feed de Instagram por evento |
+| `PUBLIC_SITE_URL` | URL base usada para callbacks de pago |
+| `ORDER_TOKEN_SECRET` | Firma HMAC de tokens de orden |
+| `DATABASE_URL` | Conexion PostgreSQL |
+| `MERCADOPAGO_ACCESS_TOKEN` | Crear preferencias y consultar pagos |
+| `MERCADOPAGO_WEBHOOK_SECRET` | Validar webhooks de Mercado Pago |
+| `WOMPI_PUBLIC_KEY` | Crear URL de checkout Wompi |
+| `WOMPI_INTEGRITY_KEY` | Firmar integridad de checkout Wompi |
+| `WOMPI_EVENTS_SECRET` | Validar eventos Wompi |
+| `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS` | Envio de email con PDF |
 
-```bash
-make install    # Instalar dependencias
-make dev        # Levantar servidor
-make build      # Build de producción
-make lint        # Verificar tipos
-make test       # Ejecutar tests
-make clean      # Limpiar artefactos
+Ver [.env.example](.env.example) para la lista completa.
+
+## Scripts
+
+| Comando | Descripcion |
+| --- | --- |
+| `npm run dev` | Servidor de desarrollo Vite |
+| `npm run build` | Build de produccion |
+| `npm run preview` | Vista previa de `dist/` |
+| `npm run lint` | Type-check con `tsc --noEmit` |
+| `npm test` | Vitest en modo watch |
+| `npm run test:run` | Vitest una sola vez |
+| `npm run test:coverage` | Cobertura con Vitest |
+
+Tambien existe `Makefile` con atajos como `make dev`, `make build`,
+`make lint` y `make test:run`.
+
+## Flujo De Comercio
+
+1. El usuario agrega productos, clases o eventos al carrito.
+2. `CheckoutModal` envia `POST /api/checkout` con cliente, proveedor, items e idempotency key.
+3. La API valida items contra el catalogo permitido y crea la orden en PostgreSQL.
+4. Se crea una preferencia de Mercado Pago o una URL firmada de Wompi.
+5. La pasarela redirige a `/api/orders/confirm?token=...`.
+6. El webhook firmado marca la orden como `paid` o `failed`.
+7. Si el pago queda `paid`, se genera PDF y se intenta enviar email.
+
+Detalles completos en [API endpoints](docs/API_ENDPOINTS.md) y
+[base de datos](docs/DATABASE_SCHEMA.md).
+
+## Deploy
+
+El despliegue esperado es Vercel:
+
+- `buildCommand`: `npm run build`
+- `outputDirectory`: `dist`
+- `framework`: `vite`
+- `api/`: funciones serverless
+- `vercel.json`: headers de seguridad, cache para assets y rewrite SPA hacia `index.html`
+
+Antes de publicar, configura las variables server-only en Vercel. No subas `.env`
+ni `.env.local`.
+
+## Git
+
+El repo sigue commits tipo Conventional Commits en el historial reciente:
+
+```text
+feat(payments): complete checkout fulfillment flow
+fix(seo): ...
+refactor: ...
+chore: ...
+ci: ...
 ```
 
-## Diseño y Estilo
+Antes de abrir un PR o hacer push:
 
-### Paleta de Colores
+```bash
+npm run lint
+npm run build
+npm run test:run
+```
 
-| Nombre | Hex | Uso |
-|--------|-----|-----|
-| Sand Dune | `#EAE0CC` | Fondo base |
-| Almond Silk | `#C9ADA1` | Acento |
-| Dry Sage | `#A0A083` | Secundario |
-| Grey Olive | `#798478` | Estructura |
-| Blue Slate | `#4D6A6D` | CTA / Destacados |
-| Ink | `#252520` | Texto principal |
+Ver [docs/GIT_WORKFLOW.md](docs/GIT_WORKFLOW.md) y [CONTRIBUTING.md](CONTRIBUTING.md).
 
-### Tipografía
+## Notas
 
-- **Headings:** Cormorant Garamond (serif, elegante)
-- **Body:** Inter (sans-serif, legible)
+- `wp-backend/` es un placeholder para una posible integracion headless futura; hoy no es un backend activo.
+- El esquema SQL se crea desde `api/_lib/db.ts`; todavia no hay migraciones versionadas separadas.
+- `docs/ECOSISTEMA_SOLIDO.md` conserva el estado del modulo de eventos e Instagram.
 
-## Variables de Ambiente
+## Contacto Del Estudio
 
-Ver `.env.example` para las variables requeridas. Copia a `.env.local` y configura tus valores:
-
-- `VITE_WHATSAPP_NUMBER` - Número de WhatsApp para reservas
-- `VITE_STUDIO_NAME` - Nombre del estudio
-- `VITE_STUDIO_EMAIL` - Email de contacto
-- `VITE_BOOKING_URL` - URL de herramienta de reservas (opcional)
-
-## Contribución
-
-1. Fork el repositorio
-2. Crear una rama feature (`git checkout -b feature/nueva-caracteristica`)
-3. Commit tus cambios (`git commit -m 'Add nueva caracteristica'`)
-4. Push a la rama (`git push origin feature/nueva-caracteristica`)
-5. Abrir un Pull Request
-
-## Contacto
-
-- **Ubicación:** Transversal 1 # 17-29, La Candelaria, Bogotá
-- **WhatsApp:** +57 321 224 8261
-- **Email:** hola@innerspirit.co
-- **Instagram:** @innerspirit_studio
-
----
-
-<p align="center">
-  © 2024 Inner Spirit Studio. Todos los derechos reservados.
-</p>
+- Direccion: Transversal 1 # 17-29, La Candelaria, Bogota
+- WhatsApp: +57 321 224 8261
+- Email: hola@innerspirit.co
+- Instagram: @innerspirit_studio
