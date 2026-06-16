@@ -50,9 +50,9 @@ const HeroSection: React.FC = () => {
       >
         <div className="animate-fade-in-up flex flex-col items-center w-full max-w-5xl">
 
-          {/* Badge */}
-          <span className="max-w-full text-white/50 text-[11px] sm:text-xs font-bold tracking-[0.18em] sm:tracking-[0.32em] uppercase mb-8 border border-white/10 px-4 py-2 rounded-full backdrop-blur-sm leading-relaxed">
-            La Candelaria, Bogotá &mdash; Santuario de Yoga y Meditación
+          {/* Badge — location only, compact */}
+          <span className="text-white/45 text-[10px] sm:text-[11px] font-bold tracking-[0.22em] sm:tracking-[0.34em] uppercase mb-8 border border-white/10 px-4 py-1.5 rounded-full backdrop-blur-sm">
+            La Candelaria, Bogotá
           </span>
 
           {/* Headline — "Movimiento" reacts to mouse proximity */}
@@ -74,6 +74,11 @@ const HeroSection: React.FC = () => {
 
           {/* Divider line */}
           <div className="w-px h-10 md:h-14 my-6 md:my-8" style={{ background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.18), transparent)' }} />
+
+          {/* Subtitle — reduced, lowered descriptor */}
+          <p className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.26em] text-stone-400/70 mb-5">
+            Santuario de Yoga y Meditación
+          </p>
 
           {/* Description */}
           <p className="text-base md:text-lg text-stone-400 font-light max-w-lg mx-auto mb-10 leading-relaxed">
