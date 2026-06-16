@@ -44,7 +44,8 @@
   --is-radius-xs: 2px;
   --is-radius-sm: 6px;
   --is-radius-md: 8px;
-  --is-space-section: 7rem;
+  --is-shell-gutter: clamp(1rem, 4vw, 4rem);
+  --is-space-section: clamp(5rem, 8vw, 7rem);
   --is-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -127,8 +128,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
-  max-width: 100vw;
+  overflow-x: clip;
 }
 
 body::selection {
@@ -154,25 +154,53 @@ html {
 
 /* World-class expansion primitives */
 .is-shell {
-  width: min(100% - 2rem, 80rem);
+  width: min(100% - (var(--is-shell-gutter) * 2), 80rem);
   margin-inline: auto;
-}
-
-@media (min-width: 768px) {
-  .is-shell {
-    width: min(100% - 4rem, 80rem);
-  }
 }
 
 .is-section {
   position: relative;
   overflow: hidden;
-  padding-block: 5rem;
+  padding-block: var(--is-space-section);
+}
+
+.is-page-section {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(5rem, 9vw, 8rem);
+}
+
+.is-page-heading {
+  color: var(--is-color-teal);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+@media (min-width: 640px) {
+  .is-page-heading {
+    font-size: 3.75rem;
+  }
 }
 
 @media (min-width: 768px) {
-  .is-section {
-    padding-block: var(--is-space-section);
+  .is-page-heading {
+    font-size: 4.5rem;
+  }
+}
+
+.is-page-lead {
+  color: var(--is-color-muted-soft);
+  font-size: 1.125rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+@media (min-width: 768px) {
+  .is-page-lead {
+    font-size: 1.25rem;
   }
 }
 
@@ -200,6 +228,7 @@ html {
 .is-eyebrow {
   display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.75rem;
   color: var(--is-color-teal);
   font-size: 0.75rem;
@@ -372,8 +401,14 @@ html {
 
 @media (min-width: 768px) {
   .is-card-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .is-card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -393,6 +428,11 @@ html {
 
 .is-safe-bottom {
   padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+.is-safe-float {
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
 }
 
 .is-visually-balanced-text {

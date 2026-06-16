@@ -20,6 +20,8 @@ export interface StudioEvent {
   illustrationName: string;
   coverImageUrl: string;
   bookingSlots: string[];
+  status?: 'active' | 'waitlist';
+  ctaLabel?: string;
   type: 'event';
   instagramPosts: InstagramEventPost[];
 }

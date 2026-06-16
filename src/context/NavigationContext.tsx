@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 export type PageName =
   | 'home'
   | 'nosotros'
+  | 'espacio'
   | 'clases'
   | 'eventos'
   | 'consultorio'
@@ -16,6 +17,7 @@ export const PAGE_TO_PATH: Record<PageName, string> = {
   '404': '/404',
   home: '/',
   nosotros: '/nosotros',
+  espacio: '/espacio',
   clases: '/clases',
   eventos: '/eventos',
   consultorio: '/consultorio',

@@ -44,21 +44,22 @@ export const studioEvents: StudioEvent[] = [
   },
   {
     slug: 'rocket-yoga-training',
-    tag: 'Formacion - Abril 2026',
+    tag: 'Formacion - lista de espera',
     title: 'ROCKET YOGA',
     subtitle: 'Teacher Training Nivel 1 - 50 horas',
     description:
-      'Entrenamiento intensivo para practicantes y profesores que buscan metodologia clara, practica asistida y certificado internacional.',
-    dateLabel: '17 al 21 de abril 2026 - 9:00 AM a 7:00 PM',
+      'La cohorte de abril 2026 ya cerro. Dejamos abierta la lista de espera para la siguiente fecha.',
+    dateLabel: 'Siguiente cohorte por confirmar',
     price: 95000,
-    priceLabel: '$95.000 COP separacion de cupo',
+    priceLabel: 'Lista de espera - sin pago anticipado',
     illustrationName: 'yoga',
     coverImageUrl: '/images/events/rocket-yoga.jpg',
     bookingSlots: [
-      '17 abril - Dia 1 presencial',
-      'Pack completo 17-21 abril',
+      'Avisarme siguiente cohorte',
       'Lista de espera - siguiente cohorte',
     ],
+    status: 'waitlist',
+    ctaLabel: 'Entrar a lista de espera',
     type: 'event',
     instagramPosts: [
       {
@@ -69,7 +70,7 @@ export const studioEvents: StudioEvent[] = [
           'Abrimos cohorte para Rocket Yoga TT. Incluye manual, mentoring y certificado.',
         publishDate: '2026-03-19',
         permalink: 'https://instagram.com/innerspirit_studio',
-        ctaLabel: 'Separar cupo en Rocket TT',
+        ctaLabel: 'Entrar a lista de espera',
       },
       {
         id: 'ig-rocket-02',
@@ -79,7 +80,7 @@ export const studioEvents: StudioEvent[] = [
           'Sesion Q&A para resolver dudas de formacion. Early bird activo esta semana.',
         publishDate: '2026-03-23',
         permalink: 'https://instagram.com/innerspirit_studio',
-        ctaLabel: 'Reservar y aplicar',
+        ctaLabel: 'Quiero siguiente cohorte',
       },
     ],
   },
@@ -128,3 +129,16 @@ export const studioEvents: StudioEvent[] = [
 
 export const getEventBySlug = (slug: string): StudioEvent | undefined =>
   studioEvents.find((event) => event.slug === slug);
+
+export const isEventBookable = (event: StudioEvent): boolean =>
+  event.status !== 'waitlist';
+
+export const getEventCtaLabel = (event: StudioEvent): string =>
+  event.ctaLabel ?? 'Reservar Lugar';
+
+export const getEventWaitlistUrl = (event: StudioEvent): string => {
+  const text = encodeURIComponent(
+    `Hola Inner Spirit, quiero entrar a la lista de espera para ${event.title}.`
+  );
+  return `https://wa.me/573212248261?text=${text}`;
+};

@@ -12,7 +12,7 @@ const HeroSection: React.FC = () => {
   return (
     <section
       id="inicio"
-      className="relative min-h-screen w-full overflow-hidden bg-[#050a0b]"
+      className="relative min-h-[100svh] w-full overflow-hidden bg-[#050a0b]"
       style={{ isolation: 'isolate' }}
     >
       {/* Galaxy Background — pointer-events disabled so buttons are always clickable */}
@@ -45,18 +45,18 @@ const HeroSection: React.FC = () => {
 
       {/* Main Content */}
       <div
-        className="relative flex flex-col items-center justify-center text-center px-4 md:px-6"
+        className="relative is-shell flex flex-col items-center justify-center text-center"
         style={{ zIndex: 2, minHeight: '100svh', paddingTop: '4rem', paddingBottom: '2rem' }}
       >
         <div className="animate-fade-in-up flex flex-col items-center w-full max-w-5xl">
 
           {/* Badge */}
-          <span className="text-white/50 text-xs font-bold tracking-[0.35em] uppercase mb-8 border border-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
-            La Candelaria, Bogotá &mdash; #1 Estudio de Yoga
+          <span className="max-w-full text-white/50 text-[11px] sm:text-xs font-bold tracking-[0.18em] sm:tracking-[0.32em] uppercase mb-8 border border-white/10 px-4 py-2 rounded-full backdrop-blur-sm leading-relaxed">
+            La Candelaria, Bogotá &mdash; Santuario de Yoga y Meditación
           </span>
 
           {/* Headline — "Movimiento" reacts to mouse proximity */}
-          <h1 className="text-6xl md:text-8xl lg:text-[8.5rem] font-heading text-white leading-[0.88] tracking-tight">
+          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[8.5rem] font-heading text-white leading-[0.9] tracking-normal">
             <span className="block opacity-95">
               {reduceMotion ? 'Movimiento' : (
                 <VariableProximity
@@ -76,33 +76,44 @@ const HeroSection: React.FC = () => {
           <div className="w-px h-10 md:h-14 my-6 md:my-8" style={{ background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.18), transparent)' }} />
 
           {/* Description */}
-          <p className="text-base md:text-lg text-stone-400 font-light max-w-md mx-auto mb-10 leading-relaxed">
-            Un refugio para calmar la mente y despertar el espíritu a los pies de Monserrate.
+          <p className="text-base md:text-lg text-stone-400 font-light max-w-lg mx-auto mb-10 leading-relaxed">
+            Un refugio en el corazón histórico de Bogotá para calmar la mente, habitar el cuerpo
+            y volver a ti. Aquí la práctica es una forma de vivir: dejar fluir.
           </p>
 
           {/* CTA buttons */}
-          <div className="flex flex-col sm:flex-row items-center gap-5">
+          <div className="flex w-full flex-col sm:w-auto sm:flex-row items-center gap-4 sm:gap-5">
             <a
               href="/clases"
               onClick={(e) => { e.preventDefault(); navigate('clases'); }}
-              className="px-9 py-4 font-heading text-lg tracking-wide min-w-[200px] text-center inline-block bg-slate-is text-sand-dune border border-slate-is hover:bg-deep-teal transition-all duration-300"
+              className="w-full sm:w-auto px-9 py-4 font-heading text-lg min-w-[200px] text-center inline-block bg-slate-is text-sand-dune border border-slate-is hover:bg-deep-teal transition-all duration-300"
             >
               Ver Clases
             </a>
             <a
               href="/eventos"
               onClick={(e) => { e.preventDefault(); navigate('eventos'); }}
-              className="px-9 py-4 font-heading text-lg tracking-wide italic min-w-[200px] text-center inline-block text-white/70 hover:text-white border-b border-white/25 hover:border-white/60 transition-all duration-300"
+              className="w-full sm:w-auto px-9 py-4 font-heading text-lg italic min-w-[200px] text-center inline-block text-white/70 hover:text-white border-b border-white/25 hover:border-white/60 transition-all duration-300"
             >
               Próximos Eventos &rarr;
             </a>
           </div>
 
+          {/* Meta row — three quiet value props */}
+          <ul className="mt-12 md:mt-14 flex w-full max-w-md flex-wrap items-center justify-center gap-x-5 gap-y-3 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.22em] text-white/45">
+            {['Comunidad', 'Cuidado', 'Reconexión'].map((meta, i) => (
+              <li key={meta} className="flex items-center gap-5">
+                {i > 0 && <span aria-hidden="true" className="h-1 w-1 rounded-full bg-white/25" />}
+                <span>{meta}</span>
+              </li>
+            ))}
+          </ul>
+
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-35 animate-pulse" style={{ zIndex: 2 }}>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 opacity-35 animate-pulse" style={{ zIndex: 2 }} aria-hidden="true">
         <span className="text-[10px] tracking-[0.3em] text-white uppercase">Descubre</span>
         <div className="w-px h-8 bg-white" />
       </div>

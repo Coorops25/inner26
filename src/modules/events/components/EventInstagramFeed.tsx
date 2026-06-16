@@ -69,10 +69,10 @@ const EventInstagramFeed: React.FC<EventInstagramFeedProps> = ({ event, onReserv
               <p className="text-sm leading-relaxed flex-grow" style={{ color: '#252520' }}>
                 {post.caption}
               </p>
-              <div className="flex items-center justify-between gap-3">
+              <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <button
                   onClick={onReserveFromPost}
-                  className="text-xs uppercase tracking-[0.15em] px-4 py-2 rounded-full transition-opacity hover:opacity-90"
+                  className="min-h-11 w-full rounded-full px-4 py-2 text-center text-xs uppercase tracking-[0.08em] transition-opacity hover:opacity-90 sm:w-auto sm:tracking-[0.15em]"
                   style={{ background: '#4D6A6D', color: '#EAE0CC' }}
                 >
                   {post.ctaLabel ?? 'Reservar'}
@@ -81,7 +81,7 @@ const EventInstagramFeed: React.FC<EventInstagramFeedProps> = ({ event, onReserv
                   href={post.permalink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs uppercase tracking-[0.15em]"
+                  className="min-h-11 inline-flex items-center justify-center text-xs uppercase tracking-[0.08em] sm:tracking-[0.15em]"
                   style={{ color: '#798478' }}
                 >
                   Ver IG

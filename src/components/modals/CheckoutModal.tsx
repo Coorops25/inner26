@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useCallback, useState } from 'react';
 import { CartContext } from '../../context/CartContext';
 import { useToast } from '../../context/ToastContext';
+import { useNavigation } from '../../context/NavigationContext';
 import { CloseIcon } from '../../constants';
 import { Illustration } from '../../assets/Illustrations';
 
 const CheckoutModal: React.FC = () => {
   const { isCheckoutModalOpen, toggleCheckoutModal, cart, removeFromCart } = useContext(CartContext);
   const { showToast } = useToast();
+  const { navigate } = useNavigation();
   const [provider, setProvider] = useState<'mercadopago' | 'wompi'>('mercadopago');
   const [fulfillmentType, setFulfillmentType] = useState<'pickup' | 'delivery'>('pickup');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -84,6 +86,11 @@ const CheckoutModal: React.FC = () => {
     showToast(`${itemName} eliminado del carrito`, 'info');
   };
 
+  const handleExploreClasses = () => {
+    toggleCheckoutModal();
+    navigate('clases');
+  };
+
   return (
     <div 
       className="fixed inset-0 bg-black/70 z-50 flex justify-center items-start p-4 overflow-y-auto"
@@ -120,7 +127,7 @@ const CheckoutModal: React.FC = () => {
                 Tu carrito está vacío.
               </p>
               <button
-                onClick={handleClose}
+                onClick={handleExploreClasses}
                 className="text-sm font-semibold py-3 px-7 rounded-full transition-all duration-300"
                 style={{ background: '#4D6A6D', color: '#EAE0CC' }}
               >
@@ -131,8 +138,8 @@ const CheckoutModal: React.FC = () => {
             <>
               <div className="space-y-4 mb-6 max-h-48 md:max-h-64 overflow-y-auto pr-2" role="list" aria-label="Productos en el carrito">
                 {cart.map(item => (
-                  <div key={item.id} className="flex items-center justify-between" role="listitem">
-                    <div className="flex items-center space-x-4">
+                  <div key={item.id} className="flex items-start justify-between gap-3" role="listitem">
+                    <div className="flex min-w-0 items-center gap-3">
                       <div
                         className="w-14 h-14 rounded-sm flex items-center justify-center overflow-hidden flex-shrink-0"
                         style={{ background: '#F3EDE2' }}
@@ -143,10 +150,10 @@ const CheckoutModal: React.FC = () => {
                           style={{ color: '#C9ADA1' } as React.CSSProperties}
                         />
                       </div>
-                      <div>
-                        <h4 className="font-semibold text-sm" style={{ color: '#252520' }}>{item.name}</h4>
+                      <div className="min-w-0">
+                        <h4 className="font-semibold text-sm break-words" style={{ color: '#252520' }}>{item.name}</h4>
                         {item.details && (
-                          <p className="text-xs" style={{ color: '#A0A083' }}>{item.details}</p>
+                          <p className="text-xs break-words" style={{ color: '#A0A083' }}>{item.details}</p>
                         )}
                         <p className="text-xs font-mono mt-0.5" style={{ color: '#798478' }}>
                           ${item.price.toLocaleString('es-CO')} × {item.quantity}
@@ -155,7 +162,7 @@ const CheckoutModal: React.FC = () => {
                     </div>
                     <button
                       onClick={() => handleRemoveItem(item.name, item.id)}
-                      className="text-xs font-semibold uppercase tracking-wider transition-colors hover:scale-105"
+                      className="flex-shrink-0 text-xs font-semibold uppercase tracking-wider transition-colors hover:scale-105"
                       style={{ color: '#A0A083' }}
                       onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = '#252520'; }}
                       onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = '#A0A083'; }}

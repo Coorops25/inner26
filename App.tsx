@@ -33,6 +33,11 @@ const pageSEO: Record<string, PageSEO> = {
     title: 'Nosotros — Inner Spirit Studio | Nuestra Historia',
     description: 'Conoce la historia de Inner Spirit Studio, un santuario de yoga y bienestar en el corazón de La Candelaria. 4.9⭐ en Google con 143+ reseñas.',
   },
+  espacio: {
+    canonical: 'https://innerspirit.co/espacio',
+    title: 'El Espacio — Alquiler para Workshops y Certificaciones | Inner Spirit Studio',
+    description: 'Alquila Inner Spirit Studio en La Candelaria, Bogotá para workshops, certificaciones, rituales y experiencias de turismo wellness. Un espacio sereno para producir encuentros con identidad local.',
+  },
   clases: {
     canonical: 'https://innerspirit.co/clases',
     title: 'Clases de Yoga, Meditación y Breathwork — Inner Spirit Studio',
@@ -67,6 +72,7 @@ const pageSEO: Record<string, PageSEO> = {
 
 const HomePage = lazy(() => import('./src/pages/HomePage'));
 const AboutPage = lazy(() => import('./src/pages/AboutPage'));
+const EspacioPage = lazy(() => import('./src/pages/EspacioPage'));
 const ClassesPage = lazy(() => import('./src/pages/ClassesPage'));
 const EventsPage = lazy(() => import('./src/pages/EventsPage'));
 const ConsultorioPage = lazy(() => import('./src/pages/ConsultorioPage'));
@@ -106,6 +112,8 @@ const PageRenderer: React.FC = () => {
   switch (page) {
     case 'nosotros':
       return <AboutPage />;
+    case 'espacio':
+      return <EspacioPage />;
     case 'clases':
       return <ClassesPage />;
     case 'eventos':

@@ -138,13 +138,22 @@ const FindYourPracticeSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category>('movimiento');
 
   return (
-    <section className="py-12 md:py-16 bg-cream">
-      <div className="container mx-auto px-6 max-w-6xl">
-        <div className="mb-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-heading mb-6 text-ink">
+    <section className="is-section bg-cream" aria-label="Encuentra tu práctica">
+      <div className="is-shell max-w-6xl">
+        <div className="mb-8 flex flex-col items-center text-center">
+          <span className="is-eyebrow">Tu práctica</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading mt-5 mb-4 text-ink">
             ¿Qué buscas hoy?
           </h2>
-          <div className="flex justify-center gap-6 md:gap-12 border-b border-accent/30">
+          <p className="is-copy is-visually-balanced-text mb-7">
+            Empieza por cómo quieres sentirte. Cada camino te lleva a una práctica
+            pensada para acompañarte justo ahí.
+          </p>
+          <div
+            role="group"
+            aria-label="Filtrar prácticas por intención"
+            className="flex flex-wrap justify-center gap-x-5 gap-y-2 md:gap-x-12 border-b border-accent/30"
+          >
             <CategoryTab label="Calma"       active={activeCategory === 'calma'}       onClick={() => setActiveCategory('calma')} />
             <CategoryTab label="Movimiento"  active={activeCategory === 'movimiento'}  onClick={() => setActiveCategory('movimiento')} />
             <CategoryTab label="Conexión"    active={activeCategory === 'conexion'}    onClick={() => setActiveCategory('conexion')} />

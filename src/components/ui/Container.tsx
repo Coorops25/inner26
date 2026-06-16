@@ -15,11 +15,11 @@ const Container: React.FC<ContainerProps> = ({
     sm: 'max-w-3xl',
     md: 'max-w-5xl',
     lg: 'max-w-7xl',
-    full: 'max-w-full',
+    full: 'max-w-none',
   };
 
   return (
-    <div className={`container mx-auto px-4 md:px-6 ${sizes[size]} ${className}`}>
+    <div className={`is-shell ${sizes[size]} ${className}`}>
       {children}
     </div>
   );

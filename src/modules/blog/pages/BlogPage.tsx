@@ -196,6 +196,7 @@ const ArticleModal: React.FC<{ post: BlogPost; onClose: () => void }> = ({ post,
 
 const BlogPage: React.FC = () => {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [featuredPost, ...otherPosts] = blogPosts;
 
   useEffect(() => {
     const blogSchema = {
@@ -223,49 +224,84 @@ const BlogPage: React.FC = () => {
         <ArticleModal post={selectedPost} onClose={() => setSelectedPost(null)} />
       )}
 
-      <section id="blog-page" className="py-20 md:py-32 bg-cream">
-        <div className="container mx-auto px-6 max-w-7xl">
+      <section id="blog-page" className="is-page-section is-section--paper">
+        <div className="is-shell">
 
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <span className="text-xs font-bold tracking-[0.3em] uppercase mb-4 block text-slate-is">
-              Journal
-            </span>
-            <h1 className="text-5xl md:text-6xl font-heading font-semibold text-slate-is">
+            <span className="is-eyebrow justify-center">Journal</span>
+            <h1 className="is-page-heading mt-5">
               Palabras para el Camino
             </h1>
-            <p className="mt-6 text-xl font-light leading-relaxed text-muted-light">
-              Recursos, guías e inspiración para nutrir tu viaje interior.
+            <p className="is-page-lead mt-6">
+              Recursos, guías e inspiración para nutrir tu viaje interior — escritos desde la práctica, no desde la teoría.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {blogPosts.map((post) => (
+          {/* Featured article — wide dark editorial card */}
+          {featuredPost && (
+            <button
+              type="button"
+              onClick={() => setSelectedPost(featuredPost)}
+              className="is-surface is-surface--dark is-surface--interactive group w-full text-left flex flex-col md:flex-row overflow-hidden mb-12"
+            >
+              <div className="is-media-stage md:w-2/5 aspect-[16/10] md:aspect-auto flex items-center justify-center">
+                <Illustration
+                  name={featuredPost.illustrationName ?? 'meditation'}
+                  className="w-1/3 h-1/3 transition-transform duration-700 group-hover:scale-110"
+                  style={{ color: '#C9ADA1' } as React.CSSProperties}
+                />
+              </div>
+              <div className="md:w-3/5 p-7 md:p-10 flex flex-col justify-center">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.18em]" style={{ color: '#C9ADA1' }}>
+                    Lectura destacada
+                  </span>
+                  <span className="is-luxury-rule" />
+                  <span className="text-[11px] font-bold uppercase tracking-[0.18em]" style={{ color: '#8B9A8B' }}>
+                    {featuredPost.category}
+                  </span>
+                </div>
+                <h2 className="font-heading text-3xl md:text-4xl leading-tight mb-4" style={{ color: '#FAF7F2' }}>
+                  {featuredPost.title}
+                </h2>
+                <p className="font-light leading-relaxed mb-6 max-w-xl" style={{ color: 'rgba(234,224,204,0.72)' }}>
+                  {featuredPost.excerpt}
+                </p>
+                <span className="font-heading text-lg transition-colors group-hover:text-white" style={{ color: '#C9ADA1' }}>
+                  Leer artículo &rarr;
+                </span>
+              </div>
+            </button>
+          )}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {otherPosts.map((post) => (
               <div
                 key={post.id}
-                className="group cursor-pointer focus-visible:outline-2 focus-visible:outline-slate-is focus-visible:outline-offset-4"
+                className="is-surface is-surface--interactive group flex flex-col overflow-hidden cursor-pointer focus-visible:outline-2 focus-visible:outline-slate-is focus-visible:outline-offset-4"
                 role="button"
                 tabIndex={0}
                 onClick={() => setSelectedPost(post)}
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedPost(post); } }}
               >
-                <div className="overflow-hidden aspect-[3/2] mb-6 flex items-center justify-center transition-colors duration-500 bg-base">
+                <div className="is-media-stage overflow-hidden aspect-[3/2] flex items-center justify-center">
                   <Illustration
                     name={post.illustrationName ?? 'meditation'}
                     className="w-2/5 h-2/5 transition-all duration-700 group-hover:scale-110"
                     style={{ color: '#C9ADA1' } as React.CSSProperties}
                   />
                 </div>
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-widest mb-2 text-slate-is">
+                <div className="p-6 flex flex-col flex-grow">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.16em] mb-2 text-slate-is">
                     {post.category}
                   </p>
-                  <h3 className="text-xl md:text-2xl font-heading font-bold leading-tight mb-3 transition-colors text-ink">
+                  <h3 className="text-xl md:text-2xl font-heading font-semibold leading-tight mb-3 transition-colors text-ink group-hover:text-slate-is">
                     {post.title}
                   </h3>
-                  <p className="font-light leading-relaxed mb-4 text-muted-light">
+                  <p className="font-light leading-relaxed mb-5 text-muted-light flex-grow">
                     {post.excerpt}
                   </p>
-                  <span className="inline-block text-sm font-semibold pb-0.5 text-ink border-b border-accent hover:text-slate-is hover:border-slate-is transition-all">
+                  <span className="inline-block text-sm font-semibold pb-0.5 text-ink border-b border-accent transition-all group-hover:text-slate-is group-hover:border-slate-is self-start">
                     Leer artículo
                   </span>
                 </div>

@@ -35,7 +35,7 @@ const ConsultorioSection: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 text-center text-white py-12 md:py-16">
+      <div className="relative z-10 is-shell text-center text-white py-12 md:py-16">
         <span className="block text-xs font-bold tracking-[0.35em] uppercase mb-4 opacity-70 text-muted">
           Sesiones 1:1
         </span>
@@ -46,12 +46,59 @@ const ConsultorioSection: React.FC = () => {
 
         <div className="w-10 h-px mx-auto mb-6 bg-slate-is" />
 
-        <p className="max-w-xl mx-auto text-lg font-light leading-relaxed mb-3 text-accent">
+        <p className="max-w-xl mx-auto text-lg font-light leading-relaxed mb-8 text-accent">
           Un espacio seguro para explorar lo que emerge en el silencio, con acompañamiento profesional personalizado.
         </p>
-        <p className="text-sm font-light mb-8 text-muted-light">
-          Yoga terapéutico · Meditación guiada · Breathwork · Arte terapia
-        </p>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto mb-10">
+          {[
+            {
+              label: 'Yoga terapéutico',
+              icon: (
+                <path d="M12 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM6 11h12M12 8v4m0 0-3 8m3-8 3 8" />
+              ),
+            },
+            {
+              label: 'Meditación guiada',
+              icon: (
+                <>
+                  <circle cx="12" cy="12" r="3" />
+                  <circle cx="12" cy="12" r="8" />
+                </>
+              ),
+            },
+            {
+              label: 'Breathwork',
+              icon: (
+                <path d="M12 20c4-3 7-6 7-10a4 4 0 0 0-7-2.6A4 4 0 0 0 5 10c0 4 3 7 7 10Z" />
+              ),
+            },
+            {
+              label: 'Arte terapia',
+              icon: (
+                <>
+                  <path d="M12 3a9 9 0 0 0 0 18c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.2 0-.8.7-1.5 1.5-1.5H16a5 5 0 0 0 5-5c0-3.9-4-7-9-7Z" />
+                  <circle cx="8" cy="11" r="1" />
+                  <circle cx="12" cy="8" r="1" />
+                  <circle cx="16" cy="11" r="1" />
+                </>
+              ),
+            },
+          ].map((item) => (
+            <div
+              key={item.label}
+              className="flex flex-col items-center gap-2 px-3 py-4 rounded-sm"
+              style={{ background: 'rgba(234,224,204,0.06)', border: '1px solid rgba(234,224,204,0.14)' }}
+            >
+              <span className="text-sand-dune" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                  {item.icon}
+                </svg>
+              </span>
+              <span className="text-xs font-light tracking-wide text-accent text-center leading-tight">{item.label}</span>
+            </div>
+          ))}
+        </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a

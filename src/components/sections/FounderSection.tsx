@@ -4,8 +4,8 @@ import { Illustration } from '../../assets/Illustrations';
 
 const FounderSection: React.FC = () => {
   return (
-    <section id="founder" className="py-20 md:py-32 bg-base">
-      <div className="container mx-auto px-6 max-w-7xl">
+    <section id="founder" className="is-page-section is-section--sand">
+      <div className="is-shell">
         <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
 
           {/* Illustration circle instead of photo */}
@@ -17,7 +17,7 @@ const FounderSection: React.FC = () => {
               />
               <div
                 className="relative w-64 h-64 md:w-80 md:h-80 rounded-full flex items-center justify-center"
-                style={{ background: '#F3EDE2' }}
+                style={{ background: '#FAF7F2', boxShadow: 'var(--is-shadow-soft)' }}
               >
                 <Illustration
                   name="lotus"
@@ -29,13 +29,20 @@ const FounderSection: React.FC = () => {
           </div>
 
           <div className="md:w-3/5 text-center md:text-left">
-            <p className="text-2xl md:text-3xl font-heading leading-relaxed" style={{ color: '#252520' }}>
-              El camino de Inner Spirit es sostenido por una escucha.
+            <span className="is-eyebrow md:justify-start justify-center">La Guía</span>
+            <p className="font-heading text-2xl md:text-3xl leading-relaxed mt-5" style={{ color: '#252520' }}>
+              El camino de Inner Spirit es sostenido por una escucha — y por la intención de
+              <span className="italic" style={{ color: '#4D6A6D' }}> dejar fluir</span>.
             </p>
-            <p className="mt-6 text-lg font-light leading-relaxed" style={{ color: '#798478' }}>
-              Una que ha sido nutrida por estudios en Sanación Energética, Meditación y Yoga Holístico,
-              pero cuya verdadera guía es la presencia compartida en el silencio. Más que enseñar,
-              el propósito es crear el espacio para que cada quien recuerde su propia sabiduría.
+            <p className="is-copy mt-6">
+              Una escucha nutrida por estudios en Sanación Energética, Meditación y Yoga Holístico,
+              pero cuya verdadera guía es la presencia compartida en el silencio. Aquí no se busca
+              corregir ni forzar: se sostiene el espacio para que el movimiento, la respiración y la
+              quietud encuentren su propio ritmo.
+            </p>
+            <p className="is-copy mt-4">
+              Más que enseñar, el propósito es crear las condiciones de calma para que cada quien
+              recuerde su propia sabiduría — y la deje fluir.
             </p>
           </div>
 

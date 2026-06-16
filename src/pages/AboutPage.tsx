@@ -11,13 +11,13 @@ const AboutPage: React.FC = () => {
 
       {/* Hero — gradient, no external images */}
       <section
-        className="relative py-32 md:py-48 flex items-center justify-center overflow-hidden"
+        className="relative is-page-section flex items-center justify-center overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #1c2829 0%, #2a3f42 50%, #252520 100%)' }}
       >
         <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
           <Illustration name="abstract-spirit" className="w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] md:w-[600px] md:h-[600px]" style={{ color: '#4D6A6D' } as React.CSSProperties} />
         </div>
-        <div className="container mx-auto px-6 relative z-10 text-center text-white">
+        <div className="is-shell relative z-10 text-center text-white">
           <span className="text-xs font-bold tracking-[0.3em] uppercase mb-6 block" style={{ color: '#4D6A6D' }}>
             Inner Spirit Studio
           </span>
@@ -31,8 +31,8 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Philosophy */}
-      <section className="py-20 md:py-32 bg-base">
-        <div className="container mx-auto px-6 max-w-3xl text-center">
+      <section className="is-page-section bg-base">
+        <div className="is-shell max-w-3xl text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-semibold mb-8" style={{ color: '#4D6A6D' }}>
             Nuestra Filosofía
           </h2>
@@ -52,8 +52,8 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Founder / Guide */}
-      <section className="py-20 md:py-32" style={{ background: '#F3EDE2' }}>
-        <div className="container mx-auto px-6 max-w-7xl">
+      <section className="is-page-section" style={{ background: '#F3EDE2' }}>
+        <div className="is-shell">
           <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
             <div className="md:w-2/5 flex justify-center">
               <div className="relative">
@@ -91,8 +91,8 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Studio — illustration gallery */}
-      <section className="py-20 md:py-32 bg-base">
-        <div className="container mx-auto px-6 max-w-7xl">
+      <section className="is-page-section bg-base">
+        <div className="is-shell">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-heading font-semibold mb-6" style={{ color: '#4D6A6D' }}>
               El Espacio
@@ -102,7 +102,7 @@ const AboutPage: React.FC = () => {
               Luz natural, paredes de barro y un piso que ha visto miles de respiraciones.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {galleryIllustrations.map((name, index) => (
               <div
                 key={index}

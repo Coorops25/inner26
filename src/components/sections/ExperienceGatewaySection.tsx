@@ -47,25 +47,25 @@ const ExperienceGatewaySection: React.FC = () => {
 
   const items = [
     {
-      label: 'Primera practica',
+      label: 'Primera práctica',
       title: 'Agenda una clase esta semana',
-      copy: 'Yoga, meditacion, breathwork y movimiento consciente para todos los niveles.',
+      copy: 'Yoga, meditación, breathwork y movimiento consciente con reserva directa.',
       action: 'Reservar clase',
       icon: 'mat' as const,
       onClick: reserveFirstClass,
     },
     {
-      label: 'Rituales activos',
-      title: 'Encuentros con fecha viva',
-      copy: 'Eventos curados con feed de Instagram, cupos y reserva directa desde el sitio.',
+      label: 'Rituales próximos',
+      title: 'Encuentros con fecha y cupo',
+      copy: 'Rituales y experiencias de comunidad con cada detalle claro antes de reservar.',
       action: 'Ver eventos',
       icon: 'moon' as const,
       onClick: () => navigate('eventos'),
     },
     {
-      label: 'Acompanamiento',
+      label: 'Acompañamiento',
       title: 'Sesiones individuales 1:1',
-      copy: 'Un espacio privado para explorar lo que emerge con presencia profesional.',
+      copy: 'Un espacio privado para explorar lo que emerge, con escucha y presencia.',
       action: 'Ver consultorio',
       icon: 'hands' as const,
       onClick: () => navigate('consultorio'),
@@ -73,7 +73,7 @@ const ExperienceGatewaySection: React.FC = () => {
   ];
 
   return (
-    <section className="is-section is-section--sand py-10 md:py-14" aria-label="Accesos principales">
+    <section className="is-section is-section--sand" aria-label="Accesos principales">
       <div className="is-shell">
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-[0.9fr_2.1fr] lg:items-stretch">
           <div className="is-surface p-6 md:p-8 flex flex-col justify-between">
@@ -82,18 +82,21 @@ const ExperienceGatewaySection: React.FC = () => {
               <h2 className="is-display mt-5 text-3xl md:text-4xl">
                 Elige el ritmo de tu visita.
               </h2>
+              <div className="is-luxury-rule mt-6" />
             </div>
             <p className="is-copy mt-8">
-              Tres caminos claros para convertir la experiencia visual del hero en una accion concreta.
+              Tres caminos para pasar de explorar a reservar: una clase para esta semana,
+              un ritual con fecha o un acompañamiento solo para ti.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {items.map((item) => (
               <Surface key={item.title} interactive className="p-6 md:p-7">
                 <button
                   type="button"
                   onClick={item.onClick}
+                  aria-label={`${item.action}: ${item.title}`}
                   className="group flex h-full w-full flex-col items-start text-left"
                 >
                   <span className="mb-7 flex h-12 w-12 items-center justify-center rounded-sm bg-slate-is text-sand-dune">

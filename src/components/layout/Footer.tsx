@@ -19,21 +19,40 @@ const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="py-12 md:py-16 bg-warm-black text-muted">
-      <div className="container mx-auto px-6 max-w-7xl flex flex-col items-center text-center">
+    <footer className="py-14 md:py-20 bg-warm-black text-muted">
+      <div className="is-shell flex flex-col items-center text-center">
+
+        {/* Final CTA */}
+        <div className="max-w-xl mb-14">
+          <span className="is-eyebrow justify-center" style={{ color: '#8B9A8B' }}>Inicia una conversación</span>
+          <p className="font-heading text-2xl md:text-3xl leading-snug mt-5 mb-6" style={{ color: '#EAE0CC' }}>
+            Cuéntanos qué quieres traer al espacio.
+          </p>
+          <a
+            href="https://wa.me/573212248261?text=Hola%2C%20quiero%20iniciar%20una%20conversaci%C3%B3n%20con%20Inner%20Spirit%20Studio"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="is-action is-action--light"
+          >
+            Escríbenos por WhatsApp
+          </a>
+        </div>
 
         {/* Big brand word */}
         <h2
-          className="text-[11vw] leading-none font-heading font-bold select-none pointer-events-none mb-1"
+          className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl leading-none font-heading font-bold select-none pointer-events-none mb-1"
           style={{ color: 'rgba(77,106,109,0.18)' }}
         >
           INNER SPIRIT
         </h2>
-        <p className="text-xs tracking-[0.3em] uppercase mb-10 text-slate-is">
+        <p className="text-xs tracking-[0.3em] uppercase mb-3 text-slate-is">
           Studio — La Candelaria, Bogotá
         </p>
+        <p className="font-heading italic text-lg mb-12" style={{ color: '#8B9A8B' }}>
+          Un santuario para volver a ti.
+        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-12 md:gap-0 border-t border-slate-is/20 pt-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-12 md:gap-0 border-t border-slate-is/20 pt-12 text-left md:text-center">
           {/* Location */}
           <div className="space-y-3">
             <span className="text-xs font-bold uppercase tracking-widest block text-slate-is">Ubicación</span>
@@ -80,8 +99,7 @@ const Footer: React.FC = () => {
                 +57 321 224 8261
               </a>
               <a
-                href="/contacto"
-                onClick={(e) => { e.preventDefault(); navigate('contacto'); }}
+                href="mailto:hola@innerspirit.co"
                 className="block mx-auto transition-colors hover:text-white pb-0.5 border-b border-muted-light/40"
               >
                 hola@innerspirit.co
@@ -116,7 +134,7 @@ const Footer: React.FC = () => {
           href="https://wa.me/573212248261?text=Hola%2C%20quiero%20reservar%20una%20clase%20en%20Inner%20Spirit%20Studio"
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-transform hover:scale-110 z-40 text-white"
+          className="fixed is-safe-float w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-transform hover:scale-110 z-40 text-white"
           style={{ background: '#25D366', touchAction: 'manipulation' }}
           aria-label="Escríbenos por WhatsApp"
         >

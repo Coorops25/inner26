@@ -32,25 +32,26 @@ const StudioSection: React.FC = () => {
   const reduceMotion = usePrefersReducedMotion();
 
   return (
-    <section id="studio" className="py-12 md:py-16 bg-base relative overflow-hidden">
-      <div className="container mx-auto px-6 max-w-7xl">
+    <section id="studio" className="is-section bg-base relative overflow-hidden">
+      <div className="is-shell">
 
         {/* Editorial heading */}
-        <div className="flex flex-col items-center text-center mb-8">
-          <span className="uppercase tracking-[0.2em] text-xs font-semibold mb-4" style={{ color: '#4D6A6D' }}>El Espacio</span>
-          <h2 className="text-3xl md:text-4xl font-heading leading-tight mb-4" style={{ color: '#1A1A18' }}>
+        <div className="flex flex-col items-center text-center mb-10">
+          <span className="is-eyebrow">El Espacio</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading leading-tight mt-5 mb-4" style={{ color: '#1A1A18' }}>
             No somos un gimnasio.<br />
-            <span style={{ color: '#5C6B5C' }}>Somos un santuario.</span>
+            <span className="italic font-light" style={{ color: '#5C6B5C' }}>Somos un santuario.</span>
           </h2>
-          <div className="w-10 h-px my-4" style={{ background: '#C9ADA1' }} />
+          <div className="is-luxury-rule my-4" />
           <p className="text-base md:text-lg font-light max-w-2xl leading-relaxed" style={{ color: '#5c5c52' }}>
-            Yoga, meditación, danza, breathwork y sound healing integrados en un espacio de 100&nbsp;m²
-            a los pies del cerro Monserrate. Clases en español e inglés.
+            Yoga, meditación, danza, breathwork y sound healing reunidos en un espacio de 100&nbsp;m²
+            a los pies de Monserrate. Un lugar para dejar fluir, respirar hondo y reencontrarte
+            con la comunidad. Clases en español e inglés.
           </p>
         </div>
 
         {/* Pillar cards — R3FImagePlane adds a ripple wave effect on hover */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8">
           {pillars.map((item) => (
             <div
               key={item.illustration}
@@ -91,7 +92,7 @@ const StudioSection: React.FC = () => {
 
         {/* Stats bar */}
         <div
-          className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x rounded-sm py-8"
+          className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x rounded-sm py-8 text-center"
           style={{ background: '#F3EDE2' }}
         >
           {stats.map((s) => (

@@ -5,6 +5,7 @@ import { useNavigation, pageToPath, type PageName } from '../../context/Navigati
 
 const navLinks: Array<{ page: Exclude<PageName, 'home' | '404'>; label: string; href: string }> = [
   { page: 'nosotros', label: 'Nosotros', href: pageToPath('nosotros') },
+  { page: 'espacio', label: 'El Espacio', href: pageToPath('espacio') },
   { page: 'clases', label: 'Clases', href: pageToPath('clases') },
   { page: 'eventos', label: 'Eventos', href: pageToPath('eventos') },
   { page: 'consultorio', label: 'Consultorio', href: pageToPath('consultorio') },
@@ -77,19 +78,19 @@ const Header: React.FC = () => {
             : 'rgba(234,224,204,0.95)',
       }}
     >
-      <div className="container mx-auto px-4 sm:px-6 md:px-12 flex justify-between items-center">
-        <div className="w-auto lg:w-1/4 flex justify-start">
+      <div className="is-shell flex justify-between items-center">
+        <div className="w-auto xl:w-1/4 flex justify-start">
           <a
             href={pageToPath('home')}
             onClick={(event) => handleLinkClick(event, 'home')}
-            className="text-lg md:text-xl tracking-[0.08em] font-heading font-bold uppercase transition-colors duration-300 relative z-50"
+            className="text-base sm:text-lg md:text-xl font-heading font-bold uppercase transition-colors duration-300 relative z-50"
             aria-current={page === 'home' ? 'page' : undefined}
           >
             Inner Spirit
           </a>
         </div>
 
-        <nav className="hidden lg:flex flex-1 justify-center items-center space-x-6 xl:space-x-10">
+        <nav className="hidden xl:flex flex-1 justify-center items-center gap-7 2xl:gap-10">
           {navLinks.map((link) => (
             <a
               key={link.page}
@@ -105,7 +106,7 @@ const Header: React.FC = () => {
           ))}
         </nav>
 
-        <div className="w-auto lg:w-1/4 flex justify-end items-center space-x-2 sm:space-x-4">
+        <div className="w-auto xl:w-1/4 flex justify-end items-center space-x-2 sm:space-x-4">
           <button
             onClick={toggleCheckoutModal}
             className="relative group flex h-11 w-11 items-center justify-center rounded-sm opacity-80 hover:opacity-100 transition-opacity"
@@ -122,7 +123,7 @@ const Header: React.FC = () => {
 
           <button
             onClick={() => setIsOpen((prev) => !prev)}
-            className="lg:hidden flex h-11 w-11 flex-col justify-center items-center space-y-1.5 focus:outline-none z-50"
+            className="xl:hidden flex h-11 w-11 flex-col justify-center items-center space-y-1.5 focus:outline-none z-50"
             aria-label={isOpen ? 'Cerrar menu' : 'Abrir menu'}
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
@@ -150,17 +151,17 @@ const Header: React.FC = () => {
       <div
         id="mobile-navigation"
         aria-hidden={!isOpen}
-        className={`fixed inset-0 z-40 flex flex-col items-center justify-center is-safe-bottom transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] bg-base ${
+        className={`fixed inset-0 z-40 flex flex-col items-center justify-start overflow-y-auto px-6 py-24 sm:justify-center is-safe-bottom transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] bg-base ${
           isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
       >
-        <nav className="flex flex-col items-center space-y-8 text-center">
+        <nav className="flex flex-col items-center gap-5 sm:gap-8 text-center">
           {navLinks.map((link, idx) => (
             <a
               key={link.page}
               href={link.href}
               onClick={(event) => handleLinkClick(event, link.page)}
-              className={`text-3xl md:text-4xl font-heading text-ink transition-all duration-500 ${
+              className={`text-2xl sm:text-3xl md:text-4xl font-heading text-ink transition-all duration-500 ${
                 isOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
               }`}
               style={{ transitionDelay: `${idx * 50}ms` }}

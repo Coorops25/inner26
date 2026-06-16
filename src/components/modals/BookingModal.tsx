@@ -93,7 +93,7 @@ const BookingModal: React.FC = () => {
         type: bookingDetails.type,
         details: `${selectedSlot} · ${sourceLabel(bookingDetails.source)}`,
       });
-      showToast(`Agregado al carrito: ${bookingDetails.title}`, 'success');
+      showToast(`Agregado al carrito: ${bookingDetails.title}. Abre el carrito para pagar.`, 'success');
       handleClose();
     } else {
       showToast('Por favor, selecciona un horario.', 'error');
@@ -124,7 +124,7 @@ const BookingModal: React.FC = () => {
 
         <div className="p-5 md:p-8">
           <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#4D6A6D' }}>
-            Reservar
+            Agendar
           </p>
           <h2 id="booking-modal-title" className="text-3xl font-heading font-bold mb-6" style={{ color: '#252520' }}>
             {bookingDetails.title}
@@ -177,17 +177,17 @@ const BookingModal: React.FC = () => {
             </div>
           )}
 
-          <div className="mt-8 flex justify-between items-center">
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xl font-bold font-mono" style={{ color: '#252520' }}>
               ${bookingDetails.price.toLocaleString('es-CO')} COP
             </p>
             <button
               onClick={handleAddToCart}
-              className="font-semibold py-3 px-7 rounded-full transition-all duration-300 hover:opacity-90 active:scale-95 text-sm uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full sm:w-auto font-semibold py-3 px-7 rounded-full transition-all duration-300 hover:opacity-90 active:scale-95 text-sm uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ background: '#4D6A6D', color: '#EAE0CC' }}
               disabled={availableTimeSlots.length === 0}
             >
-              Confirmar
+              Agregar al carrito
             </button>
           </div>
         </div>

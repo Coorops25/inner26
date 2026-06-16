@@ -11,7 +11,7 @@ const testimonials = [
 ];
 
 const StarRating = () => (
-  <div className="flex gap-1 mb-4">
+  <div className="flex gap-1 mb-4" aria-hidden="true">
     {[1,2,3,4,5].map(i => (
       <svg key={i} className="w-3.5 h-3.5" viewBox="0 0 20 20" fill="#C9ADA1">
         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -24,12 +24,15 @@ const TestimonialsSection: React.FC = () => {
   const loop = [...testimonials, ...testimonials, ...testimonials];
 
   return (
-    <section className="py-12 md:py-16 overflow-hidden border-t" style={{ background: '#121210', borderColor: 'rgba(77,106,109,0.15)' }}>
-      <div className="container mx-auto px-6 mb-8 text-center">
-        <span className="text-xs font-bold tracking-[0.25em] uppercase" style={{ color: '#4D6A6D' }}>Comunidad</span>
-        <div className="flex items-center justify-center gap-3 mt-3">
-          <span className="text-3xl font-heading" style={{ color: '#C9ADA1' }}>4.9</span>
-          <div className="flex gap-0.5">
+    <section className="py-12 md:py-16 overflow-hidden border-t" style={{ background: '#121210', borderColor: 'rgba(77,106,109,0.15)' }} aria-label="Lo que dice la comunidad">
+      <div className="is-shell mb-8 text-center">
+        <span className="is-eyebrow justify-center" style={{ color: '#8B9A8B' }}>Comunidad Inner Spirit</span>
+        <p className="font-heading text-2xl md:text-3xl mt-5 leading-snug" style={{ color: '#FAF7F2' }}>
+          Historias de quienes vuelven a respirar aquí.
+        </p>
+        <div className="flex items-center justify-center gap-3 mt-5">
+          <span className="text-3xl font-heading is-metric" style={{ color: '#C9ADA1' }}>4.9</span>
+          <div className="flex gap-0.5" aria-hidden="true">
             {[1,2,3,4,5].map(i => (
               <svg key={i} className="w-4 h-4" viewBox="0 0 20 20" fill="#C9ADA1">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -55,16 +58,25 @@ const TestimonialsSection: React.FC = () => {
             animation-play-state: paused;
           }
         `}</style>
-        <div className="marquee-content">
+        <div className="marquee-content" aria-hidden="true">
           {loop.map((t, i) => (
-            <div key={i} className="w-[calc(100vw-3rem)] max-w-[360px] md:w-[520px] md:max-w-none px-6 md:px-12 flex flex-col items-center text-center flex-shrink-0">
+            <figure key={i} className="w-[calc(100vw-3rem)] max-w-[360px] md:w-[520px] md:max-w-none px-6 md:px-12 flex flex-col items-center text-center flex-shrink-0">
               <StarRating />
-              <p className="font-heading text-xl md:text-2xl text-white leading-relaxed mb-5">"{t.quote}"</p>
-              <p className="font-sans text-xs tracking-widest uppercase" style={{ color: '#A0A083' }}>{t.name}</p>
-              <p className="text-[10px] mt-1" style={{ color: '#4D6A6D' }}>{t.origin}</p>
-            </div>
+              <blockquote className="font-heading text-xl md:text-2xl text-white leading-relaxed mb-5">&ldquo;{t.quote}&rdquo;</blockquote>
+              <figcaption className="font-sans text-xs tracking-widest uppercase" style={{ color: '#A0A083' }}>
+                {t.name}
+                <span className="block text-[10px] mt-1 tracking-normal normal-case" style={{ color: '#4D6A6D' }}>{t.origin}</span>
+              </figcaption>
+            </figure>
           ))}
         </div>
+
+        {/* Accessible, non-duplicated rendering for screen readers */}
+        <ul className="sr-only">
+          {testimonials.map((t) => (
+            <li key={t.id}>&ldquo;{t.quote}&rdquo; — {t.name}, {t.origin}</li>
+          ))}
+        </ul>
       </div>
     </section>
   );

@@ -17,7 +17,7 @@ const NewsletterSection: React.FC = () => {
 
   return (
     <section
-      className="relative py-12 md:py-16 border-t overflow-hidden"
+      className="relative is-section border-t overflow-hidden"
       style={{ background: '#EAE0CC', borderColor: '#D9D1C0' }}
     >
       {/* Animated ribbon waves as section background */}
@@ -25,17 +25,27 @@ const NewsletterSection: React.FC = () => {
         <Ribbons />
       </div>
 
-      <div className="relative container mx-auto px-6 text-center max-w-3xl" style={{ zIndex: 10 }}>
-        <span className="text-xs font-bold tracking-[0.25em] uppercase mb-3 block" style={{ color: '#4D6A6D' }}>
+      <div className="relative is-shell text-center max-w-2xl" style={{ zIndex: 10 }}>
+        <span className="is-eyebrow justify-center mb-3" style={{ color: '#4D6A6D' }}>
           Comunidad
         </span>
-        <h2 className="text-3xl md:text-4xl font-heading mb-4" style={{ color: '#1A1A18' }}>
+        <h2 className="font-heading text-3xl md:text-5xl mb-4" style={{ color: '#1A1A18' }}>
           Cartas desde la Calma
         </h2>
-        <p className="text-base font-light mb-6 leading-relaxed" style={{ color: '#5C6B5C' }}>
-          Recibe inspiración, fechas de rituales y noticias de nuestra comunidad.<br className="hidden md:block" />
-          Directamente a tu bandeja, sin ruido innecesario.
+        <p className="text-base md:text-lg font-light mb-6 leading-relaxed" style={{ color: '#5C6B5C' }}>
+          Una carta breve, cuando hay algo que vale la pena compartir: fechas de rituales y eventos,
+          prácticas para llevar a casa e inspiración para tu camino interior.
         </p>
+
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-8 text-[11px] font-bold uppercase tracking-[0.16em]" style={{ color: '#4D6A6D' }}>
+          {['Rituales de luna', 'Prácticas guiadas', 'Sin spam'].map((item) => (
+            <span key={item} className="inline-flex items-center gap-2">
+              <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full" style={{ background: '#8B9A8B' }} />
+              {item}
+            </span>
+          ))}
+        </div>
+
         <form
           onSubmit={handleSubmit}
           className="flex flex-col sm:flex-row gap-0 max-w-md mx-auto border-b transition-colors focus-within:border-opacity-100"

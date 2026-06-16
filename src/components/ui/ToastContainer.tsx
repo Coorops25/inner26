@@ -33,7 +33,7 @@ const ToastContainer: React.FC = () => {
 
   return (
     <div
-      className="fixed top-20 right-4 z-[100] flex flex-col gap-3 pointer-events-none"
+      className="fixed left-4 right-4 top-20 z-[100] flex flex-col gap-3 pointer-events-none sm:left-auto sm:max-w-sm"
       role="region"
       aria-label="Notificaciones"
       aria-live="polite"
@@ -43,7 +43,7 @@ const ToastContainer: React.FC = () => {
         return (
           <div
             key={toast.id}
-            className="pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-sm shadow-lg animate-fade-in-up"
+            className="pointer-events-auto flex min-w-0 items-start gap-3 px-4 py-3 rounded-sm shadow-lg animate-fade-in-up"
             style={{
               background: style.bg,
               color: '#EAE0CC',
@@ -52,7 +52,7 @@ const ToastContainer: React.FC = () => {
             role="alert"
           >
             <span className="flex-shrink-0">{style.icon}</span>
-            <p className="text-sm font-medium">{toast.message}</p>
+            <p className="min-w-0 text-sm font-medium break-words">{toast.message}</p>
             <button
               onClick={() => dismissToast(toast.id)}
               className="flex-shrink-0 ml-2 opacity-70 hover:opacity-100 transition-opacity"

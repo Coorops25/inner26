@@ -2,7 +2,12 @@ import React, { useContext, useState } from 'react';
 import { CartContext } from '../../context/CartContext';
 import { Illustration } from '../../assets/Illustrations';
 import EventInstagramFeed from '../../modules/events/components/EventInstagramFeed';
-import { studioEvents } from '../../modules/events/data/events';
+import {
+  getEventCtaLabel,
+  getEventWaitlistUrl,
+  isEventBookable,
+  studioEvents,
+} from '../../modules/events/data/events';
 import { toEventBookingDetails } from '../../modules/events/utils/toBookingDetails';
 
 const EventsSection: React.FC = () => {
@@ -13,16 +18,37 @@ const EventsSection: React.FC = () => {
   if (!event) return null;
 
   const reserveFromSite = () => {
+    if (!isEventBookable(event)) {
+      window.open(getEventWaitlistUrl(event), '_blank', 'noopener,noreferrer');
+      return;
+    }
     openBookingModal(toEventBookingDetails(event, 'site'));
   };
 
   const reserveFromInstagram = () => {
+    if (!isEventBookable(event)) {
+      window.open(getEventWaitlistUrl(event), '_blank', 'noopener,noreferrer');
+      return;
+    }
     openBookingModal(toEventBookingDetails(event, 'instagram'));
   };
 
   return (
-    <section id="eventos" className="py-12 md:py-16 bg-base">
-      <div className="container mx-auto px-6 max-w-7xl">
+    <section id="eventos" className="is-section bg-base">
+      <div className="is-shell">
+        <div className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
+          <span className="is-eyebrow justify-center" style={{ color: '#4D6A6D' }}>
+            Rituales & Encuentros
+          </span>
+          <h2 className="is-display text-4xl sm:text-5xl md:text-6xl mt-4" style={{ color: '#252520' }}>
+            Reunirnos para volver al centro
+          </h2>
+          <p className="mt-5 font-light leading-relaxed" style={{ color: '#798478' }}>
+            Inner Dance, ceremonias de luna nueva y encuentros de sonido. Espacios vivos que marcan
+            el ciclo y nos recuerdan que el camino también se transita en comunidad.
+          </p>
+        </div>
+
         <div className="flex gap-3 mb-6 justify-center flex-wrap">
           {studioEvents.map((currentEvent, index) => (
             <button
@@ -40,8 +66,8 @@ const EventsSection: React.FC = () => {
           ))}
         </div>
 
-        <div className="flex flex-col md:flex-row items-stretch md:min-h-[480px] overflow-hidden">
-          <div className="md:w-5/12 relative overflow-hidden group min-h-[320px]">
+        <div className="flex flex-col lg:flex-row items-stretch lg:min-h-[480px] overflow-hidden">
+          <div className="lg:w-5/12 relative overflow-hidden group min-h-[260px] sm:min-h-[320px]">
             <img
               src={event.coverImageUrl}
               alt={`Imagen del evento ${event.title}`}
@@ -60,12 +86,12 @@ const EventsSection: React.FC = () => {
             </div>
           </div>
 
-          <div className="md:w-7/12 flex flex-col justify-center p-6 md:p-12 lg:p-16 bg-dark-panel text-accent">
+          <div className="lg:w-7/12 flex flex-col justify-center p-6 md:p-12 lg:p-16 bg-dark-panel text-accent">
             <span className="text-xs font-bold tracking-[0.25em] uppercase mb-5 block text-slate-is">
               {event.tag}
             </span>
 
-            <h3 className="text-5xl md:text-6xl font-heading text-white mb-2 leading-none">{event.title}</h3>
+            <h3 className="text-4xl sm:text-5xl md:text-6xl font-heading text-white mb-2 leading-none">{event.title}</h3>
             <p className="font-serif italic text-xl mb-8 text-muted">
               {event.subtitle}
             </p>
@@ -85,17 +111,53 @@ const EventsSection: React.FC = () => {
                   {event.priceLabel}
                 </span>
               </div>
-              <button
-                onClick={reserveFromSite}
-                className="text-white font-heading text-xl pb-1 transition-all duration-300 hover:opacity-80 border-b border-slate-is"
-              >
-                Reservar Lugar &rarr;
-              </button>
+              {isEventBookable(event) ? (
+                <button
+                  onClick={reserveFromSite}
+                  className="min-h-11 text-white font-heading text-xl pb-1 transition-all duration-300 hover:opacity-80 border-b border-slate-is"
+                >
+                  {getEventCtaLabel(event)} &rarr;
+                </button>
+              ) : (
+                <a
+                  href={getEventWaitlistUrl(event)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="min-h-11 text-white font-heading text-xl pb-1 transition-all duration-300 hover:opacity-80 border-b border-slate-is"
+                >
+                  {getEventCtaLabel(event)} &rarr;
+                </a>
+              )}
             </div>
           </div>
         </div>
 
         <EventInstagramFeed event={event} onReserveFromPost={reserveFromInstagram} />
+
+        {/* Cómo participar */}
+        <div className="mt-16 md:mt-24">
+          <div className="text-center mb-10">
+            <span className="is-eyebrow justify-center" style={{ color: '#4D6A6D' }}>Cómo participar</span>
+            <h3 className="is-display text-3xl sm:text-4xl mt-4" style={{ color: '#252520' }}>Tres pasos para acompañarnos</h3>
+          </div>
+          <ol className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-4xl mx-auto list-none">
+            {[
+              { n: '01', t: 'Elige tu encuentro', d: 'Explora los rituales activos arriba. Cada uno tiene su fecha, intención y energía propia.' },
+              { n: '02', t: 'Reserva tu lugar', d: 'Aparta cupo desde el sitio o únete a la lista de espera si la formación está cerrada.' },
+              { n: '03', t: 'Llega y habítalo', d: 'Ven con ropa cómoda y mente abierta. Nosotros sostenemos el espacio para que solo te entregues.' },
+            ].map((step) => (
+              <li
+                key={step.n}
+                className="px-6 py-7 rounded-sm"
+                style={{ background: '#FAF7F2', border: '1px solid #EAE0CC' }}
+              >
+                <span className="font-mono text-sm tracking-[0.2em]" style={{ color: '#A0A083' }}>{step.n}</span>
+                <h4 className="font-heading text-2xl mt-3 mb-2" style={{ color: '#252520' }}>{step.t}</h4>
+                <p className="font-light text-sm leading-relaxed" style={{ color: '#798478' }}>{step.d}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
   );

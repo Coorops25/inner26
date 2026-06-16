@@ -61,62 +61,90 @@ const ContactPage: React.FC = () => {
   `;
   
   return (
-    <div className="animate-fade-in-up bg-[#F5F0E6] min-h-screen pt-32 pb-20">
+    <div className="animate-fade-in-up is-section--paper min-h-screen">
         <section id="contacto-page">
-            <div className="container mx-auto px-6 max-w-7xl">
-                
+            <div className="is-shell py-24 md:py-32">
+
                 {/* Hero Text */}
                 <div className="text-center mb-20 max-w-3xl mx-auto">
-                    <span className="text-xs font-bold tracking-[0.3em] text-stone-400 uppercase mb-4 block">Hablemos</span>
-                    <h1 className="text-5xl md:text-7xl font-heading text-stone-900 mb-6">Nuestro Umbral</h1>
-                    <div className="w-px h-12 bg-accent mx-auto mb-6"></div>
-                    <p className="text-xl text-stone-500 font-light leading-relaxed">
-                        Si sientes que este es tu lugar, las puertas están abiertas. Escríbenos o visítanos en el corazón de Candelaria.
+                    <span className="is-eyebrow justify-center">Hablemos</span>
+                    <h1 className="is-page-heading mt-5">Nuestro Umbral</h1>
+                    <div className="is-luxury-rule mx-auto my-6" style={{ width: '1px', height: '3rem' }}></div>
+                    <p className="is-page-lead">
+                        Si sientes que este es tu lugar, las puertas están abiertas. Escríbenos o visítanos en La Candelaria, Bogotá.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-24 items-start">
-                    
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
+
                     {/* Left Column: Map & Info */}
-                    <div className="space-y-12">
-                        <div className="bg-white p-2 shadow-sm rounded-sm">
-                            <div className="aspect-[4/3] w-full overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-1000 ease-out">
-                                <iframe 
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.684112199858!2d-76.6500586852419!3d3.426999997514863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a733a7587131%3A0x6b772522b10a2482!2sTrev.%201%20%2317-29%2C%20Candelaria%2C%20Valle%20del%20Cauca%2C%20Colombia!5e0!3m2!1sen!2sus!4v1684343431631!5m2!1sen!2sus" 
-                                    width="100%" 
-                                    height="100%" 
-                                    style={{border:0}} 
-                                    allowFullScreen={true}
-                                    loading="lazy" 
-                                    referrerPolicy="no-referrer-when-downgrade"
-                                    title="Ubicación de Inner Spirit en Google Maps"
-                                    className="w-full h-full"
-                                >
-                                </iframe>
-                                <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-black/10"></div>
+                    <div className="space-y-10">
+                        {/* Stylized location card (grid-line background + pin, no external embed) */}
+                        <div className="is-surface overflow-hidden">
+                            <div
+                                className="relative aspect-[4/3]"
+                                style={{
+                                    background:
+                                        'linear-gradient(90deg, rgba(77,106,109,0.10) 1px, transparent 1px), linear-gradient(180deg, rgba(77,106,109,0.08) 1px, transparent 1px), linear-gradient(135deg, rgba(201,173,161,0.18), rgba(77,106,109,0.10)), #F3EDE2',
+                                    backgroundSize: '2rem 2rem, 2rem 2rem, auto, auto',
+                                }}
+                                role="img"
+                                aria-label="Mapa ilustrado de la ubicación de Inner Spirit en La Candelaria, Bogotá"
+                            >
+                                <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(115deg, transparent 46%, rgba(139,154,139,0.28) 46%, rgba(139,154,139,0.28) 49%, transparent 49%)' }} />
+                                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-full flex flex-col items-center">
+                                    <span aria-hidden="true" className="block w-3.5 h-3.5 rounded-full ring-4" style={{ background: '#4D6A6D', boxShadow: '0 6px 16px rgba(45,74,77,0.35)' }} />
+                                    <span aria-hidden="true" className="block w-px h-5" style={{ background: '#4D6A6D' }} />
+                                </div>
+                                <div className="absolute left-4 bottom-4 right-4 sm:right-auto sm:max-w-[16rem] px-4 py-3 rounded-sm" style={{ background: 'rgba(250,247,242,0.92)', backdropFilter: 'blur(4px)', border: '1px solid rgba(77,106,109,0.16)' }}>
+                                    <p className="font-heading text-lg leading-tight" style={{ color: '#2D4A4D' }}>Inner Spirit Studio</p>
+                                    <p className="text-sm font-light mt-0.5" style={{ color: '#5E675D' }}>Transversal 1 #17-29 · La Candelaria</p>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="flex flex-col md:flex-row justify-between gap-8 text-stone-600 font-light">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-7">
                              <div>
-                                <h4 className="font-heading text-2xl text-stone-800 mb-2">Visítanos</h4>
-                                <p>Trav. 1 #17-29</p>
-                                <p>Candelaria, Colombia</p>
+                                <p className="is-eyebrow mb-3">Visítanos</p>
+                                <p className="is-copy" style={{ lineHeight: 1.6 }}>Transversal 1 #17-29<br />La Candelaria, Bogotá</p>
                              </div>
                              <div>
-                                <h4 className="font-heading text-2xl text-stone-800 mb-2">Conecta</h4>
-                                <div className="flex gap-4 mt-2">
-                                    <a href="https://instagram.com/innerspirit_studio" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors" aria-label="Instagram @innerspirit_studio"><InstagramIcon /></a>
-                                    <a href="https://wa.me/573212248261" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors" aria-label="WhatsApp +57 321 224 8261"><WhatsAppIcon /></a>
+                                <p className="is-eyebrow mb-3">Horario</p>
+                                <p className="is-copy is-metric" style={{ lineHeight: 1.6 }}>Lun–Vie · 6:30 AM – 9:00 PM<br />Sáb–Dom · 8:00 AM – 9:00 PM</p>
+                             </div>
+                             <div>
+                                <p className="is-eyebrow mb-3">Escríbenos</p>
+                                <a href="https://wa.me/573212248261" target="_blank" rel="noopener noreferrer" className="is-copy block transition-colors hover:text-slate-is">+57 321 224 8261</a>
+                                <a href="mailto:hola@innerspirit.co" className="is-copy block transition-colors hover:text-slate-is">hola@innerspirit.co</a>
+                             </div>
+                             <div>
+                                <p className="is-eyebrow mb-3">Síguenos</p>
+                                <div className="flex gap-5">
+                                    <a href="https://instagram.com/innerspirit_studio" target="_blank" rel="noopener noreferrer" className="text-stone-400 hover:text-slate-is transition-colors transform hover:-translate-y-0.5 duration-300" aria-label="Instagram @innerspirit_studio"><InstagramIcon /></a>
+                                    <a href="https://wa.me/573212248261" target="_blank" rel="noopener noreferrer" className="text-stone-400 hover:text-slate-is transition-colors transform hover:-translate-y-0.5 duration-300" aria-label="WhatsApp +57 321 224 8261"><WhatsAppIcon /></a>
                                 </div>
                              </div>
+                        </div>
+
+                        {/* Antes de tu visita */}
+                        <div className="is-surface p-5" style={{ background: 'linear-gradient(180deg, rgba(139,154,139,0.10), rgba(139,154,139,0.03)), #FAF7F2' }}>
+                            <p className="is-eyebrow mb-2">Antes de tu visita</p>
+                            <p className="is-copy" style={{ fontSize: '0.95rem' }}>
+                                Llega 10 minutos antes para acomodarte sin prisa. Trae ropa cómoda; mat, mantas y props los tenemos en el estudio. Si es tu primera vez, escríbenos por WhatsApp y te orientamos con gusto.
+                            </p>
                         </div>
                     </div>
 
                     {/* Right Column: Minimalist Form */}
-                    <div className="bg-white px-8 py-10 md:px-12 md:py-14 shadow-sm rounded-sm border border-stone-100">
-                        <h3 className="text-3xl font-heading text-stone-800 mb-10">Envía un Mensaje</h3>
-                        
+                    <div className="is-surface px-5 py-8 sm:px-8 md:px-12 md:py-14">
+                        <p className="is-eyebrow">Inicia una conversación</p>
+                        <h3 className="is-display text-3xl md:text-4xl mt-4 mb-4">
+                          Cuéntanos qué quieres <span className="italic" style={{ color: '#C9ADA1' }}>traer al espacio</span>.
+                        </h3>
+                        <p className="is-copy mb-10">
+                          Déjanos un mensaje y seguimos por WhatsApp para coordinar lo que necesites.
+                        </p>
+
                         <form onSubmit={handleSubmit} className="space-y-8">
                             {/* Honeypot */}
                             <input type="text" name="honeypot" value={formState.honeypot} onChange={handleInputChange} className="hidden" aria-hidden="true" tabIndex={-1} />
