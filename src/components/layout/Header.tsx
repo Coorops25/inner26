@@ -151,33 +151,36 @@ const Header: React.FC = () => {
       <div
         id="mobile-navigation"
         aria-hidden={!isOpen}
-        className={`fixed inset-0 z-40 flex flex-col items-center justify-start overflow-y-auto px-6 py-24 sm:justify-center is-safe-bottom transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] bg-base ${
+        className={`fixed inset-0 z-40 overflow-y-auto overscroll-contain bg-base transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
       >
-        <nav className="flex flex-col items-center gap-5 sm:gap-8 text-center">
-          {navLinks.map((link, idx) => (
-            <a
-              key={link.page}
-              href={link.href}
-              onClick={(event) => handleLinkClick(event, link.page)}
-              className={`text-2xl sm:text-3xl md:text-4xl font-heading text-ink transition-all duration-500 ${
-                isOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-              }`}
-              style={{ transitionDelay: `${idx * 50}ms` }}
-              aria-current={page === link.page ? 'page' : undefined}
-            >
-              {link.label}
+        {/* min-h-full wrapper: centers when it fits, scrolls (no top clipping) when it doesn't */}
+        <div className="min-h-full flex flex-col items-center justify-center gap-10 px-6 pt-28 pb-16 is-safe-bottom">
+          <nav className="flex flex-col items-center gap-4 sm:gap-6 text-center">
+            {navLinks.map((link, idx) => (
+              <a
+                key={link.page}
+                href={link.href}
+                onClick={(event) => handleLinkClick(event, link.page)}
+                className={`text-2xl sm:text-3xl font-heading text-ink transition-all duration-500 ${
+                  isOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+                }`}
+                style={{ transitionDelay: `${isOpen ? idx * 50 : 0}ms` }}
+                aria-current={page === link.page ? 'page' : undefined}
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <div className="flex gap-6 text-sm tracking-widest uppercase text-muted-light">
+            <a href="https://instagram.com/innerspirit_studio" target="_blank" rel="noopener noreferrer">
+              Instagram
             </a>
-          ))}
-        </nav>
-        <div className="mt-8 md:mt-14 flex gap-6 text-sm tracking-widest uppercase text-muted-light">
-          <a href="https://instagram.com/innerspirit_studio" target="_blank" rel="noopener noreferrer">
-            Instagram
-          </a>
-          <a href="https://wa.me/573212248261" target="_blank" rel="noopener noreferrer">
-            WhatsApp
-          </a>
+            <a href="https://wa.me/573212248261" target="_blank" rel="noopener noreferrer">
+              WhatsApp
+            </a>
+          </div>
         </div>
       </div>
     </header>
