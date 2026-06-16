@@ -123,6 +123,13 @@ const Footer: React.FC = () => {
                 </a>
               ))}
             </div>
+            <a
+              href="/privacidad"
+              onClick={(e) => { e.preventDefault(); navigate('privacidad'); }}
+              className="text-sm transition-colors hover:text-white text-left md:text-center block"
+            >
+              Privacidad
+            </a>
             <p className="text-xs mt-4 text-muted-light/50">
               &copy; {year} Inner Spirit Studio. Todos los derechos reservados.
             </p>

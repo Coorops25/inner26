@@ -68,11 +68,17 @@ const pageSEO: Record<string, PageSEO> = {
     title: 'Contacto — Inner Spirit Studio | La Candelaria, Bogotá',
     description: 'Visítanos en Transversal 1 #17-29, La Candelaria, Bogotá. WhatsApp: +57 321 224 8261. Horario: Lun-Vie 6:30AM–9PM, Sáb-Dom 8AM–9PM.',
   },
+  privacidad: {
+    canonical: 'https://innerspirit.co/privacidad',
+    title: 'Política de Tratamiento de Datos — Inner Spirit Studio',
+    description: 'Política de Tratamiento de Datos Personales de Inner Spirit Studio conforme a la Ley 1581 de 2012 (Habeas Data) en Colombia. Conoce tus derechos como titular.',
+  },
 };
 
 const HomePage = lazy(() => import('./src/pages/HomePage'));
 const AboutPage = lazy(() => import('./src/pages/AboutPage'));
 const EspacioPage = lazy(() => import('./src/pages/EspacioPage'));
+const PrivacyPage = lazy(() => import('./src/pages/PrivacyPage'));
 const ClassesPage = lazy(() => import('./src/pages/ClassesPage'));
 const EventsPage = lazy(() => import('./src/pages/EventsPage'));
 const ConsultorioPage = lazy(() => import('./src/pages/ConsultorioPage'));
@@ -126,6 +132,8 @@ const PageRenderer: React.FC = () => {
       return <BlogPage />;
     case 'contacto':
       return <ContactPage />;
+    case 'privacidad':
+      return <PrivacyPage />;
     case '404':
       return <NotFoundPage />;
     default:

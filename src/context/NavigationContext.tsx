@@ -11,6 +11,7 @@ export type PageName =
   | 'tienda'
   | 'blog'
   | 'contacto'
+  | 'privacidad'
   | '404';
 
 export const PAGE_TO_PATH: Record<PageName, string> = {
@@ -24,6 +25,7 @@ export const PAGE_TO_PATH: Record<PageName, string> = {
   tienda: '/tienda',
   blog: '/blog',
   contacto: '/contacto',
+  privacidad: '/privacidad',
 };
 
 export const pathToPage = (pathname: string): PageName => {

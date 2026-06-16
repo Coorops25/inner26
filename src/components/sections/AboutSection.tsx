@@ -82,6 +82,25 @@ const AboutSection: React.FC = () => {
           </div>
 
         </div>
+
+        {/* Para qué / Por qué — propósito y comunidad */}
+        <div className="mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+          <article className="is-surface p-8 md:p-10">
+            <span className="is-eyebrow">¿Para qué?</span>
+            <p className="is-copy mt-5">
+              En un mundo lleno de ruido, Inner Spirit es un espacio diseñado para ayudarte a
+              reconectar con tu esencia. Ofrecemos clases, terapias y eventos que nutren tu
+              cuerpo, mente y espíritu.
+            </p>
+          </article>
+          <article className="is-surface p-8 md:p-10">
+            <span className="is-eyebrow">¿Por qué?</span>
+            <p className="is-copy mt-5">
+              Somos más que un centro de bienestar: somos una comunidad que celebra tu crecimiento
+              y te acompaña en cada paso de tu viaje hacia la paz interior.
+            </p>
+          </article>
+        </div>
       </div>
     </section>
   );
