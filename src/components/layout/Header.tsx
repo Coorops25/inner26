@@ -21,9 +21,11 @@ const Header: React.FC = () => {
   const { page, navigate } = useNavigation();
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-  // On homepage hero, header is transparent with white text until scrolled
+  // On homepage hero, header is transparent with white text until scrolled.
+  // When the mobile menu is open the overlay is light (sand), so the header must
+  // switch to its solid/ink style — otherwise the white brand + close icon vanish.
   const isHeroPage = page === 'home';
-  const isTransparent = isHeroPage && !scrolled;
+  const isTransparent = isHeroPage && !scrolled && !isOpen;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -62,6 +64,7 @@ const Header: React.FC = () => {
   };
 
   return (
+    <>
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         scrolled ? 'py-3 md:py-4 shadow-sm is-header-surface' : 'py-5 md:py-7'
@@ -147,7 +150,11 @@ const Header: React.FC = () => {
           </button>
         </div>
       </div>
+    </header>
 
+      {/* Mobile menu overlay — sibling of <header> (NOT a child): the header's
+          backdrop-blur establishes a containing block for fixed descendants, which
+          would collapse this fixed inset-0 overlay to the header's height. */}
       <div
         id="mobile-navigation"
         aria-hidden={!isOpen}
@@ -183,7 +190,7 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 };
 

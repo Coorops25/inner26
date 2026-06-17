@@ -12,7 +12,10 @@
   --color-ink: #1A1A18;
   --color-cream-light: #FAF7F2;
   --color-warm-black: #121210;
-  --color-base: #EAE0CC;
+  /* NOTE: do NOT define `--color-base` here — it makes Tailwind v4 generate a
+     `text-base` *color* utility (sand) that collides with the built-in `text-base`
+     font-size, silently tinting any text-base element sand. `bg-base` and
+     `text-base-text` are provided as manual classes below instead. */
   --color-base-text: #1A1A18;
   --color-accent: #C9ADA1;
   --color-sage: #8B9A8B;
