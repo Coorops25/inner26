@@ -38,13 +38,13 @@ const Footer: React.FC = () => {
           </a>
         </div>
 
-        {/* Big brand word */}
-        <h2
-          className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl leading-none font-heading font-bold select-none pointer-events-none mb-1"
-          style={{ color: 'rgba(77,106,109,0.18)' }}
-        >
-          INNER SPIRIT
-        </h2>
+        {/* Brand logo — knocked out to cream so the maroon line-art reads on the dark footer */}
+        <img
+          src="/images/logo.png"
+          alt="Inner Spirit"
+          className="w-auto select-none mb-4"
+          style={{ height: 'clamp(96px, 22vw, 140px)', filter: 'brightness(0) invert(1)', opacity: 0.92 }}
+        />
         <p className="text-xs tracking-[0.3em] uppercase mb-3 text-slate-is">
           Studio — La Candelaria, Bogotá
         </p>

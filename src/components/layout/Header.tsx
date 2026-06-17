@@ -86,10 +86,25 @@ const Header: React.FC = () => {
           <a
             href={pageToPath('home')}
             onClick={(event) => handleLinkClick(event, 'home')}
-            className="text-base sm:text-lg md:text-xl font-heading font-bold uppercase transition-colors duration-300 relative z-50"
+            className="flex items-center gap-2.5 relative z-50 transition-colors duration-300"
             aria-current={page === 'home' ? 'page' : undefined}
           >
-            Inner Spirit
+            {/* Logo mark — cropped to hide the built-in wordmark; color adapts to the
+                header background (white on the dark hero, natural maroon on light). */}
+            <span className="block shrink-0 overflow-hidden" style={{ height: '34px', width: '38px' }} aria-hidden="true">
+              <img
+                src="/images/logo.png"
+                alt=""
+                className="block w-[38px] h-auto"
+                style={{
+                  filter: isTransparent ? 'brightness(0) invert(1)' : 'none',
+                  transition: 'filter 300ms ease',
+                }}
+              />
+            </span>
+            <span className="text-base sm:text-lg md:text-xl font-heading font-bold uppercase">
+              Inner Spirit
+            </span>
           </a>
         </div>
 
