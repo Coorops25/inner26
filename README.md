@@ -64,6 +64,7 @@ inner/
 |-- docs/                   # Documentacion tecnica del proyecto
 |-- design-system/          # Guia del sistema visual
 |-- public/                 # Assets publicos
+|   `-- images/             # Fotografia real (studio/, events/, blog/, instagram/...) y logo.png
 |-- src/
 |   |-- components/         # Layout, modales, secciones, UI y efectos
 |   |-- context/            # Cart, Toast y Navigation

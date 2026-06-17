@@ -26,12 +26,25 @@ const faqs = [
   },
 ];
 
-const classes = [
+interface ClassItem {
+  title: string;
+  subtitle: string;
+  description: string;
+  illustrationName: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  price: number;
+  priceLabel: string;
+}
+
+const classes: ClassItem[] = [
   {
     title: 'Yoga',
     subtitle: 'Hatha · Vinyasa · Yin · AcroYoga · Kundalini',
     description: 'Una práctica para unificar cuerpo, mente y respiración. Flujos dinámicos, posturas clásicas y trabajo energético con mantras. Para todos los niveles, en español e inglés.',
     illustrationName: 'yoga',
+    imageUrl: '/images/studio/yoga-clase-grupal.jpg',
+    imageAlt: 'Clase de yoga en grupo sobre esterillas en Inner Spirit Studio',
     price: 36000,
     priceLabel: '$36.000 COP / sesión',
   },
@@ -40,6 +53,8 @@ const classes = [
     subtitle: 'Silencio · Pranayama · Atención Plena',
     description: 'Un espacio de silencio para observar y descansar. Técnicas de respiración para liberar tensiones, expandir la energía y cultivar la claridad interior. Sin experiencia previa.',
     illustrationName: 'breathwork',
+    imageUrl: '/images/studio/meditacion-mudra.jpg',
+    imageAlt: 'Persona en meditación con mudra sobre un cojín',
     price: 36000,
     priceLabel: '$36.000 COP / sesión',
   },
@@ -48,6 +63,8 @@ const classes = [
     subtitle: 'Inner Dance · Danza Boreal · Inner Movement',
     description: 'Movimiento libre para liberar el cuerpo y la mente. Sin coreografías — una invitación a que tu cuerpo se exprese auténticamente guiado por la música y tu impulso interior.',
     illustrationName: 'dance',
+    imageUrl: '/images/studio/danza-movimiento.jpg',
+    imageAlt: 'Clase de danza y movimiento consciente en comunidad',
     price: 36000,
     priceLabel: '$36.000 COP / sesión',
   },
@@ -167,11 +184,20 @@ const ClassesPage: React.FC = () => {
                   className="overflow-hidden aspect-[16/9] relative flex items-center justify-center transition-colors duration-500"
                   style={{ background: '#EAE0CC' }}
                 >
-                  <Illustration
-                    name={item.illustrationName}
-                    className="w-1/3 h-1/3 transition-all duration-700 group-hover:scale-110"
-                    style={{ color: '#C9ADA1' } as React.CSSProperties}
-                  />
+                  {item.imageUrl ? (
+                    <img
+                      src={item.imageUrl}
+                      alt={item.imageAlt ?? item.title}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  ) : (
+                    <Illustration
+                      name={item.illustrationName}
+                      className="w-1/3 h-1/3 transition-all duration-700 group-hover:scale-110"
+                      style={{ color: '#C9ADA1' } as React.CSSProperties}
+                    />
+                  )}
                 </div>
                 <div className="p-6 md:p-8 flex flex-col flex-grow">
                   <span className="text-xs font-bold uppercase tracking-widest mb-2 block" style={{ color: '#4D6A6D' }}>
@@ -185,7 +211,7 @@ const ClassesPage: React.FC = () => {
                   </p>
                   <p className="text-xs font-mono mb-6" style={{ color: '#A0A083' }}>{item.priceLabel}</p>
                   <button
-                    onClick={() => openBookingModal({ type: 'class', title: item.title, price: item.price, imageUrl: '', illustrationName: item.illustrationName })}
+                    onClick={() => openBookingModal({ type: 'class', title: item.title, price: item.price, imageUrl: item.imageUrl ?? '', illustrationName: item.illustrationName })}
                     className="border font-heading uppercase tracking-widest text-sm py-3 px-6 transition-all duration-300 hover:opacity-90"
                     style={{ borderColor: '#4D6A6D', color: '#4D6A6D' }}
                     onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#4D6A6D'; (e.currentTarget as HTMLButtonElement).style.color = '#EAE0CC'; }}

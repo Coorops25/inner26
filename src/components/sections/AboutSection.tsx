@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { useNavigation } from '../../context/NavigationContext';
-import { Illustration } from '../../assets/Illustrations';
 
 const AboutSection: React.FC = () => {
   const { navigate } = useNavigation();
@@ -71,11 +70,12 @@ const AboutSection: React.FC = () => {
 
           {/* Right: Illustration */}
           <div className="lg:w-1/2 order-1 lg:order-2 relative">
-            <div className="is-frame is-media-stage relative aspect-[3/4] flex items-center justify-center p-8 md:p-12 lg:p-14">
-              <Illustration
-                name="lotus"
-                className="w-full h-full transition-transform duration-[1.5s] ease-out hover:scale-110"
-                style={{ color: '#C9ADA1' } as React.CSSProperties}
+            <div className="is-frame relative aspect-[3/4] overflow-hidden">
+              <img
+                src="/images/studio/yoga-postura-ventanas.jpg"
+                alt="Práctica de yoga junto a los ventanales del estudio en La Candelaria"
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.5s] ease-out hover:scale-105"
               />
             </div>
             <span className="hidden md:block absolute -bottom-6 -left-6 w-28 h-28 rounded-sm" style={{ border: '1px solid rgba(201,173,161,0.5)', zIndex: -1 }} />

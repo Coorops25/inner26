@@ -134,11 +134,19 @@ const BookingModal: React.FC = () => {
             className="w-full h-40 rounded-sm mb-6 overflow-hidden flex items-center justify-center"
             style={{ background: '#F3EDE2' }}
           >
-            <Illustration
-              name={bookingDetails.illustrationName ?? 'abstract-spirit'}
-              className="w-1/3 h-1/3"
-              style={{ color: '#C9ADA1' } as React.CSSProperties}
-            />
+            {bookingDetails.imageUrl ? (
+              <img
+                src={bookingDetails.imageUrl}
+                alt={bookingDetails.title}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <Illustration
+                name={bookingDetails.illustrationName ?? 'abstract-spirit'}
+                className="w-1/3 h-1/3"
+                style={{ color: '#C9ADA1' } as React.CSSProperties}
+              />
+            )}
           </div>
 
           <h3 className="text-sm font-bold uppercase tracking-wider mb-3" style={{ color: '#798478' }}>

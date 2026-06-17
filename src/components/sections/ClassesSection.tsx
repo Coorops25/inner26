@@ -1,7 +1,6 @@
 
 import React, { useContext, useState } from 'react';
 import { CartContext } from '../../context/CartContext';
-import { Illustration } from '../../assets/Illustrations';
 
 const classes = [
   {
@@ -9,6 +8,8 @@ const classes = [
     subtitle: 'Hatha · Vinyasa · Yin · Kundalini',
     description: 'Fluye con tu respiración y encuentra el equilibrio. Clases en español e inglés para todos los niveles.',
     illustrationName: 'yoga',
+    imageUrl: '/images/studio/yoga-clase-grupal.jpg',
+    imageAlt: 'Clase de yoga en grupo sobre esterillas en Inner Spirit Studio',
     price: 36000,
     priceLabel: '$36.000 COP / clase',
   },
@@ -17,6 +18,8 @@ const classes = [
     subtitle: 'Silencio Interior',
     description: 'Cultiva la paz interior y la claridad mental. Técnicas de respiración para liberar tensiones y expandir la energía.',
     illustrationName: 'breathwork',
+    imageUrl: '/images/studio/meditacion-mudra.jpg',
+    imageAlt: 'Persona en meditación con mudra sobre un cojín',
     price: 36000,
     priceLabel: '$36.000 COP / clase',
   },
@@ -25,6 +28,8 @@ const classes = [
     subtitle: 'Expresión Libre',
     description: 'Inner Dance, movimiento consciente y sanación con cuencos tibetanos, gong y campanas.',
     illustrationName: 'sound-healing',
+    imageUrl: '/images/studio/danza-movimiento.jpg',
+    imageAlt: 'Clase de danza y movimiento consciente en comunidad',
     price: 36000,
     priceLabel: '$36.000 COP / clase',
   },
@@ -117,19 +122,20 @@ const ClassesSection: React.FC = () => {
                 type: 'class',
                 title: item.title,
                 price: item.price,
-                imageUrl: '',
+                imageUrl: item.imageUrl,
                 illustrationName: item.illustrationName,
               })}
               aria-label={`Ver horarios de ${item.title}`}
             >
               <div
-                className="relative overflow-hidden w-full aspect-[3/4] mb-6 flex items-center justify-center transition-colors duration-500"
+                className="relative overflow-hidden w-full aspect-[3/4] mb-6 transition-colors duration-500"
                 style={{ background: '#EAE0CC' }}
               >
-                <Illustration
-                  name={item.illustrationName}
-                  className="w-1/2 h-1/2 transition-all duration-700 group-hover:scale-110"
-                  style={{ color: '#C9ADA1' } as React.CSSProperties}
+                <img
+                  src={item.imageUrl}
+                  alt={item.imageAlt}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 {/* Hover overlay */}
                 <div
