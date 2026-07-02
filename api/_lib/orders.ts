@@ -49,20 +49,37 @@ export const signOrder = (order: OrderSnapshot) => {
   return `${payload}.${signature}`;
 };
 
+// Los tokens firmados abren la orden, el PDF y la entrada. Sin caducidad, un enlace
+// filtrado (historial, logs, reenvio de email) queda valido para siempre. 90 dias cubre
+// tickets de eventos con fecha futura sin dejar la ventana abierta indefinidamente.
+const tokenMaxAgeMs = () => {
+  const days = Number(process.env.ORDER_TOKEN_MAX_AGE_DAYS || 90);
+  return (Number.isFinite(days) && days > 0 ? days : 90) * 24 * 60 * 60 * 1000;
+};
+
 export const verifyOrderToken = (token: string): OrderTokenPayload => {
   const [payload, signature] = token.split('.');
   if (!payload || !signature) throw new Error('Token invalido');
 
   const expected = crypto.createHmac('sha256', getSecret()).update(payload).digest('base64url');
-  if (!crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) {
+  const signatureBuffer = Buffer.from(signature);
+  const expectedBuffer = Buffer.from(expected);
+  if (signatureBuffer.length !== expectedBuffer.length || !crypto.timingSafeEqual(signatureBuffer, expectedBuffer)) {
     throw new Error('Firma invalida');
   }
 
   const parsed = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8')) as Partial<OrderTokenPayload>;
   if (!parsed.orderId) throw new Error('Token invalido');
+
+  const createdAt = String(parsed.createdAt || '');
+  const createdMs = Date.parse(createdAt);
+  if (Number.isFinite(createdMs) && Date.now() - createdMs > tokenMaxAgeMs()) {
+    throw new Error('Token expirado');
+  }
+
   return {
     orderId: String(parsed.orderId),
-    createdAt: String(parsed.createdAt || ''),
+    createdAt,
   };
 };
 

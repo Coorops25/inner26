@@ -26,7 +26,13 @@ export default async function handler(req: any, res: any) {
     }
 
     const eventId = `${eventName}:${String(transaction.id)}:${status}`;
-    const order = await getOrderById(String(transaction.reference));
+    let order;
+    try {
+      order = await getOrderById(String(transaction.reference));
+    } catch {
+      // Orden desconocida: responder 2xx para que Wompi no reintente indefinidamente.
+      return res.status(202).json({ received: true, processed: false, reason: 'orden desconocida' });
+    }
     const amountMatches = Number(transaction.amount_in_cents) === order.amountInCents && transaction.currency === 'COP';
     if (!amountMatches) return res.status(409).json({ error: 'Monto no coincide' });
 

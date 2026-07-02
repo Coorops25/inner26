@@ -29,7 +29,13 @@ export default async function handler(req: any, res: any) {
     }
 
     const orderId = String(payment?.external_reference || '');
-    const order = await getOrderById(orderId);
+    let order;
+    try {
+      order = await getOrderById(orderId);
+    } catch {
+      // Orden desconocida: responder 2xx para que MercadoPago no reintente indefinidamente.
+      return res.status(202).json({ received: true, processed: false, reason: 'orden desconocida' });
+    }
     const amountMatches = Number(payment?.transaction_amount) === order.amount && payment?.currency_id === 'COP';
     if (!amountMatches) return res.status(409).json({ error: 'Monto no coincide' });
 

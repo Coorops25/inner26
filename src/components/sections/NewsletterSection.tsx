@@ -11,7 +11,8 @@ const NewsletterSection: React.FC = () => {
     const email = (form.querySelector('input[type="email"]') as HTMLInputElement)?.value ?? '';
     const text = encodeURIComponent(`Hola Inner Spirit, quiero unirme a la comunidad y recibir noticias. Mi correo es: ${email}`);
     showToast('Abriendo WhatsApp para confirmar tu suscripción...', 'success');
-    setTimeout(() => window.open(`https://wa.me/573212248261?text=${text}`, '_blank'), 500);
+    // Abrir dentro del gesto del usuario: un window.open diferido lo bloquean los popup blockers.
+    window.open(`https://wa.me/573212248261?text=${text}`, '_blank', 'noopener,noreferrer');
     form.reset();
   };
 
